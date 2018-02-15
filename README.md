@@ -1,0 +1,1 @@
+# jeedom-plugin-zigate
