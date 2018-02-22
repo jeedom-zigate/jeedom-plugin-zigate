@@ -6,6 +6,10 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
+* 2018-02-22 :
+    - Correction de bugs
+    - Ajout niveau de batterie
+
 * 2018-02-19 :
     - Ajout du support des commandes on/off et level control
     - Attention il est nécessaire de refaire l'appairage des équipements pour faire apparaitre les nouvelles commandes
