@@ -8,6 +8,7 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 * 2018-02-24 :
     - Correction de bugs
+    - Support de la ZiGate Wifi
 
 * 2018-02-22 :
     - Correction de bugs
