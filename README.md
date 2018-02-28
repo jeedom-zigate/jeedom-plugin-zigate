@@ -6,6 +6,12 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
+* 2018-02-28 :
+    - Correction de bugs
+    - Ajout des vignettes (pour les équipements XIAOMI, les autres arriveront prochainement)
+    - Ajout d'un bouton pour rafraichir les informations d'un équipement
+    - Amélioration de la gestion du niveau de batterie
+
 * 2018-02-24 :
     - Correction de bugs
     - Support de la ZiGate Wifi
