@@ -6,6 +6,9 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
+* 2018-03-02 :
+    - Petite mise à jour pour corriger un bug empéchant l'inclusion (erreur 128)
+
 * 2018-02-28 :
     - Correction de bugs
     - Ajout des vignettes (pour les équipements XIAOMI, les autres arriveront prochainement)
