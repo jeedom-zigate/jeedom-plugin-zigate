@@ -6,9 +6,11 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
-* ---------- :
+* 2018-03-07 :
     - Ajout de vignettes
-    
+    - Ajout inversion pour les infos binaires
+    - Ajout min/max pour les infos numériques
+    - Corrections de bugs
 
 * 2018-03-02 :
     - Petite mise à jour pour corriger un bug empéchant l'inclusion (erreur 128)
