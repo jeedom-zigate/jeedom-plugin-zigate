@@ -6,6 +6,10 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
+* 2018-03-08 :
+    - Ajout de vignettes
+    - Correction d'un bug dans la dépendance du démon provoquant son crash
+
 * 2018-03-07 :
     - Ajout de vignettes
     - Ajout inversion pour les infos binaires
