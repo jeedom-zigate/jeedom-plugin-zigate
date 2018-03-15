@@ -7,8 +7,8 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 # ChangeLog
 
 * 2018-03-15 :
-    - Remonter état des ampoules IKEA
-    - Retour à 0 des capteurs de présence
+    - Remonter état des ampoules IKEA
+    - Retour à 0 des capteurs de présence
     - Ajout de vignettes
 
 * 2018-03-08 :
