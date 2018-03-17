@@ -6,6 +6,10 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
+* 2018-03-17 :
+    - Correction d'un bug de sélection automatique du port usb
+    - Correction d'un bug empéchant parfois les valeurs de remonter
+
 * 2018-03-15 :
     - Remontée état des ampoules IKEA
     - Retour à 0 des capteurs de présence
