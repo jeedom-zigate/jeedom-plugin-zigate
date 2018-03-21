@@ -6,6 +6,11 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
+* Beta :
+    - Ajout commande Touchlink
+    - Ajout commande Network Scan
+    - Ajout commande Identifier
+
 * 2018-03-17 :
     - Correction d'un bug de sélection automatique du port usb
     - Correction d'un bug empéchant parfois les valeurs de remonter
