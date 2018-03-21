@@ -11,6 +11,7 @@ Documentation et changlog du plugin ZiGate pour Jeedom
     - Ajout commande Network Scan
     - Ajout commande Identifier
     - Ajout de vignettes
+    - Gestion des capteurs de luminosité
 
 * 2018-03-17 :
     - Correction d'un bug de sélection automatique du port usb
