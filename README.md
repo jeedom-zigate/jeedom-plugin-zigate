@@ -6,12 +6,13 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
-* Beta :
+* 2018-03-21 :
     - Ajout commande Touchlink
     - Ajout commande Network Scan
     - Ajout commande Identifier
     - Ajout de vignettes
     - Gestion des capteurs de luminosité
+    - Ebauche information couleur des ampoules
 
 * 2018-03-17 :
     - Correction d'un bug de sélection automatique du port usb
