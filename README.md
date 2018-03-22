@@ -6,6 +6,9 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
+* -------- :
+    - Commande des prises Legrand (en attendant la mise à jour il suffit de relancer l'installation des dépendances)
+
 * 2018-03-21 :
     - Ajout commande Touchlink
     - Ajout commande Network Scan
