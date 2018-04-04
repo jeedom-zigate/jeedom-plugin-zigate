@@ -9,6 +9,9 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 * -------- :
     - Commande des prises Legrand (en attendant la mise à jour il suffit de relancer l'installation des dépendances)
     - Commande des ampoules Sunricher DIM Lighting
+    - Information de présence sous forme binaire et non numérique
+    - Correction des informations onoff manquantes pour les interrupteurs multiples
+    - Correction d'un bug concernant les jeedom utilisant HTTPS
 
 * 2018-03-21 :
     - Ajout commande Touchlink
