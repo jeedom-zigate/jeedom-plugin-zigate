@@ -13,6 +13,7 @@ Documentation et changlog du plugin ZiGate pour Jeedom
     - Correction des informations onoff manquantes pour les interrupteurs multiples
     - Correction d'un bug concernant les jeedom utilisant HTTPS
     - Gestion du cluster 0x0500 IAS Zone (capteur d'inondation, fumée, présence, etc)
+    - Gestion des couleurs pour les ampoules
 
 * 2018-03-21 :
     - Ajout commande Touchlink
