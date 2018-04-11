@@ -15,6 +15,7 @@ Documentation et changlog du plugin ZiGate pour Jeedom
     - Gestion du cluster 0x0500 IAS Zone (capteur d'inondation, fumée, présence, etc)
     - Gestion des couleurs pour les ampoules
     - Ajout de vignettes
+    - Fonction de reconnexion automatique
 
 * 2018-03-21 :
     - Ajout commande Touchlink
