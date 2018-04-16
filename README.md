@@ -6,6 +6,9 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
+* 2018-04-16 :
+    - Correction bug gestion des couleurs (pas de gestion hue pour le moment)
+
 * 2018-04-11 :
     - Commande des prises Legrand
     - Commande des ampoules Sunricher DIM Lighting
