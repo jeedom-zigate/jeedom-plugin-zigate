@@ -6,6 +6,11 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
+* 2018-04-18 :
+    - Amélioration des équipements HUE
+    - Corrections de bug
+    - Ajout de vignettes
+
 * 2018-04-16 :
     - Correction bug gestion des couleurs
 
