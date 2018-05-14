@@ -6,6 +6,9 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
+* 2018-05-14 :
+    - Ajout de vignettes
+
 * 2018-04-20 :
     - Correction installation des dépendances
 
