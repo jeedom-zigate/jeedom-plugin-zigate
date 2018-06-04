@@ -7,6 +7,7 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 # ChangeLog
 
 * Prochaine version :
+    - Publication des sources sur github
     - Ajout de la commande Toggle
     
 * 2018-05-14 :
