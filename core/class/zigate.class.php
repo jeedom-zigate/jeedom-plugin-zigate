@@ -5,7 +5,7 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 class zigate extends eqLogic {
     
-    public static $_excludeOnSendPlugin = array('.zigate.json', '.key');
+    public static $_excludeOnSendPlugin = array('.zigate.json', '.key', '_config.yml');
 
     public static function callZiGate($action, $args='') {
         log::add('zigate', 'debug', 'callZiGate ' . print_r($action,true) . ' ' .print_r($args,true));
