@@ -161,7 +161,7 @@ class zigate extends eqLogic {
                               $cmd_info->setSubType('numeric');
                               if ($name == 'current_level'){
                                   $cmd_info->setConfiguration('minValue', 0);
-                                  $cmd_info->setConfiguration('maxValue', 254);
+                                  $cmd_info->setConfiguration('maxValue', 100);
                               }
                               if ($name == 'current_hue'){
                                   $cmd_info->setConfiguration('minValue', 0);
@@ -225,6 +225,9 @@ class zigate extends eqLogic {
                 }
             }
         }
+        $key = $this->_create_action(0, 'refresh', 'refresh', 'other');
+        array_push($created_commands, $key);
+        
         /*
         foreach (self::getCmd() as $cmd) {
             if (!in_array($cmd->getLogicalId(), $created_commands)) {
@@ -523,7 +526,6 @@ class zigateCmd extends cmd {
                 zigate::CallZiGate('action_onoff',[$addr, $endpoint, $value]);
                 break;
             case 'level':
-                $value = intval($value*255/100);
                 $onoff = 1;
                 if ($value == 0){
                     $onoff = 0;
@@ -543,6 +545,9 @@ class zigateCmd extends cmd {
                 break;
             case 'hue':
                 zigate::CallZiGate('actions_move_hue_hex',[$addr, $endpoint, $value]);
+                break;
+            case 'refresh':
+                zigate::callZiGate('refresh_device', [$addr]);
                 break;
         }
     }
