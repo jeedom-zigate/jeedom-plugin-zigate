@@ -59,7 +59,7 @@ class zigate extends eqLogic {
             $eqLogic->setStatus('rssi', $device['info']['rssi']);
             $eqLogic->save();
             $eqLogic = self::byId($eqLogic->getId());
-            $eqLogic->createCommand($device);
+            $eqLogic->createCommands($device);
         } else {
             foreach ($device['info'] as $info => $value) {
                 $eqLogic->setConfiguration($info, $value);
@@ -67,7 +67,7 @@ class zigate extends eqLogic {
             $eqLogic->setStatus('lastCommunication', $device['info']['last_seen']);
             $eqLogic->setStatus('rssi', $device['info']['rssi']);
             $eqLogic->save();
-            $eqLogic->createCommand($device);
+            $eqLogic->createCommands($device);
         }
         return $addr;
     }
@@ -100,8 +100,8 @@ class zigate extends eqLogic {
         $this->batteryStatus($percent);
     }
     
-    public function createCommand($device) {
-      	log::add('zigate', 'debug', 'createcommand for '.$this->getLogicalId());
+    public function createCommands($device) {
+      	log::add('zigate', 'debug', 'createcommands for '.$this->getLogicalId());
       	$created_commands = [];
       	foreach ($device['endpoints'] as $endpoint) {
       	    $endpoint_id = $endpoint['endpoint'];
@@ -110,83 +110,27 @@ class zigate extends eqLogic {
       	    foreach ($endpoint['clusters'] as $cluster){
       	        $cluster_id = $cluster['cluster'];
       	        foreach ($cluster['attributes'] as $attribute){
-      	            $attribute_id = $attribute['attribute'];
-      	            $key = $this->getLogicalId().'.'.$endpoint_id.'.'.$cluster_id.'.'.$attribute_id;
-      	            $name = $endpoint_id.'_'.$cluster_id.'_'.$attribute['attribute'];
-      	            if (isset($attribute['name'])){
-      	                $name = $attribute['name'];
+      	            $value = $attribute['data'];
+      	            if (isset($attribute['value'])){
+      	                $value = $attribute['value'];
       	            }
-                    $cmd_info = $this->getCmd(null, $key);
-                    if (!is_object($cmd_info)) {
-                        $cmd_info = new zigateCmd();
-                        $cmd_info->setLogicalId($key);
-                        $cmd_info->setType('info');
-                        $cmd_info->setEqLogic_id($this->getId());
-                        $cmd_info->setIsHistorized(1);
-                        if (!isset($attribute['name'])){
-                            $cmd_info->setIsVisible(0);
-                            $cmd_info->setIsHistorized(0);
-                        }
-                        if ($cluster_id == 0){
-                            $cmd_info->setIsVisible(0);
-                        }
-                        $cmd_info->setName($name);
-                    }
-                    if (isset($attribute['unit'])){
-                        $cmd_info->setUnite($attribute['unit']);
-                    }
-                    if (isset($attribute['name'])){
-                        $cmd_info->setConfiguration('property', $name);
-                        if ($cluster_id == 0){
-                            $this->setConfiguration($name,$attribute['value']);
-                            $this->save();
-                        }
-                    }
-                    $cmd_info->setConfiguration('addr', $this->getLogicalId());
-                    $cmd_info->setConfiguration('endpoint', $endpoint_id);
-                    $cmd_info->setConfiguration('cluster', $cluster_id);
-                    $cmd_info->setConfiguration('attribute', $attribute_id);
-                    $value = $attribute['data'];
-                    if (isset($attribute['value'])){
-                        $value = $attribute['value'];
-                    }
-                    if ($name == 'battery'){
-                        $this->evaluateBattery($value);
-                    }
-                  switch (gettype($value)) {
-                      case 'boolean':
-                          $cmd_info->setSubType('binary');
-                          break;
-                      case 'integer':
-                              $cmd_info->setSubType('numeric');
-                              if ($name == 'current_level'){
-                                  $cmd_info->setConfiguration('minValue', 0);
-                                  $cmd_info->setConfiguration('maxValue', 100);
-                              }
-                              if ($name == 'current_hue'){
-                                  $cmd_info->setConfiguration('minValue', 0);
-                                  $cmd_info->setConfiguration('maxValue', 360);
-                              }
-                              if ($name == 'current_saturation'){
-                                  $cmd_info->setConfiguration('minValue', 0);
-                                  $cmd_info->setConfiguration('maxValue', 100);
-                              }
-                              if ($name == 'colour_temperature'){
-                                  $cmd_info->setConfiguration('minValue', 1700);
-                                  $cmd_info->setConfiguration('maxValue', 6500);
-                              }
-                              break;
-                      case 'double':
-                        $cmd_info->setSubType('numeric');
-                        break;
-                      default:
-                          $cmd_info->setSubType('string');
-                          break;
-                  }
-                  //$cmd_info->setValue($value);
-                  $cmd_info->save();
-                  $cmd_info->event($value);
-                  array_push($created_commands, $key);
+      	            // hmm, it's a array, we supposed a dict
+      	            // so create a command per value
+      	            if (gettype($value) == 'array'){
+      	                foreach($value as $name => $val){
+      	                    $fake_attribute = $attribute;
+      	                    $fake_attribute['name'] = $name;
+      	                    $fake_attribute['value'] = $val;
+      	                    $fake_attribute['attribute'] = $attribute['attribute'].'.'.$name;
+      	                    $key = $this->_create_command($endpoint_id, $cluster_id, $fake_attribute);
+      	                    array_push($created_commands, $key);
+      	                }
+      	            }
+      	            else {
+      	             $key = $this->_create_command($endpoint_id, $cluster_id, $attribute);
+      	             array_push($created_commands, $key);
+      	            }
+                  
                 }
       	    }
         
@@ -235,6 +179,88 @@ class zigate extends eqLogic {
             }
         }
         */
+    }
+    public function _create_command($endpoint_id, $cluster_id, $attribute){
+        $attribute_id = $attribute['attribute'];
+        log::add('zigate', 'debug', 'create command '.$endpoint_id.'.'.$cluster_id.'.'.$attribute_id);
+        $key = $this->getLogicalId().'.'.$endpoint_id.'.'.$cluster_id.'.'.$attribute_id;
+        $name = $endpoint_id.'_'.$cluster_id.'_'.$attribute['attribute'];
+        if (isset($attribute['name'])){
+            $name = $attribute['name'];
+        }
+        $value = $attribute['data'];
+        if (isset($attribute['value'])){
+            $value = $attribute['value'];
+        }
+        
+        $cmd_info = $this->getCmd(null, $key);
+        if (!is_object($cmd_info)) {
+            $cmd_info = new zigateCmd();
+            $cmd_info->setLogicalId($key);
+            $cmd_info->setType('info');
+            $cmd_info->setEqLogic_id($this->getId());
+            $cmd_info->setIsHistorized(1);
+            if (!isset($attribute['name'])){
+                $cmd_info->setIsVisible(0);
+                $cmd_info->setIsHistorized(0);
+            }
+            if ($cluster_id == 0){
+                $cmd_info->setIsVisible(0);
+            }
+            $cmd_info->setName($name);
+        }
+        if (isset($attribute['unit'])){
+            $cmd_info->setUnite($attribute['unit']);
+        }
+        if (isset($attribute['name'])){
+            $cmd_info->setConfiguration('property', $name);
+            if ($cluster_id == 0){
+                $this->setConfiguration($name,$attribute['value']);
+                $this->save();
+            }
+        }
+        $cmd_info->setConfiguration('addr', $this->getLogicalId());
+        $cmd_info->setConfiguration('endpoint', $endpoint_id);
+        $cmd_info->setConfiguration('cluster', $cluster_id);
+        $cmd_info->setConfiguration('attribute', $attribute_id);
+        
+        if ($name == 'battery'){
+            $this->evaluateBattery($value);
+        }
+        switch (gettype($value)) {
+            case 'boolean':
+                $cmd_info->setSubType('binary');
+                break;
+            case 'integer':
+                $cmd_info->setSubType('numeric');
+                if ($name == 'current_level'){
+                    $cmd_info->setConfiguration('minValue', 0);
+                    $cmd_info->setConfiguration('maxValue', 100);
+                }
+                if ($name == 'current_hue'){
+                    $cmd_info->setConfiguration('minValue', 0);
+                    $cmd_info->setConfiguration('maxValue', 360);
+                }
+                if ($name == 'current_saturation'){
+                    $cmd_info->setConfiguration('minValue', 0);
+                    $cmd_info->setConfiguration('maxValue', 100);
+                }
+                if ($name == 'colour_temperature'){
+                    $cmd_info->setConfiguration('minValue', 1700);
+                    $cmd_info->setConfiguration('maxValue', 6500);
+                }
+                break;
+            case 'double':
+                $cmd_info->setSubType('numeric');
+                break;
+            default:
+                $cmd_info->setSubType('string');
+                break;
+        }
+        //$cmd_info->setValue($value);
+        $cmd_info->save();
+        $cmd_info->event($value);
+        return $key;
     }
     public function _create_action($endpoint_id, $action, $name, $subtype, $value=null){
         log::add('zigate', 'debug', 'create action '.$action.' for endpoint '.$endpoint_id);
