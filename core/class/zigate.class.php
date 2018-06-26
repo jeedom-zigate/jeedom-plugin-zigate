@@ -50,25 +50,18 @@ class zigate extends eqLogic {
             $eqLogic->setEqType_name('zigate');
             $eqLogic->setIsEnable(1);
             $eqLogic->setLogicalId($addr);
-            foreach ($device['info'] as $info => $value) {
-                $eqLogic->setConfiguration($info, $value);
-            }
             $eqLogic->setName('Device ' . $addr);
             $eqLogic->setIsVisible(1);
-            $eqLogic->setStatus('lastCommunication', $device['info']['last_seen']);
-            $eqLogic->setStatus('rssi', $device['info']['rssi']);
             $eqLogic->save();
             $eqLogic = self::byId($eqLogic->getId());
-            $eqLogic->createCommands($device);
-        } else {
-            foreach ($device['info'] as $info => $value) {
-                $eqLogic->setConfiguration($info, $value);
-            }
-            $eqLogic->setStatus('lastCommunication', $device['info']['last_seen']);
-            $eqLogic->setStatus('rssi', $device['info']['rssi']);
-            $eqLogic->save();
-            $eqLogic->createCommands($device);
+        } 
+        foreach ($device['info'] as $info => $value) {
+            $eqLogic->setConfiguration($info, $value);
         }
+        $eqLogic->setStatus('lastCommunication', $device['info']['last_seen']);
+        $eqLogic->setStatus('rssi', $device['info']['rssi']);
+        $eqLogic->save();
+        $eqLogic->createCommands($device);
         return $addr;
     }
     public static function removeDevice($addr) {
@@ -221,6 +214,9 @@ class zigate extends eqLogic {
             $cmd_info->setConfiguration('property', $name);
             if ($cluster_id == 0){
                 $this->setConfiguration($name,$attribute['value']);
+                if ($name == 'type' && $attribute['value'] && $this->getName() == 'Device ' . $this->getLogicalId()){
+                    $this->setName('Device ' . $this->getLogicalId(). ' '.$attribute['value']);
+                }
                 $this->save();
             }
         }
