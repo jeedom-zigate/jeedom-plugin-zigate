@@ -2,7 +2,7 @@
 	"id" : "zigate",
 	"name" : "ZiGate",
 	"description" : "Plugin zigate pour utilisation de la zigate",
-	"licence" : "(c) Sébastien RAMAGE",
+	"licence" : "MIT License",
 	"author" : "Sébastien RAMAGE",
 	"require" : "3.0",
 	"category" : "automation protocol",
