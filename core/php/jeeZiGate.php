@@ -46,29 +46,9 @@ elseif ($action == 'ZIGATE_ATTRIBUTE_UPDATED'){
         $eqLogic = zigate::byLogicalId($device['addr'], 'zigate');
         if (is_object($eqLogic)) {
             $attribute = $results['attribute'];
-            $endpoint = $attribute['endpoint'];
-            $logicId = $device['addr'].'.'.$attribute['endpoint'].'.'.$attribute['cluster'].'.'.$attribute['attribute'];
-          	if (isset($attribute['value'])){
-              $value = $attribute['value'];
-            }
-          	else {
-            	$value = $attribute['data'];
-            }
-            log::add('zigate','debug','Device Update '.$logicId.' '.$value);
-            $cmd = $eqLogic->getCmd(null,$logicId);
-          	if (is_object($cmd)){
-            	$cmd->event($value);
-            	$eqLogic->setStatus('lastCommunication', $device['info']['last_seen']);
-            	$eqLogic->setStatus('rssi', $device['info']['rssi']);
-            	if (isset($attribute['name'])){
-                	if ($attribute['name'] == 'battery'){
-                	    $eqLogic->evaluateBattery($value);
-                	}
-            	}
-            }
-          	else {
-          	    zigate::syncDevice($device);
-          	}
+            $eqLogic->update_command($attribute['endpoint'], $attribute['cluster'], $attribute);
+            $eqLogic->setStatus('lastCommunication', $device['info']['last_seen']);
+            $eqLogic->setStatus('rssi', $device['info']['rssi']);
         }
     }
 }

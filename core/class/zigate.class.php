@@ -110,27 +110,8 @@ class zigate extends eqLogic {
       	    foreach ($endpoint['clusters'] as $cluster){
       	        $cluster_id = $cluster['cluster'];
       	        foreach ($cluster['attributes'] as $attribute){
-      	            $value = $attribute['data'];
-      	            if (isset($attribute['value'])){
-      	                $value = $attribute['value'];
-      	            }
-      	            // hmm, it's a array, we supposed a dict
-      	            // so create a command per value
-      	            if (gettype($value) == 'array'){
-      	                foreach($value as $name => $val){
-      	                    $fake_attribute = $attribute;
-      	                    $fake_attribute['name'] = $name;
-      	                    $fake_attribute['value'] = $val;
-      	                    $fake_attribute['attribute'] = $attribute['attribute'].'.'.$name;
-      	                    $key = $this->_create_command($endpoint_id, $cluster_id, $fake_attribute);
-      	                    array_push($created_commands, $key);
-      	                }
-      	            }
-      	            else {
-      	             $key = $this->_create_command($endpoint_id, $cluster_id, $attribute);
-      	             array_push($created_commands, $key);
-      	            }
-                  
+      	            $keys = $this->update_command($endpoint_id, $cluster_id, $attribute);
+      	            $created_commands = array_merge($created_commands, $keys);
                 }
       	    }
         
@@ -179,6 +160,30 @@ class zigate extends eqLogic {
             }
         }
         */
+    }
+    public function update_command($endpoint_id, $cluster_id, $attribute){
+        $created_commands = [];
+        $value = $attribute['data'];
+        if (isset($attribute['value'])){
+            $value = $attribute['value'];
+        }
+        // hmm, it's a array, we supposed a dict
+        // so create a command per value
+        if (gettype($value) == 'array'){
+            foreach($value as $name => $val){
+                $fake_attribute = $attribute;
+                $fake_attribute['name'] = $name;
+                $fake_attribute['value'] = $val;
+                $fake_attribute['attribute'] = $attribute['attribute'].'.'.$name;
+                $key = $this->_create_command($endpoint_id, $cluster_id, $fake_attribute);
+                array_push($created_commands, $key);
+            }
+        }
+        else {
+            $key = $this->_create_command($endpoint_id, $cluster_id, $attribute);
+            array_push($created_commands, $key);
+        }
+        return $created_commands;
     }
     public function _create_command($endpoint_id, $cluster_id, $attribute){
         $attribute_id = $attribute['attribute'];
