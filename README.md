@@ -6,7 +6,16 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
-* Prochaine version :
+* 2018-06-26 :
+	- Ajout de vignettes
+	- Ajout du type de le nom par défaut des équipements
+	- Gestion des zone IAS (Détecteur d'inondation, de fumée, d'intrusion, etc)
+	- Ajout de la commande refresh
+	- Correction bug multiclick pas à 0 au démarrage
+	- Amélioration de la gestion du cube XIAOMI
+	- Modification de l'information current_level varie maintenant de 0-100 au lieu de 0-254
+
+* 2018-06-05 :
     - Publication des sources sur github
     - Ajout de la commande Toggle
     
