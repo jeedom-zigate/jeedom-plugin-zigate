@@ -85,8 +85,11 @@ class zigate extends eqLogic {
             if (!$power_source){
                 $power_source = 3;
             }
+            if ($power_source == 3){
+                $power_source = 3.2;
+            }
             $power_source = floatval($power_source);
-            $power_end = 0.75*$power_source;
+            $power_end = 0.9*$power_source;
             $percent = ($value-$power_end)*100/($power_source-$power_end);
             $percent = intval($percent);
         }
