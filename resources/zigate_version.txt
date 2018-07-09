@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 0.17.3
+=======
+0.17.2
+>>>>>>> branch 'dev' of https://github.com/doudz/jeedom-plugin-zigate.git
