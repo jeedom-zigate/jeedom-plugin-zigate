@@ -6,6 +6,10 @@ Documentation et changlog du plugin ZiGate pour Jeedom
 
 # ChangeLog
 
+* 2018-07-20 :
+	- Amélioration de la gestion du cube Xiaomi
+	- Diverses amélioration/correction de bugs
+
 * 2018-06-26 :
 	- Ajout de vignettes
 	- Ajout du type de le nom par défaut des équipements
