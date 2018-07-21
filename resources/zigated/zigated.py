@@ -278,15 +278,15 @@ zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_UPDATED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_NEED_REFRESH, z)
 
+z.autoStart()
+z.start_auto_save()
+
 version = z.get_version_text()
 logging.info('Firmware ZiGate : {}'.format(version))
 if version < '3.0d':
     logging.error('Veuillez mettre à jour le firmware de votre clé ZiGate')
     logging.error('Version actuelle : {} - Version minimale requise : 3.0d'.format(version))
     sys.exit(1)
-
-z.autoStart()
-z.start_auto_save()
 
 if args.sharedata:
     t = threading.Thread(target=sharedata)
