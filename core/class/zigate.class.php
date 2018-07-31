@@ -146,7 +146,7 @@ class zigate extends eqLogic {
                 }
             }
         }
-        $key = $this->_create_action(0, 'refresh', 'refresh', 'other');
+        $key = $this->_create_action(0, 'refresh', 'resync', 'other');
         array_push($created_commands, $key);
         
         /*
