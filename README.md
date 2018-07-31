@@ -3,8 +3,11 @@ Plugin ZiGate pour Jeedom
 
 Documentation et changlog du plugin ZiGate pour Jeedom
 
+## Documentation
 
-# ChangeLog
+Voir la [documentation](documentation/Documentation.md).
+
+## ChangeLog
 
 * 2018-07-20 :
 	- Ajout de vignettes
