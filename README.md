@@ -3,9 +3,9 @@ Plugin ZiGate pour Jeedom
 
 Documentation et changlog du plugin ZiGate pour Jeedom
 
-## Documentation
+## Documentation utilisateur
 
-Voir la [documentation](documentation/Documentation.md).
+Voir la [documentation utilisateur](documentation/Documentation.md).
 
 ## ChangeLog
 
