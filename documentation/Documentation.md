@@ -39,7 +39,7 @@ Ce panneau de configuration donne aussi l'accès aux logs, ce sont les logs les 
 #### Gestion
 
 * Mode inclusion : passe le plugin en mode détection d'équipement pendant 30 secondes. Il faut lancer la procédure d'association sur les équipements à associer dans cet intervalle.
-* TouchLink : association en mode touch link.
+* TouchLink : association d'équipement en mode touch link.
 * Network scan : lancement d'un scan du réseau ZigBee. Peut résoudre des problèmes d'association, mais pour l'instant l'impact est inconnu
 * Synchroniser : synchronise les informations du plugin avec les informations réelles du réseau ZigBee. Commande très importante à utiliser régulièrement pour s'assurer que les données affichées sont bien les données en cours. Plus techniquement, cette synchronisation permet d'afficher les données les plus récentes présentes dans le démon, qui est le composant qui porte la vérité sur le réseau ZigBee
 * Reset ZiGate : équivalent à un débranchement/rebranchement de la ZiGate. Cette commande ne supprime aucune donnée
@@ -66,7 +66,7 @@ Paramètres de l'équipement :
 * Type : type de l'équipement après identification de l'équipement
 * Manufacturer : constructeur de l'équipement
 * IEEE : identifiant réseau unique, l'équivalent d'une adresse mac par exemple
-* Link quality : niveau de qualité du lien avec l'équipement. Une valeur basse indique un lien trop faible, la communication peut être instable
+* Link quality : niveau de qualité du lien avec l'équipement. Une valeur basse indique un lien trop faible, la communication peut être instable. Une valeur à 50 peut engendrer des disparitions temporaires d'équipement. Une valeur de 100 semble être stable.
 * Power source : source d'énergie
    * 0 : inconnu
    * 3 : batterie
