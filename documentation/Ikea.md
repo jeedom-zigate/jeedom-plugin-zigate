@@ -36,7 +36,7 @@ Pour associer une télécommande (bouton, variateur) avec une ampoule sans rompr
 4. L'ampoule doit clignoter pour signifier que l'inclusion a réussi
 5. Dans Jeedom, l'ampoule doit apparaître avec un nom aléatoire. La renommer et choisir le parent si besoin
 6. Sauvegarder l'ampoule
-7. Rafraîchir l'ampoule
+7. Resynchroniser l'ampoule
 8. Patienter quelques temps que les données soient bien remontées dans Jeedom. Si les données mettent du temps, demander une synchronisation dans le plugin ZiGate
 
 ### Ajout d'une télécommande
@@ -49,7 +49,7 @@ Si la télécommande est déjà associée avec ZiGate, par exemple lors de l'ajo
 1. Passer le plugin en mode *Inclusion*
 2. Appuyer 4 fois sur le bouton d'association de la télécommande
 3. La télécommande doit apparaître dans Jeedom avec un nom aléatoire
-4. Sauvegarder la télécommande
+4. Resynchroniser la télécommande
 5. Associer la télécommande avec les ampoules une à une [voir la vidéo](https://www.youtube.com/watch?v=JRYFEuQhkIE)
     1. Approcher la télécommande à 2 cm de l'ampoule
     2. Appuyer pendant environ 10 secondes sur la télécommande d'association, jusqu'à ce que l'ampoule varie sa luminosité
@@ -64,7 +64,7 @@ Si le variateur est déjà associée avec ZiGate, par exemple lors de l'ajout d'
 1. Passer le plugin en mode *Inclusion*
 2. Appuyer 4 fois sur le bouton d'association du variateur
 3. Le variateur doit apparaître dans Jeedom avec un nom aléatoire
-4. Sauvegarder le variateur
+4. Resynchroniser le variateur
 5. Associer le variateur avec les ampoules une à une [voir la vidéo](https://www.youtube.com/watch?v=_XxYk6Twm34)
     1. Approcher la télécommande à 2 cm de l'ampoule
     2. Appuyer pendant environ 10 secondes sur la télécommande d'association, jusqu'à ce que l'ampoule varie sa luminosité
