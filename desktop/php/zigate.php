@@ -88,7 +88,7 @@ foreach ($eqLogics as $eqLogic) {
 	<a class="btn btn-success eqLogicAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
   <a class="btn btn-danger eqLogicAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
   <a class="btn btn-default eqLogicAction pull-right" data-action="configure"><i class="fa fa-cogs"></i> {{Configuration avancée}}</a>
-  <a class="btn btn-success eqLogicAction pull-right" data-action="refresh_device"><i class="fa fa-refresh"></i> {{Rafraichir l'équipement}}</a>
+  <a class="btn btn-success eqLogicAction pull-right" data-action="refresh_device"><i class="fa fa-refresh"></i> {{Resynchroniser l'équipement}}</a>
   <a class="btn btn-success eqLogicAction pull-right" data-action="identify_device"><i class="fa fa-refresh"></i> {{Identifier}}</a>
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fa fa-arrow-circle-left"></i></a></li>
