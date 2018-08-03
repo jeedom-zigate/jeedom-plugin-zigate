@@ -288,10 +288,10 @@ if version < '3.0d':
     logging.error('Version actuelle : {} - Version minimale requise : 3.0d'.format(version))
     sys.exit(1)
 
-if args.sharedata:
-    t = threading.Thread(target=sharedata)
-    t.setDaemon(True)
-    t.start()
+#if args.sharedata:
+#    t = threading.Thread(target=sharedata)
+#    t.setDaemon(True)
+#    t.start()
 
 t = threading.Thread(target=server.serve_forever)
 t.start()
