@@ -263,8 +263,8 @@ server = socketserver.UnixStreamServer(args.socket, JeedomHandler)
 if '.' in args.device:  # supposed I.P:PORT
     host_port = args.device.split(':', 1)
     host = host_port[0]
-    port = 9999
-    if len(host_port) > 1:
+    port = None
+    if len(host_port) == 2:
         port = int(host_port[1])
     logging.info('Démarrage ZiGate WiFi {} {}'.format(host, port))
     z = zigate.ZiGateWiFi(host, port, persistent_file, auto_start=False)
@@ -288,10 +288,10 @@ if version < '3.0d':
     logging.error('Version actuelle : {} - Version minimale requise : 3.0d'.format(version))
     sys.exit(1)
 
-if args.sharedata:
-    t = threading.Thread(target=sharedata)
-    t.setDaemon(True)
-    t.start()
+#if args.sharedata:
+#    t = threading.Thread(target=sharedata)
+#    t.setDaemon(True)
+#    t.start()
 
 t = threading.Thread(target=server.serve_forever)
 t.start()
