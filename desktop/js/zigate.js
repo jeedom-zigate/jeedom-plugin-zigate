@@ -14,6 +14,10 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
+$('#bt_healthzigate').on('click', function () {
+  $('#md_modal').dialog({title: "{{Santé Zigate}}"});
+  $('#md_modal').load('index.php?v=d&plugin=zigate&modal=health').dialog('open');
+});
 
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 /*
