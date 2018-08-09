@@ -29,7 +29,7 @@ $eqLogics = zigate::byType('zigate');
 			<th>{{Module}}</th>
 			<th>{{ID}}</th>
 			<th>{{Modèle}}</th>
-			<th>{{Identifiant}}</th>
+			<th>{{Rssi}}</th>
 			<th>{{Statut}}</th>
 			<th>{{Batterie}}</th>
 			<th>{{Dernière communication}}</th>
@@ -47,7 +47,7 @@ foreach ($eqLogics as $eqLogic) {
 	echo '<tr><td>' . $image . '</td><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
 	echo '<td><span class="label label-info" style="font-size : 1em; cursor : default;">' . $eqLogic->getId() . '</span></td>';
 	echo '<td><span class="label label-info" style="font-size : 1em; cursor : default;">' . $eqLogic->getConfiguration('type') . '</span></td>';
-	echo '<td><span class="label label-info" style="font-size : 1em; cursor : default;">' . $eqLogic->getLogicalId() . '</span></td>';
+	echo '<td><span class="label label-info" style="font-size : 1em; cursor : default;">' . $eqLogic->getConfiguration('rssi') . '</span></td>';
 	$status = '<span class="label label-success" style="font-size : 1em; cursor : default;">{{OK}}</span>';
 	if ($eqLogic->getStatus('state') == 'nok') {
 		$status = '<span class="label label-danger" style="font-size : 1em; cursor : default;">{{NOK}}</span>';
