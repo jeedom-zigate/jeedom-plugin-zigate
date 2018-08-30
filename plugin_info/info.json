@@ -1,16 +1,20 @@
 {
-	"id" : "zigate",
-	"name" : "ZiGate",
-	"description" : "Plugin zigate pour utilisation de la zigate",
-	"licence" : "MIT License",
-	"author" : "Sébastien RAMAGE",
-	"require" : "3.0",
-	"category" : "automation protocol",
-	"hasDependency" : true,
-	"hasOwnDeamon" : true,
-	"maxDependancyInstallTime" : 30,
-	"changelog" : "https://doudz.github.io/jeedom-plugin-zigate/",
-	"documentation" : "https://doudz.github.io/jeedom-plugin-zigate/",
-    "language" : ["fr_FR","en_US"],
-    "compatibility" : ["Jeedomboard","RPI/RPI2","Docker","DIY"]
+	"id": "zigate",
+	"name": "ZiGate",
+	"description": "Plugin zigate pour utilisation de la zigate",
+	"licence": "MIT License",
+	"author": "Sébastien RAMAGE",
+	"require": "3.0",
+	"category": "automation protocol",
+	"hasDependency": true,
+	"hasOwnDeamon": true,
+	"maxDependancyInstallTime": 30,
+	"link": {
+		"forum": "https://www.jeedom.com/forum/viewtopic.php?f=133&t=34490"
+	},
+	"changelog": "https://github.com/Jeedom-Zigate/jeedom-plugin-zigate",
+	"documentation": "https://jeedom-zigate.github.io/jeedom-plugin-zigate",
+	"language": ["fr_FR", "en_US"],
+	"compatibility": ["Jeedomboard", "RPI/RPI2", "Docker", "DIY"],
+	"pluginVersion": "1.1.0-b1"
 }
