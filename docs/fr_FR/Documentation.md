@@ -18,7 +18,7 @@
 
 Après l'installation du plugin depuis le Jeedom Market, la page de configuration s'ouvre :
 
-![Configuration du plugin](images/Configuration.png)
+![Configuration du plugin](../images/Configuration.png)
 
 Plusieurs étapes sont nécessaires à la configuration du plugin :
 
@@ -34,7 +34,7 @@ Ce panneau de configuration donne aussi l'accès aux logs, ce sont les logs les 
 
 ### Fonctions du plugin
 
-![Plugin ZiGate](images/Plugin.png)
+![Plugin ZiGate](../images/Plugin.png)
 
 #### Gestion
 
@@ -49,7 +49,7 @@ Ce panneau de configuration donne aussi l'accès aux logs, ce sont les logs les 
 
 ### Configuration des équipements
 
-![Configuration de l'équipement](images/Equipement.png)
+![Configuration de l'équipement](../images/Equipement.png)
 
 Fonctions :
 
