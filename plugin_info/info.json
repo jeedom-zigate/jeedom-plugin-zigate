@@ -12,7 +12,7 @@
 	"link": {
 		"forum": "https://www.jeedom.com/forum/viewtopic.php?f=133&t=34490"
 	},
-	"changelog": "https://github.com/Jeedom-Zigate/jeedom-plugin-zigate",
+	"changelog": "https://jeedom-zigate.github.io/jeedom-plugin-zigate/fr_FR/changelog",
 	"documentation": "https://jeedom-zigate.github.io/jeedom-plugin-zigate",
 	"language": ["fr_FR", "en_US"],
 	"compatibility": ["Jeedomboard", "RPI/RPI2", "Docker", "DIY"],
