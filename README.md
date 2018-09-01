@@ -1,9 +1,8 @@
 Plugin ZiGate pour Jeedom
 =========================
+<img src="plugin_info/zigate_icon.png" align="right" height="160" width="150">
 
 Plugin permettant d'intégrer la clé [ZiGate](https://zigate.fr/) dans la solution domotique [Jeedom](https://www.jeedom.com).
-
-<img src="plugin_info/zigate_icon.png" align="right" height="160" width="150">
 
 ## Documentation utilisateur
 
