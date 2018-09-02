@@ -1,6 +1,10 @@
 Plugin ZiGate pour Jeedom
 =========================
+
 <img src="plugin_info/zigate_icon.png" align="right" height="160" width="150">
+
+[![GitHub version](https://badge.fury.io/gh/Jeedom-Zigate%2Fjeedom-plugin-zigate.svg)](https://github.com/Jeedom-Zigate/jeedom-plugin-zigate) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Jeedom-Zigate/jeedom-plugin-zigate.svg)](http://isitmaintained.com/project/Jeedom-Zigate/jeedom-plugin-zigate "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/Jeedom-Zigate/jeedom-plugin-zigate.svg)](http://isitmaintained.com/project/Jeedom-Zigate/jeedom-plugin-zigate "Percentage of issues still open") [![GitHub license](https://img.shields.io/github/license/Jeedom-Zigate/jeedom-plugin-zigate.svg)](https://github.com/Jeedom-Zigate/jeedom-plugin-zigate/blob/master/LICENSE)
+
 
 Plugin permettant d'intégrer la clé [ZiGate](https://zigate.fr/) dans la solution domotique [Jeedom](https://www.jeedom.com).
 
@@ -10,8 +14,8 @@ Voir la [documentation utilisateur](https://jeedom-zigate.github.io/jeedom-plugi
 
 ## Market
 
-Retrouvez le sur le Market Jeedom [ici](https://www.jeedom.com/market/index.php?v=d&p=market&type=plugin&&name=zigate)
+Retrouvez le sur le Market Jeedom [ici](https://www.jeedom.com/market/index.php?v=d&p=market&type=plugin&&name=zigate).
 
 ## Forum
 
-Lien vers le forum [ici]("https://www.jeedom.com/forum/viewtopic.php?f=133&t=34490")
+Lien vers le forum [ici](https://www.jeedom.com/forum/viewtopic.php?f=133&t=34490).
