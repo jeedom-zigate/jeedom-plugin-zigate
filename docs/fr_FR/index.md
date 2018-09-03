@@ -1,5 +1,4 @@
-Plugin ZiGate pour Jeedom
-=========================
+# Plugin ZiGate pour Jeedom
 
 ## Installation
 
@@ -10,10 +9,10 @@ Après l'installation du plugin depuis le Jeedom Market, la page de configuratio
 Plusieurs étapes sont nécessaires à la configuration du plugin :
 
 1. Activer le plugin, la configuration devient alors accessible
-2. Lancer l'installation des dépendances
-3. Si besoin, relancer le démon, jusqu'à ce que le statut et la configuration soient OK
-4. Sélectionner le port USB de la ZiGate, le nom *Prolific* doit apparaître dans le nom
-5. Dans le cas de la version WiFi, il faut saisir l'adresse IP ainsi que le port de la clé ZiGate
+1. Lancer l'installation des dépendances
+1. Si besoin, relancer le démon, jusqu'à ce que le statut et la configuration soient OK
+1. Sélectionner le port USB de la ZiGate, le nom *Prolific* doit apparaître dans le nom
+1. Dans le cas de la version WiFi, il faut saisir l'adresse IP ainsi que le port de la clé ZiGate
 
 Ce panneau de configuration donne aussi l'accès aux logs, ce sont les logs les plus utiles sur la communication avec les équipements.
 
@@ -55,8 +54,8 @@ Ce panneau de configuration donne aussi l'accès aux logs, ce sont les logs les 
 * IEEE : identifiant réseau unique, l'équivalent d'une adresse mac par exemple
 * Link quality : niveau de qualité du lien avec l'équipement. Une valeur basse indique un lien trop faible, la communication peut être instable. Une valeur à 50 peut engendrer des disparitions temporaires d'équipement. Une valeur de 100 semble être stable.
 * Power source : source d'énergie
-   * 0 : inconnu
-   * 3 : batterie
+      * 0 : inconnu
+      * 3 : batterie
 * Batterie : niveau de batterie de l'équipement
 
 L'onglet *Commandes* regroupe l'ensemble des commandes de l'équipement. Consulter la documentation de Jeedom pour plus d'information.
@@ -64,12 +63,15 @@ L'onglet *Commandes* regroupe l'ensemble des commandes de l'équipement. Consult
 ### Intégration des équipements
 
 #### Ikea
+
 Voir [Ikea](ikea.md).
 
 #### Philips
+
 Voir [Philips](philips.md).
 
 #### Xiaomi
+
 Voir [Xiaomi](xiaomi.md).
 
 ## FAQ

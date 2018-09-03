@@ -1,5 +1,4 @@
-Philips (Hue)
-=============
+# Philips (Hue)
 
 ## Compatibilité (non exhaustive)
 
