@@ -1,14 +1,5 @@
-- [Ikea (Trådfri)](#ikea-trådfri)
-    - [Compatibilité (non exhaustive)](#compatibilité-non-exhaustive)
-    - [Références](#références)
-    - [Informations générales](#informations-générales)
-        - [Lien entre les télécommandes et ZiGate](#lien-entre-les-télécommandes-et-zigate)
-    - [Mode opératoire](#mode-opératoire)
-        - [Ajout d'une ampoule](#ajout-dune-ampoule)
-        - [Ajout d'une télécommande](#ajout-dune-télécommande)
-        - [Ajout d'un variateur](#ajout-dun-variateur)
-
-# Ikea (Trådfri)
+Ikea (Trådfri)
+==============
 
 ## Compatibilité (non exhaustive)
 
@@ -46,11 +37,11 @@ La télécommande doit être associée à ZiGate, [voir pourquoi](#lien-entre-le
 Si la télécommande est déjà associée avec ZiGate, par exemple lors de l'ajout d'une nouvelle ampoule, seule l'association entre la télécommande et l'ampoule est nécessaire
 
 1. Ouvrir la télécommande pour accéder au bouton d'association
-1. Passer le plugin en mode *Inclusion*
-2. Appuyer 4 fois sur le bouton d'association de la télécommande
-3. La télécommande doit apparaître dans Jeedom avec un nom aléatoire
-4. Resynchroniser la télécommande
-5. Associer la télécommande avec les ampoules une à une [voir la vidéo](https://www.youtube.com/watch?v=JRYFEuQhkIE)
+2. Passer le plugin en mode *Inclusion*
+3. Appuyer 4 fois sur le bouton d'association de la télécommande
+4. La télécommande doit apparaître dans Jeedom avec un nom aléatoire
+5. Resynchroniser la télécommande
+6. Associer la télécommande avec les ampoules une à une [voir la vidéo](https://www.youtube.com/watch?v=JRYFEuQhkIE)
     1. Approcher la télécommande à 2 cm de l'ampoule
     2. Appuyer pendant environ 10 secondes sur la télécommande d'association, jusqu'à ce que l'ampoule varie sa luminosité
 
@@ -61,10 +52,10 @@ le variateur doit être associé à ZiGate, [voir pourquoi](#lien-entre-les-tél
 Si le variateur est déjà associée avec ZiGate, par exemple lors de l'ajout d'une nouvelle ampoule, seule l'association entre le variateur et l'ampoule est nécessaire
 
 1. Ouvrir le variateur pour accéder au bouton d'association
-1. Passer le plugin en mode *Inclusion*
-2. Appuyer 4 fois sur le bouton d'association du variateur
-3. Le variateur doit apparaître dans Jeedom avec un nom aléatoire
-4. Resynchroniser le variateur
-5. Associer le variateur avec les ampoules une à une [voir la vidéo](https://www.youtube.com/watch?v=_XxYk6Twm34)
+3. Passer le plugin en mode *Inclusion*
+3. Appuyer 4 fois sur le bouton d'association du variateur
+4. Le variateur doit apparaître dans Jeedom avec un nom aléatoire
+5. Resynchroniser le variateur
+6. Associer le variateur avec les ampoules une à une [voir la vidéo](https://www.youtube.com/watch?v=_XxYk6Twm34)
     1. Approcher la télécommande à 2 cm de l'ampoule
     2. Appuyer pendant environ 10 secondes sur la télécommande d'association, jusqu'à ce que l'ampoule varie sa luminosité

@@ -1,32 +1,19 @@
-- [Plugin ZiGate pour Jeedom](#plugin-zigate-pour-jeedom)
-    - [Installation](#installation)
-    - [Fonctionnement](#fonctionnement)
-        - [Fonctions du plugin](#fonctions-du-plugin)
-            - [Gestion](#gestion)
-            - [Mes équipements ZiGate](#mes-équipements-zigate)
-        - [Configuration des équipements](#configuration-des-équipements)
-        - [Intégration des équipements](#intégration-des-équipements)
-            - [Ikea](#ikea)
-            - [Philips](#philips)
-            - [Xiaomi](#xiaomi)
-    - [FAQ](#faq)
-        - [Le statut de l'équipement ne remonte plus dans Jeedom](#le-statut-de-léquipement-ne-remonte-plus-dans-jeedom)
-
-# Plugin ZiGate pour Jeedom
+Plugin ZiGate pour Jeedom
+=========================
 
 ## Installation
 
 Après l'installation du plugin depuis le Jeedom Market, la page de configuration s'ouvre :
 
-![Configuration du plugin](images/Configuration.png)
+![Configuration du plugin](../images/Configuration.png)
 
 Plusieurs étapes sont nécessaires à la configuration du plugin :
 
 1. Activer le plugin, la configuration devient alors accessible
-1. Lancer l'installation des dépendances
-1. Si besoin, relancer le démon, jusqu'à ce que le statut et la configuration soient OK
-1. Sélectionner le port USB de la ZiGate, le nom *Prolific* doit apparaître dans le nom
-1. Dans le cas de la version WiFi, il faut saisir l'adresse IP ainsi que le port de la clé ZiGate
+2. Lancer l'installation des dépendances
+3. Si besoin, relancer le démon, jusqu'à ce que le statut et la configuration soient OK
+4. Sélectionner le port USB de la ZiGate, le nom *Prolific* doit apparaître dans le nom
+5. Dans le cas de la version WiFi, il faut saisir l'adresse IP ainsi que le port de la clé ZiGate
 
 Ce panneau de configuration donne aussi l'accès aux logs, ce sont les logs les plus utiles sur la communication avec les équipements.
 
@@ -34,7 +21,7 @@ Ce panneau de configuration donne aussi l'accès aux logs, ce sont les logs les 
 
 ### Fonctions du plugin
 
-![Plugin ZiGate](images/Plugin.png)
+![Plugin ZiGate](../images/Plugin.png)
 
 #### Gestion
 
@@ -49,15 +36,15 @@ Ce panneau de configuration donne aussi l'accès aux logs, ce sont les logs les 
 
 ### Configuration des équipements
 
-![Configuration de l'équipement](images/Equipement.png)
+![Configuration de l'équipement](../images/Equipement.png)
 
-Fonctions :
+#### Fonctions
 
 * Identifier : lance la commande *identify* sur l'équipement pendant 5 secondes. Le résulat dépend de l'équipement, mais l'idée générale est de pouvoir identifier visuellement l'équipement en question. Une ampoule peut, par exemple, clignoter quelques secondes.
 * Resynchroniser l'équipement : commande importante qui envoie une série de questions à l'équipement pour l'identifier, découvrir ses capacités, et le configurer au mieux. Cette opération est lancée automatiquement lors de l'association d'un équipement, mais il peut être utile de la relancer lors qu'un équipement ne transmet plus son état par exemple, celà peut relancer la communication. Le plugin est en mesure d'identifier quand un rafraîchissement est nécessaire. Le cas échéant, il sera automatique pour un équipement sur secteur. Pour un équipement sur batterie, il faut la *réveiller*. La méthode dépend de l'équipement. Voir les intégrations plus bas. Le rafraîchissement est également lancé automatiquement lors du (re)démarrage du démon.
 * Configuration avancée : accès à la configuration avancée de l'équipement, déconseillé pour les non initiés
 
-Paramètres de l'équipement :
+#### Paramètres de l'équipement
 
 * Nom de l'équipement zigate : nom que l'on veut donner à l'équipement
 * Parent : objet parent dans Jeedom
@@ -76,9 +63,14 @@ L'onglet *Commandes* regroupe l'ensemble des commandes de l'équipement. Consult
 
 ### Intégration des équipements
 
-#### [Ikea](Ikea.md)
-#### [Philips](Philips.md)
-#### [Xiaomi](Xiaomi.md)
+#### Ikea
+Voir [Ikea](ikea.md).
+
+#### Philips
+Voir [Philips](philips.md).
+
+#### Xiaomi
+Voir [Xiaomi](xiaomi.md).
 
 ## FAQ
 

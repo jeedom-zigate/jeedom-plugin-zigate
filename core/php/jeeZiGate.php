@@ -35,7 +35,7 @@ elseif ($action == 'ZIGATE_DEVICE_REMOVED'){
 elseif ($action == 'ZIGATE_DEVICE_NEED_REFRESH'){
     $device = $results['device'];
     $eqLogic = zigate::byLogicalId($device['addr'], 'zigate');
-    message::add('zigate', 'L\'équipement ZiGate '.$eqLogic->getName().' requiert un rafraichissement.');
+    message::add('zigate', 'L\'équipement ZiGate '.$eqLogic->getHumanName().' requiert un rafraichissement.');
 }
 elseif ($action == 'ZIGATE_ATTRIBUTE_ADDED'){
     zigate::syncDevice($results['device']);
