@@ -1,6 +1,22 @@
 plugins:
+  fixme:
+    enabled: true
+    config:
+      strings:
+      - FIXME
+      - BUG
   markdownlint:
     enabled: true
     checks:
       MD013:
         enabled: false
+  pep8:
+    enabled: true
+  phpcodesniffer:
+    enabled: true
+    config:
+      standard: "PSR1,PSR2"
+  phpmd:
+    enabled: true
+  pmd:
+    enabled: true
