@@ -1,6 +1,7 @@
 # Plugin ZiGate pour Jeedom
 
 [![GitHub version](https://badge.fury.io/gh/Jeedom-Zigate%2Fjeedom-plugin-zigate.svg)](https://github.com/Jeedom-Zigate/jeedom-plugin-zigate)
+[![Build Status](https://travis-ci.org/Jeedom-Zigate/jeedom-plugin-zigate.svg?branch=master)](https://travis-ci.org/Jeedom-Zigate/jeedom-plugin-zigate)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4cf84a075d3eadda0a13/maintainability)](https://codeclimate.com/github/Jeedom-Zigate/jeedom-plugin-zigate/maintainability)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Jeedom-Zigate/jeedom-plugin-zigate.svg)](http://isitmaintained.com/project/Jeedom-Zigate/jeedom-plugin-zigate "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/Jeedom-Zigate/jeedom-plugin-zigate.svg)](http://isitmaintained.com/project/Jeedom-Zigate/jeedom-plugin-zigate "Percentage of issues still open")
