@@ -1,5 +1,18 @@
 matrix:
   include:
+
+  - language: php
+    php:
+    - 7.2
+    - 7.1
+    - 7.0
+    - 5.6
+    install:
+    - composer install
+    script:
+    - cd ${TRAVIS_BUILD_DIR}
+    - composer run-script test
+
   - language: markdown
     script:
     - gem install mdl

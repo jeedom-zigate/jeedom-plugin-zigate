@@ -15,15 +15,16 @@
  */
 
 $('#bt_healthzigate').on('click', function () {
-  $('#md_modal').dialog({title: "{{Santé Zigate}}"});
-  $('#md_modal').load('index.php?v=d&plugin=zigate&modal=health').dialog('open');
+    $('#md_modal').dialog({title: "{{Santé Zigate}}"});
+    $('#md_modal').load('index.php?v=d&plugin=zigate&modal=health').dialog('open');
 });
 
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 /*
  * Fonction pour l'ajout de commande, appellé automatiquement par plugin.zigate
  */
-function addCmdToTable(_cmd) {
+function addCmdToTable(_cmd)
+{
     if (!isset(_cmd)) {
         var _cmd = {configuration: {}};
     }
@@ -46,11 +47,11 @@ function addCmdToTable(_cmd) {
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="minValue" placeholder="{{Min}}" title="{{Min}}" style="margin-top : 5px;"> ';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="maxValue" placeholder="{{Max}}" title="{{Max}}" style="margin-top : 5px;">';
     tr += '</td>';
- 	tr += '<td>';
+    tr += '<td>';
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/>{{Afficher}}</label></span> ';
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label></span> ';
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="display" data-l2key="invertBinary"/>{{Inverser}}</label></span> '
-   	tr += '</td>';
+    tr += '</td>';
     tr += '<td>';
     if (is_numeric(_cmd.id)) {
         tr += '<a class="btn btn-default btn-xs cmdAction" data-action="configure"><i class="fa fa-cogs"></i></a> ';
@@ -84,13 +85,13 @@ $('#bt_touchlink').on('click', function () {
 });
 
 $('#bt_networkscan').on('click', function () {
-	callZiGate('start_network_scan');
+    callZiGate('start_network_scan');
 });
 
 $('.eqLogicAction[data-action=refresh_device]').on('click', function () {
     if ($('.li_eqLogic.active').attr('data-eqLogic_id') != undefined) {
-    	id = $('.li_eqLogic.active').attr('data-eqLogic_id');
-    	refresh_eqlogic(id);
+        id = $('.li_eqLogic.active').attr('data-eqLogic_id');
+        refresh_eqlogic(id);
     } else {
         $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner un}} ' + eqType, level: 'danger'});
     }
@@ -98,17 +99,18 @@ $('.eqLogicAction[data-action=refresh_device]').on('click', function () {
 
 $('.eqLogicAction[data-action=identify_device]').on('click', function () {
     if ($('.li_eqLogic.active').attr('data-eqLogic_id') != undefined) {
-    	id = $('.li_eqLogic.active').attr('data-eqLogic_id');
-    	identify_device(id);
+        id = $('.li_eqLogic.active').attr('data-eqLogic_id');
+        identify_device(id);
     } else {
         $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner un}} ' + eqType, level: 'danger'});
     }
 });
 
-function callZiGate(action){
-	$.ajax({
-        type: "POST", 
-        url: "plugins/zigate/core/ajax/zigate.ajax.php", 
+function callZiGate(action)
+{
+    $.ajax({
+        type: "POST",
+        url: "plugins/zigate/core/ajax/zigate.ajax.php",
         data: {
             action: action,
         },
@@ -116,7 +118,7 @@ function callZiGate(action){
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success: function (data) { 
+        success: function (data) {
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
@@ -126,10 +128,11 @@ function callZiGate(action){
     });
 }
 
-function syncEqLogicWithZiGate() {
+function syncEqLogicWithZiGate()
+{
     $.ajax({
-        type: "POST", 
-        url: "plugins/zigate/core/ajax/zigate.ajax.php", 
+        type: "POST",
+        url: "plugins/zigate/core/ajax/zigate.ajax.php",
         data: {
             action: "syncEqLogicWithZiGate",
         },
@@ -137,7 +140,7 @@ function syncEqLogicWithZiGate() {
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success: function (data) { 
+        success: function (data) {
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
@@ -147,10 +150,11 @@ function syncEqLogicWithZiGate() {
     });
 }
 
-function permitJoin() {
+function permitJoin()
+{
     $.ajax({
-        type: "POST", 
-        url: "plugins/zigate/core/ajax/zigate.ajax.php", 
+        type: "POST",
+        url: "plugins/zigate/core/ajax/zigate.ajax.php",
         data: {
             action: "permit_join",
         },
@@ -158,22 +162,22 @@ function permitJoin() {
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success: function (data) { 
+        success: function (data) {
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
-            }
-            else {
-            	$('#div_alert').showAlert({message: 'Mode inclusion lancé pour 30sec.', level: 'warning'});
+            } else {
+                $('#div_alert').showAlert({message: 'Mode inclusion lancé pour 30sec.', level: 'warning'});
             }
         }
     });
 }
 
-function reset() {
+function reset()
+{
     $.ajax({
-        type: "POST", 
-        url: "plugins/zigate/core/ajax/zigate.ajax.php", 
+        type: "POST",
+        url: "plugins/zigate/core/ajax/zigate.ajax.php",
         data: {
             action: "reset",
         },
@@ -181,22 +185,22 @@ function reset() {
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success: function (data) { 
+        success: function (data) {
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
-            }
-            else {
-            	$('#div_alert').showAlert({message: 'Reset de la clé ZiGate.', level: 'warning'});
+            } else {
+                $('#div_alert').showAlert({message: 'Reset de la clé ZiGate.', level: 'warning'});
             }
         }
     });
 }
 
-function refresh_eqlogic(id){
-	$.ajax({
-        type: "POST", 
-        url: "plugins/zigate/core/ajax/zigate.ajax.php", 
+function refresh_eqlogic(id)
+{
+    $.ajax({
+        type: "POST",
+        url: "plugins/zigate/core/ajax/zigate.ajax.php",
         data: {
             action: "refresh_eqlogic",
             args: [id]
@@ -205,24 +209,24 @@ function refresh_eqlogic(id){
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success: function (data) { 
+        success: function (data) {
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
-            }
-            else {
-            	$('#div_alert').showAlert({message: 'Rafraichissement de l\'équipement lancé.<br>' +
-            			'Les équipements sur pile doivent être activés manuellement pour transmettre les infos' +
-            			' (Appui sur le bouton de synchro, manipulation, etc)', level: 'warning'});
+            } else {
+                $('#div_alert').showAlert({message: 'Rafraichissement de l\'équipement lancé.<br>' +
+                        'Les équipements sur pile doivent être activés manuellement pour transmettre les infos' +
+                        ' (Appui sur le bouton de synchro, manipulation, etc)', level: 'warning'});
             }
         }
     });
 }
 
-function identify_device(id){
-	$.ajax({
-        type: "POST", 
-        url: "plugins/zigate/core/ajax/zigate.ajax.php", 
+function identify_device(id)
+{
+    $.ajax({
+        type: "POST",
+        url: "plugins/zigate/core/ajax/zigate.ajax.php",
         data: {
             action: "identify_device",
             args: [id]
@@ -231,20 +235,19 @@ function identify_device(id){
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success: function (data) { 
+        success: function (data) {
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
-            }
-            else {
-            	$('#div_alert').showAlert({message: 'Identification de l\'équipement lancé. (Cette commande peut être sans effet sur certain équipement)', level: 'warning'});
+            } else {
+                $('#div_alert').showAlert({message: 'Identification de l\'équipement lancé. (Cette commande peut être sans effet sur certain équipement)', level: 'warning'});
             }
         }
     });
 }
 
 $('body').off('zigate::device_changed').on('zigate::device_changed', function (_event, _options) {
-	if (_options == '') {
+    if (_options == '') {
         window.location.reload();
     } else {
         window.location.href = 'index.php?v=d&p=zigate&m=zigate&id=' + _options;
