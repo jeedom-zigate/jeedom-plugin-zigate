@@ -76,7 +76,7 @@ $eqLogics = zigate::byType('zigate');
                 $battery_status = '<span class="label label-danger" style="font-size : 1em;">' . $eqLogic->getStatus('battery') . '%</span>';
             } elseif ($eqLogic->getStatus('battery') < 60 && $eqLogic->getStatus('battery') != '') {
                 $battery_status = '<span class="label label-warning" style="font-size : 1em;">' . $eqLogic->getStatus('battery') . '%</span>';
-            } elseif ($eqLogic->getStatus('battery') > 60 && $eqLogic->getStatus('battery') != '') {
+            } elseif ($eqLogic->getStatus('battery') >= 60 && $eqLogic->getStatus('battery') != '') {
                 $battery_status = '<span class="label label-success" style="font-size : 1em;">' . $eqLogic->getStatus('battery') . '%</span>';
             }
             echo '<td>' . $battery_status . '</td>';
