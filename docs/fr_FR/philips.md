@@ -1,6 +1,7 @@
 # Philips (Hue)
 
 ## Compatibilité (non exhaustive)
+
 |Photo | Nom | Ids | Commentaire |
 | ------ | ----------- |------ | ----------- |
 |<img src="../../images/LCT012.jpg" alt="pict" width="80"/>|Ampoule Hue E27 Couleur|LCT001<br>LCT012<br>LCT015||
