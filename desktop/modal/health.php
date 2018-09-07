@@ -45,12 +45,7 @@ $eqLogics = zigate::byType('zigate');
     <tbody>
         <?php
         foreach ($eqLogics as $eqLogic) {
-            if (file_exists(dirname(__FILE__) . '/../../images/' . $eqLogic->getConfiguration('type') . '.jpg')) {
-                $image = '<img src="plugins/zigate/images/' . $eqLogic->getConfiguration('type') . '.jpg' . '" height="55" width="55" />';
-            } else {
-                $image = '<img src="' . $plugin->getPathImgIcon() . '" height="55" width="55" />';
-            }
-            echo '<tr><td>' . $image . '</td><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
+            echo '<tr><td><img src="' . $eqLogic->getImage() . '" height="55" width="55" /></td><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
             echo '<td><span class="label label-info" style="font-size : 1em; cursor : default;">' . $eqLogic->getId() . '</span></td>';
             echo '<td><span class="label label-info" style="font-size : 1em; cursor : default;">' . $eqLogic->getConfiguration('type') . '</span></td>';
                 $rssi_status = '<span class="label label-success" style="font-size : 1em;">{{OK}}</span>';
