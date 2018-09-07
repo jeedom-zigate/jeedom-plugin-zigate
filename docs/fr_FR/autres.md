@@ -1,4 +1,4 @@
-# Autre
+# Autres
 
 ## Compatibilité (non exhaustive)
 |Photo | Nom | Ids | Commentaire |
