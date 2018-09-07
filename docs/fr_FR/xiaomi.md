@@ -1,5 +1,4 @@
-Xiaomi (Aqara)
-==============
+# Xiaomi (Aqara)
 
 ## Compatibilité (non exhaustive)
 
