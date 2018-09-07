@@ -1,6 +1,7 @@
 # Ikea (Trådfri)
 
 ## Compatibilité (non exhaustive)
+
 |Photo | Nom | Ids | Commentaire |
 | ------ | ----------- |------ | ----------- |
 |<img src="../../images/TRADFRI_bulb_E14_WS_opal_400lm.jpg" alt="pict" width="80"/>|Ampoule Tradfri E14|TRADFRI_bulb_E14_WS_opal_400lm||
@@ -9,7 +10,6 @@
 |<img src="../../images/TRADFRI_bulb_GU10_W_400lm.jpg" alt="pict" width="80"/>|Ampoule Tradfri GU10|TRADFRI_bulb_GU10_W_400lm<br>TRADFRI_bulb_GU10_WS_400lm||
 |<img src="../../images/TRADFRI_remote_control.jpg" alt="pict" width="80"/>|Télécommande Tradfri|TRADFRI_remote_control||
 |<img src="../../images/TRADFRI_wireless_dimmer.jpg" alt="pict" width="80"/>|Variateur d'intensité Tradfri|TRADFRI_wireless_dimmer||
-
 
 ## Références
 
