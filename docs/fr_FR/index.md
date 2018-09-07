@@ -74,13 +74,13 @@ Voir [Philips](philips.md).
 
 Voir [Xiaomi](xiaomi.md).
 
-#### OSRAM
+#### Osram
 
 Voir [Osram](osram.md).
 
-#### AUTRE
+#### Autres
 
-Voir [Autre](autre.md).
+Voir [Autres](autres.md).
 
 ## FAQ
 
