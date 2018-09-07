@@ -1,4 +1,4 @@
-# OSRAM
+# Osram
 
 ## Compatibilité (non exhaustive)
 |Photo | Nom | Ids | Commentaire |
