@@ -330,6 +330,10 @@ class zigate extends eqLogic
         if (!is_null($value)) {
             $cmd_action->setConfiguration('value', $value);
         }
+        if ($name == 'level') {
+            $cmd_info->setConfiguration('minValue', 0);
+            $cmd_info->setConfiguration('maxValue', 100);
+        }
         $cmd_action->save();
         return $key;
     }
