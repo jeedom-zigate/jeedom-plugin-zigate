@@ -1,6 +1,7 @@
 # Xiaomi (Aqara)
 
 ## Compatibilité (non exhaustive)
+
 |Photo | Nom | Ids | Commentaire |
 | ------ | ----------- |------ | ----------- |
 |<img src="../../images/lumi.sensor_ht.jpg" alt="pict" width="80"/>|Capteur de température / humidité|lumi.sens<br/>lumi.sensor_ht||
