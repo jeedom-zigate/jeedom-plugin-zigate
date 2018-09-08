@@ -74,6 +74,14 @@ Voir [Philips](philips.md).
 
 Voir [Xiaomi](xiaomi.md).
 
+#### Osram
+
+Voir [Osram](osram.md).
+
+#### Autres
+
+Voir [Autres](autres.md).
+
 ## FAQ
 
 ### Le statut de l'équipement ne remonte plus dans Jeedom
