@@ -4,12 +4,12 @@
 
 |Photo | Nom | Ids | Commentaire |
 | ------ | ----------- |------ | ----------- |
-|<img src="../../images/TRADFRI_bulb_E14_WS_opal_400lm.jpg" alt="pict" width="80"/>|Ampoule Tradfri E14|TRADFRI_bulb_E14_WS_opal_400lm||
-|<img src="../../images/TRADFRI_bulb_E27_WS_opal_980lm.jpg" alt="pict" width="80"/>|Ampoule Tradfri E27|TRADFRI_bulb_E27_WS_opal_980lm<br>TRADFRI_bulb_E27_W_opal_1000lm<br>TRADFRI_bulb_E27_opal_1000lm||
-|<img src="../../images/TRADFRI_bulb_E27_CWS_opal_600lm.jpg" alt="pict" width="80"/>|Ampoule Tradfri E27 Couleur|TRADFRI_bulb_E27_CWS_opal_600lm||
-|<img src="../../images/TRADFRI_bulb_GU10_W_400lm.jpg" alt="pict" width="80"/>|Ampoule Tradfri GU10|TRADFRI_bulb_GU10_W_400lm<br>TRADFRI_bulb_GU10_WS_400lm||
-|<img src="../../images/TRADFRI_remote_control.jpg" alt="pict" width="80"/>|Télécommande Tradfri|TRADFRI_remote_control||
-|<img src="../../images/TRADFRI_wireless_dimmer.jpg" alt="pict" width="80"/>|Variateur d'intensité Tradfri|TRADFRI_wireless_dimmer||
+|<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/TRADFRI_bulb_E14_WS_opal_400lm.jpg" alt="pict" width="80"/>|Ampoule Tradfri E14|TRADFRI_bulb_E14_WS_opal_400lm||
+|<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/TRADFRI_bulb_E27_WS_opal_980lm.jpg" alt="pict" width="80"/>|Ampoule Tradfri E27|TRADFRI_bulb_E27_WS_opal_980lm<br>TRADFRI_bulb_E27_W_opal_1000lm<br>TRADFRI_bulb_E27_opal_1000lm||
+|<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/TRADFRI_bulb_E27_CWS_opal_600lm.jpg" alt="pict" width="80"/>|Ampoule Tradfri E27 Couleur|TRADFRI_bulb_E27_CWS_opal_600lm||
+|<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/TRADFRI_bulb_GU10_W_400lm.jpg" alt="pict" width="80"/>|Ampoule Tradfri GU10|TRADFRI_bulb_GU10_W_400lm<br>TRADFRI_bulb_GU10_WS_400lm||
+|<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/TRADFRI_remote_control.jpg" alt="pict" width="80"/>|Télécommande Tradfri|TRADFRI_remote_control||
+|<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/TRADFRI_wireless_dimmer.jpg" alt="pict" width="80"/>|Variateur d'intensité Tradfri|TRADFRI_wireless_dimmer||
 
 ## Références
 
