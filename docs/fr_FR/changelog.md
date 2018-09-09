@@ -1,6 +1,17 @@
 # Changelog
 
-## v1.1.18 (2018-07-20)
+## v1.1.0 (2018-09-09)
+
+* Enhancement #41: Nouveau logo.
+* Enhancement #59: Documentation contributeurs.
+* Enhancement #42: Mise en place d'Intégration Continue et de QA.
+* Enhancement #43: Nouvelle URLs pour le projet.
+* Enhancement #33 / #51 : Page santé (merci @Deepcore93 & @ioull).
+* Enhancement #48: Mettre la doc dans les standards Jeedom.
+* Enhancement #40: Rajouter un champ pluginVersion.
+* Enhancement #32: Ajouter le nom de l'équipement à rafraîchir (merci @Deepcore93).
+
+## v1.0.18 (2018-07-20)
 
 * Ajout de vignettes.
 * Amélioration de la gestion du cube Xiaomi.
