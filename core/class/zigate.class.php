@@ -21,27 +21,33 @@
  * THE SOFTWARE.
  */
 
-/* * ***************************Includes********************************* */
-// phpcs:disable PSR1.Files.SideEffects
+ /*
+  * Because extends a Jeedom class...
+  * phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
+  * phpcs:disable PSR1.Classes.ClassDeclaration.MultipleClasses
+  * phpcs:disable PSR1.Files.SideEffects
+  * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+  * phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
+  * phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+  * phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
+  */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-// phpcs:enable
-
-// Because extends a Jeedom class:
-// phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
-// phpcs:disable PSR1.Classes.ClassDeclaration.MultipleClasses
-// phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-// phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
-// phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
-// phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
 
 /**
- * Class that extends the Jeedom eqLogic
+ * Define a Zigate eqLogic.
  */
 class zigate extends eqLogic
 {
 
-    public static $_excludeOnSendPlugin = array('.zigate.json', '.key', '_config.yml');
+    public static $_excludeOnSendPlugin = ['.zigate.json', '.key', '_config.yml'];
 
+    /**
+     * Call the ziagte Python daemon.
+     *
+     * @param  string $action Action calling.
+     * @param  string $args   Other arguments.
+     * @return array  Result of the callZiGate.
+     */
     public static function callZiGate($action, $args = '')
     {
         log::add('zigate', 'debug', 'callZiGate ' . print_r($action, true) . ' ' .print_r($args, true));
@@ -49,11 +55,13 @@ class zigate extends eqLogic
         $sock = 'unix://' . jeedom::getTmpFolder('zigate') . '/daemon.sock';
         $fp = stream_socket_client($sock, $errno, $errstr);
         $result = '';
+
         if ($fp) {
-            $query = array();
-            $query['action'] = $action;
-            $query['args'] = $args;
-            $query['apikey'] = $apikey;
+            $query = [
+                'action' => $action,
+                'args' => $args,
+                'apikey' => $apikey
+            ];
             fwrite($fp, json_encode($query));
             while (!feof($fp)) {
                 $result .= fgets($fp, 1024);
@@ -62,23 +70,37 @@ class zigate extends eqLogic
         }
         $result = (is_json($result)) ? json_decode($result, true) : $result;
         log::add('zigate', 'debug', 'result callZiGate '.print_r($result, true));
+
         return $result;
     }
 
+
+    /**
+     * Sync all eqLogic.
+     */
     public static function syncEqLogicWithZiGate()
     {
         $results = zigate::callZiGate('devices');
-        $findDevice = array();
+        $findDevice = [];
         foreach ($results['result'] as $result) {
             $addr = zigate::syncDevice($result);
             array_push($findDevice, $addr);
         }
+
         foreach (self::byType('zigate') as $eqLogic) {
             if (!in_array($eqLogic->getLogicalId(), $findDevice)) {
-                    $eqLogic->remove();
+                $eqLogic->remove();
             }
         }
     }
+
+
+    /**
+     * Sync a specific eqLogic.
+     *
+     * @param  array  $device Device array definition.
+     * @return string Device address (Id).
+     */
     public static function syncDevice($device)
     {
         $addr = $device['info']['addr'];
@@ -93,21 +115,39 @@ class zigate extends eqLogic
             $eqLogic->save();
             $eqLogic = self::byId($eqLogic->getId());
         }
+
         foreach ($device['info'] as $info => $value) {
             $eqLogic->setConfiguration($info, $value);
         }
+
         $eqLogic->setStatus('lastCommunication', $device['info']['last_seen']);
         $eqLogic->setStatus('rssi', $device['info']['rssi']);
         $eqLogic->save();
         $eqLogic->createCommands($device);
+
         return $addr;
     }
+
+
+    /**
+     * Remove a device.
+     *
+     * @param  string $addr Device address (Id).
+     * @see https://github.com/Jeedom-Zigate/jeedom-plugin-zigate/issues/30
+     */
     public static function removeDevice($addr)
     {
         $eqLogic = self::byLogicalId($addr, 'zigate');
         $eqLogic->remove();
     }
 
+
+    /**
+     * Get property by name.
+     *
+     * @param  string $name The propertiy's name.
+     * @return array  The cmd return.
+     */
     public function getProperty($name)
     {
         $cmds = $this->searchCmdByConfiguration('property');
@@ -118,6 +158,13 @@ class zigate extends eqLogic
         }
     }
 
+
+    /**
+     * Calculate bettery percent from voltage.
+     *
+     * @param  float $value Voltage.
+     * @return int   Battery percentage.
+     */
     public function evaluateBattery($value)
     {
         $percent = $this->getProperty('battery_percent');
@@ -134,9 +181,16 @@ class zigate extends eqLogic
             $percent = ($value-$power_end)*100/($power_source-$power_end);
             $percent = intval($percent);
         }
+
         $this->batteryStatus($percent);
     }
 
+
+    /**
+     * Create command.
+     *
+     * @param  array $device Device definition.
+     */
     public function createCommands($device)
     {
         log::add('zigate', 'debug', 'createcommands for '.$this->getLogicalId());
@@ -187,17 +241,20 @@ class zigate extends eqLogic
                 }
             }
         }
+
         $key = $this->_create_action(0, 'refresh', 'resync', 'other');
         array_push($created_commands, $key);
-
-        /*
-        foreach (self::getCmd() as $cmd) {
-            if (!in_array($cmd->getLogicalId(), $created_commands)) {
-                $cmd->remove();
-            }
-        }
-        */
     }
+
+
+    /**
+     * Update command
+     *
+     * @param  string $endpoint_id End point Id.
+     * @param  string $cluster_id  Cluster Id.
+     * @param  string $attribute   Attribute name.
+     * @return array  Udated command informations.
+     */
     public function update_command($endpoint_id, $cluster_id, $attribute)
     {
         $created_commands = [];
@@ -205,8 +262,11 @@ class zigate extends eqLogic
         if (isset($attribute['value'])) {
             $value = $attribute['value'];
         }
-        // hmm, it's a array, we supposed a dict
-        // so create a command per value
+
+        /*
+         * hmm, it's a array, we supposed a dict
+         * so create a command per value
+         */
         if (gettype($value) == 'array') {
             foreach ($value as $name => $val) {
                 $fake_attribute = $attribute;
@@ -222,6 +282,16 @@ class zigate extends eqLogic
         }
         return $created_commands;
     }
+
+
+    /**
+     * Create a command.
+     *
+     * @param  string $endpoint_id End point Id.
+     * @param  string $cluster_id  Cluster Id.
+     * @param  string $attribute   Attribute name.
+     * @return string Command key.
+     */
     public function _create_command($endpoint_id, $cluster_id, $attribute)
     {
         $attribute_id = $attribute['attribute'];
@@ -231,6 +301,7 @@ class zigate extends eqLogic
         if (isset($attribute['name'])) {
             $name = $attribute['name'];
         }
+
         $value = $attribute['data'];
         if (isset($attribute['value'])) {
             $value = $attribute['value'];
@@ -252,9 +323,11 @@ class zigate extends eqLogic
             }
             $cmd_info->setName($name);
         }
+
         if (isset($attribute['unit'])) {
             $cmd_info->setUnite($attribute['unit']);
         }
+
         if (isset($attribute['name'])) {
             $cmd_info->setConfiguration('property', $name);
             if ($cluster_id == 0) {
@@ -265,6 +338,7 @@ class zigate extends eqLogic
                 $this->save();
             }
         }
+
         $cmd_info->setConfiguration('addr', $this->getLogicalId());
         $cmd_info->setConfiguration('endpoint', $endpoint_id);
         $cmd_info->setConfiguration('cluster', $cluster_id);
@@ -273,6 +347,7 @@ class zigate extends eqLogic
         if ($name == 'battery') {
             $this->evaluateBattery($value);
         }
+
         switch (gettype($value)) {
             case 'boolean':
                 $cmd_info->setSubType('binary');
@@ -303,11 +378,23 @@ class zigate extends eqLogic
                 $cmd_info->setSubType('string');
                 break;
         }
-        //$cmd_info->setValue($value);
+
         $cmd_info->save();
         $cmd_info->event($value);
+
         return $key;
     }
+
+    /**
+     * Create an action.
+     *
+     * @param  string $endpoint_id End point Id.
+     * @param  string $action      Action name.
+     * @param  string $name        Command name.
+     * @param  string $subtype     Subtype name.
+     * @param  string $value       Value.
+     * @return string Action key.
+     */
     public function _create_action($endpoint_id, $action, $name, $subtype, $value = null)
     {
         log::add('zigate', 'debug', 'create action '.$action.' for endpoint '.$endpoint_id);
@@ -315,6 +402,7 @@ class zigate extends eqLogic
         if (!is_null($value)) {
             $key = $key.'.'.$value;
         }
+
         $cmd_action = $this->getCmd(null, $key);
         if (!is_object($cmd_action)) {
             $cmd_action = new zigateCmd();
@@ -327,52 +415,87 @@ class zigate extends eqLogic
         $cmd_action->setConfiguration('addr', $this->getLogicalId());
         $cmd_action->setConfiguration('endpoint', $endpoint_id);
         $cmd_action->setConfiguration('action', $action);
+
         if (!is_null($value)) {
             $cmd_action->setConfiguration('value', $value);
         }
         $cmd_action->save();
+
         return $key;
     }
 
+
+    /**
+     * Send "permit_join" to ZiGate.
+     *
+     * @return array ZiGate called commmand return.
+     */
     public static function permitJoin()
     {
         return zigate::callZiGate('permit_join');
     }
 
+
+    /**
+     * Send "reset" to ZiGate.
+     *
+     * @return array ZiGate called commmand return.
+     */
     public static function reset()
     {
         return zigate::callZiGate('reset');
     }
 
+
+    /**
+     * Get Zigate lib dependancy information.
+     *
+     * @return array Python3 command return.
+     */
     public static function dependancy_info()
     {
-        $return = array();
-        $return['state'] = 'nok';
-        $return['log'] = 'zigate_update';
-        $return['progress_file'] = jeedom::getTmpFolder('zigate') . '/dependance';
+        $return = [
+            'state' => 'nok',
+            'log' => 'zigate_update',
+            'progress_file' => jeedom::getTmpFolder('zigate') . '/dependance'
+        ]
+
         $zigate_version = trim(file_get_contents(dirname(__FILE__) . '/../../resources/zigate_version.txt'));
         $cmd = "/usr/bin/python3 -c 'from distutils.version import LooseVersion;import zigate,sys;" .
-            "sys.exit(LooseVersion(zigate.__version__)<LooseVersion(\"".$zigate_version."\"))' 2>&1";
+              "sys.exit(LooseVersion(zigate.__version__)<LooseVersion(\"".$zigate_version."\"))' 2>&1";
         exec($cmd, $output, $return_var);
+
         if ($return_var == 0) {
             $return['state'] = 'ok';
         }
+
         return $return;
     }
 
+
+    /**
+     * Install dependancies.
+     *
+     * @return array Shell script command return.
+     */
     public static function dependancy_install()
     {
         log::remove(__CLASS__ . '_update');
-        return array(
+        return [
             'script' => dirname(__FILE__) . '/../../resources/install_#stype#.sh ' . jeedom::getTmpFolder('zigate') . '/dependance',
             'log' => log::getPathToLog(__CLASS__ . '_update')
-        );
+        ];
     }
 
+
+    /**
+     * Return information (status) about daemon.
+     *
+     * @return array Shell command return.
+     */
     public static function deamon_info()
     {
-        $return = array();
-        $return['state'] = 'nok';
+        $return = ['state' => 'nok'];
         $pid_file = jeedom::getTmpFolder('zigate') . '/daemon.pid';
         if (file_exists($pid_file)) {
             if (posix_getsid(trim(file_get_contents($pid_file)))) {
@@ -403,6 +526,12 @@ class zigate extends eqLogic
         return $return;
     }
 
+
+    /**
+     * Start python daemon.
+     *
+     * @return array Shell command return.
+     */
     public static function deamon_start($_debug = false)
     {
         self::deamon_stop();
@@ -422,6 +551,7 @@ class zigate extends eqLogic
         } else {
             $cmd .= ' --device ' . $port;
         }
+
         $cmd .= ' --loglevel ' . log::convertLogLevel(log::getLogLevel('zigate'));
         $cmd .= ' --apikey ' . jeedom::getApiKey('zigate');
         $cmd .= ' --pid ' . jeedom::getTmpFolder('zigate') . '/daemon.pid';
@@ -440,14 +570,22 @@ class zigate extends eqLogic
             sleep(1);
             $i++;
         }
+
         if ($i >= 5) {
             log::add('zigate', 'error', 'Impossible de lancer le démon zigate, relancer le démon en debug et vérifiez la log', 'unableStartDeamon');
             return false;
         }
+
         message::removeAll('zigate', 'unableStartDeamon');
         log::add('zigate', 'info', 'Démon zigate lancé');
     }
 
+
+    /**
+     * Stop python daemon.
+     *
+     * @return array Shell command return.
+     */
     public static function deamon_stop()
     {
         $deamon_info = self::deamon_info();
@@ -471,6 +609,12 @@ class zigate extends eqLogic
         }
     }
 
+
+    /**
+     * Get eqLogic images path.
+     *
+     * @return string Image path.
+     */
     public function getImage()
     {
         $filename = $this->getConfiguration('type') . '.jpg';
@@ -479,108 +623,119 @@ class zigate extends eqLogic
         if (file_exists($path)) {
             return 'plugins/zigate/images/' . $filename;
         }
+
         $plugin = plugin::byId($this->getEqType_name());
+
         return $plugin->getPathImgIcon();
     }
-    /*     * *************************Attributs****************************** */
-
-
-
-    /*     * ***********************Methode static*************************** */
 
     /*
      * Fonction exécutée automatiquement toutes les minutes par Jeedom
-      public static function cron() {
-
-      }
-     */
+    public static function cron()
+    {
+    } */
 
 
     /*
      * Fonction exécutée automatiquement toutes les heures par Jeedom
-      public static function cronHourly() {
-
-      }
-     */
+    public static function cronHourly()
+    {
+    } */
 
     /*
      * Fonction exécutée automatiquement tous les jours par Jeedom
-      public static function cronDayly() {
+    public static function cronDayly()
+    {
+    } */
 
-      }
+
+    /**
+     * Before insert.
      */
-
-
-
-    /*     * *********************Méthodes d'instance************************* */
-
     public function preInsert()
     {
     }
 
+    /**
+     * After insert.
+     */
     public function postInsert()
     {
     }
 
+    /**
+     * Before saving.
+     */
     public function preSave()
     {
     }
 
+    /**
+     * After saving.
+     */
     public function postSave()
     {
     }
 
+    /**
+     * Before update.
+     */
     public function preUpdate()
     {
     }
 
+    /**
+     * After update.
+     */
     public function postUpdate()
     {
     }
 
+    /**
+     * After remove.
+     */
     public function preRemove()
     {
         zigate::callZiGate('remove_device', [$this->getLogicalId()]);
     }
 
+    /**
+     * After remove.
+     */
     public function postRemove()
     {
     }
 
     /*
      * Non obligatoire mais permet de modifier l'affichage du widget si vous en avez besoin
-      public function toHtml($_version = 'dashboard') {
-
-      }
-     */
+    public function toHtml($_version = 'dashboard')
+    {
+    } */
 
     /*
      * Non obligatoire mais ca permet de déclencher une action après modification de variable de configuration
-    public static function postConfig_<Variable>() {
-    }
-     */
+    public static function postConfig_<Variable>()
+    {
+    } */
 
     /*
      * Non obligatoire mais ca permet de déclencher une action avant modification de variable de configuration
     public static function preConfig_<Variable>() {
-    }
-     */
-
-    /*     * **********************Getteur Setteur*************************** */
+    } */
 }
 
+
+/**
+ * Define zigate command extending cmd.
+ */
 class zigateCmd extends cmd
 {
-    /*     * *************************Attributs****************************** */
-
-
-    /*     * ***********************Methode static*************************** */
-
-
-    /*     * *********************Methode d'instance************************* */
+    /**
+     * Action before call execute.
+     */
     public function preSave()
     {
-        # on verifie si le nom n'est pas déjà utilisé, si oui, on supprime l'ancien
+        // We check if the name is not already used, if yes, we delete the old one
         $result = zigateCmd::byEqLogicIdCmdName($this->getEqLogic_id(), $this->getName());
         if (is_object($result)) {
             if ($this->getLogicalId() != $result->getLogicalId()) {
@@ -589,15 +744,23 @@ class zigateCmd extends cmd
         }
     }
 
-    public function execute($_options = array())
+
+    /**
+     * Zigate commmand execution.
+     *
+     * @param  array  $_options Option of the call cmd.
+     */
+    public function execute($_options = [])
     {
         if ($this->getType() != 'action') {
             return;
         }
+
         $addr = $this->getConfiguration('addr');
         $endpoint = $this->getConfiguration('endpoint');
         $action = $this->getConfiguration('action');
         $value = $this->getConfiguration('value');
+
         switch ($this->getSubType()) {
             case 'slider':
                 $value = intval($_options['slider']);
@@ -606,10 +769,12 @@ class zigateCmd extends cmd
                 $value = $_options['color'];
                 break;
         }
+
         switch ($action) {
             case 'onoff':
                 zigate::CallZiGate('action_onoff', [$addr, $endpoint, $value]);
                 break;
+
             case 'level':
                 $onoff = 1;
                 if ($value == 0) {
@@ -617,25 +782,28 @@ class zigateCmd extends cmd
                 }
                 zigate::CallZiGate('action_move_level_onoff', [$addr, $endpoint, $onoff, $value]);
                 break;
+
             case 'lock':
                 zigate::CallZiGate('action_lock', [$addr, $endpoint, $value]);
                 break;
+
             case 'color':
                 zigate::CallZiGate('actions_move_colour_hex', [$addr, $endpoint, $value]);
                 break;
+
             case 'temperature':
                 // min 1700 max 6500
                 $value = intval(($value*(6500-1700)/100)+1700);
                 zigate::CallZiGate('actions_move_temperature', [$addr, $endpoint, $value]);
                 break;
+
             case 'hue':
                 zigate::CallZiGate('actions_move_hue_hex', [$addr, $endpoint, $value]);
                 break;
+
             case 'refresh':
                 zigate::callZiGate('refresh_device', [$addr]);
                 break;
         }
     }
-
-    /*     * **********************Getteur Setteur*************************** */
 }

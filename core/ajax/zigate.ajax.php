@@ -30,33 +30,38 @@ try {
     }
 
     ajax::init();
-
     $action = init('action');
 
     if ($action == 'syncEqLogicWithZiGate') {
+        // Admin page: action on click on "Synchroniser". Sync all equipement.
         zigate::syncEqLogicWithZiGate();
         ajax::success();
     } elseif ($action == 'refresh_eqlogic') {
+        // eqLogic page: reresh the eqLogic.
         $id = intval(init('args')[0]);
         $eqLogic = zigate::byId($id);
         $addr = $eqLogic->getLogicalId();
         $result = zigate::callZiGate('refresh_device', [$addr]);
+
         if ($result['success']) {
             ajax::success();
         } else {
             ajax::error('Echec');
         }
     } elseif ($action == 'identify_device') {
+        // eqLogic page: identify the eqLogic.
         $id = intval(init('args')[0]);
         $eqLogic = zigate::byId($id);
         $addr = $eqLogic->getLogicalId();
         $result = zigate::callZiGate('identify_device', [$addr,10]);
+
         if ($result['success']) {
             ajax::success();
         } else {
             ajax::error('Echec');
         }
     } else {
+        // Call metod callZiGate with args.
         $result = zigate::callZiGate($action, init('args'));
         if ($result['success']) {
             ajax::success();
@@ -66,7 +71,6 @@ try {
     }
 
     throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
-    /*     * *********Catch exeption*************** */
 } catch (Exception $e) {
     ajax::error(displayExeption($e), $e->getCode());
 }
