@@ -71,4 +71,5 @@ if ($action == 'syncEqLogicWithZiGate') {
 } elseif ($action == 'message') {
     message::add('zigate', $results['message']);
 }
+
 echo json_encode($response);
