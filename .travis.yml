@@ -13,6 +13,15 @@ matrix:
     - cd ${TRAVIS_BUILD_DIR}
     - composer run-script test
 
+  - language: python
+    php:
+    - 3.5
+    install:
+    - pip install flake8
+    script:
+    - cd ${TRAVIS_BUILD_DIR}
+    - flake8 .
+
   - language: markdown
     script:
     - gem install mdl

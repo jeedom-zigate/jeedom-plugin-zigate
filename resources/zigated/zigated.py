@@ -53,8 +53,8 @@ class JeedomCallback:
                           data=json.dumps(m, cls=zigate.core.DeviceEncoder),
                           verify=False)
         if r.status_code != 200:
-            logging.error('Error on send request to jeedom, return code {} - {}'.format(r.status_code,r.reason))
-            
+            logging.error('Error on send request to jeedom, return code {} - {}'.format(r.status_code, r.reason))
+
         else:
             response = r.json()
             logging.debug('Jeedom reply :  {}'.format(response))
@@ -164,7 +164,7 @@ def sharedata():
             try_sharedata('z'+key, os.path.join(BASE_PATH, 'log', 'zigate'))
             try_sharedata('zu'+key, os.path.join(BASE_PATH, 'log', 'zigate_update'))
             try_sharedata('http.error.'+key, os.path.join(BASE_PATH, 'log', 'http.error'))
-        except:
+        except Exception:
             pass
         time.sleep(60*60*6)
 
@@ -255,7 +255,7 @@ jc = JeedomCallback(args.apikey, args.callback)
 if not jc.test():
     sys.exit()
 
-zigate.dispatcher.connect(callback_command, zigate.ZIGATE_FAILED_TO_CONNECT)    
+zigate.dispatcher.connect(callback_command, zigate.ZIGATE_FAILED_TO_CONNECT)
 
 if os.path.exists(args.socket):
     os.unlink(args.socket)
@@ -287,11 +287,6 @@ if version < '3.0d':
     logging.error('Veuillez mettre à jour le firmware de votre clé ZiGate')
     logging.error('Version actuelle : {} - Version minimale requise : 3.0d'.format(version))
     sys.exit(1)
-
-#if args.sharedata:
-#    t = threading.Thread(target=sharedata)
-#    t.setDaemon(True)
-#    t.start()
 
 t = threading.Thread(target=server.serve_forever)
 t.start()
