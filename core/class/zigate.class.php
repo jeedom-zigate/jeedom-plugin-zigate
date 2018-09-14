@@ -458,7 +458,7 @@ class zigate extends eqLogic
             'state' => 'nok',
             'log' => 'zigate_update',
             'progress_file' => jeedom::getTmpFolder('zigate') . '/dependance'
-        ]
+        ];
 
         $zigate_version = trim(file_get_contents(dirname(__FILE__) . '/../../resources/zigate_version.txt'));
         $cmd = "/usr/bin/python3 -c 'from distutils.version import LooseVersion;import zigate,sys;" .
