@@ -87,3 +87,33 @@ Voir [Autres](autres.md).
 ### Le statut de l'équipement ne remonte plus dans Jeedom
 
 Lancer un rafraîchissement de l'équipement. Si le problème revient régulièrement, il peut être intéressant de mettre en place un cron pour déclencher ce rafraîchissement à intervalle régulier.
+
+### Le daemon ne se lance pas ou plus
+
+En cas de non lancement du daemon et de message de type :
+
+```bash
+[2018-08-25 20:35:17][ERROR][zigate] : No response after command 0x0010
+Traceback (most recent call last):
+File "/var/www/html/plugins/zigate/core/class/../../resources/zigated/zigated.py", line 281, in <module>
+z.autoStart()
+File "/usr/local/lib/python3.4/dist-packages/zigate/core.py", line 225, in autoStart
+self.get_version()
+File "/usr/local/lib/python3.4/dist-packages/zigate/core.py", line 588, in get_version
+self._version = self.send_data(0x0010, wait_response=0x8010).data
+AttributeError: 'NoneType' object has no attribute 'data'
+[2018-08-25 20:39:18][ERROR][zigate] : No response after command 0x0010
+Traceback (most recent call last):
+File "/var/www/html/plugins/zigate/core/class/../../resources/zigated/zigated.py", line 281, in <module>
+z.autoStart()
+File "/usr/local/lib/python3.4/dist-packages/zigate/core.py", line 225, in autoStart
+self.get_version()
+File "/usr/local/lib/python3.4/dist-packages/zigate/core.py", line 588, in get_version
+self._version = self.send_data(0x0010, wait_response=0x8010).data
+AttributeError: 'NoneType' object has no attribute 'data'
+```
+
+* Désactiver la "Gestion automatique".
+* Arrêter manuelelment le daemon.
+* Attendre 2 mn.
+* Relancer manuelelment le daemon.
