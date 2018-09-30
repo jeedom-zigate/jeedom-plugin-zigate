@@ -14,7 +14,7 @@ matrix:
     - composer run-script test
 
   - language: python
-    php:
+    python:
     - 3.5
     install:
     - pip install flake8
