@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.1.1 (2018-10-20)
+
+* Enhancement #50: Amélioration de la doc: liste les équipements supportés (merci @ioull).
+* Enhancement #57: Travis: mise en place de Travis pour le Python.
+* Enhancement #58: Améliorer la documentation du code.
+* Enhancement #69: Ajout de la version du plugin sur la page de configuration.
+
 ## v1.1.0 (2018-09-09)
 
 * Enhancement #41: Nouveau logo.
