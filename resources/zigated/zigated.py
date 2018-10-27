@@ -255,7 +255,7 @@ jc = JeedomCallback(args.apikey, args.callback)
 if not jc.test():
     sys.exit()
 
-zigate.dispatcher.connect(callback_command, zigate.ZIGATE_FAILED_TO_CONNECT)
+zigate.dispatcher.connect(callback_command, zigate.const.ZIGATE_FAILED_TO_CONNECT)
 
 if os.path.exists(args.socket):
     os.unlink(args.socket)
@@ -271,12 +271,12 @@ if '.' in args.device:  # supposed I.P:PORT
 else:
     logging.info('Démarrage ZiGate USB {}'.format(args.device))
     z = zigate.ZiGate(args.device, persistent_file, auto_start=False)
-zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_ADDED, z)
-zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_UPDATED, z)
-zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_REMOVED, z)
-zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_ADDED, z)
-zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_UPDATED, z)
-zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_NEED_REFRESH, z)
+zigate.dispatcher.connect(callback_command, zigate.const.ZIGATE_DEVICE_ADDED, z)
+zigate.dispatcher.connect(callback_command, zigate.const.ZIGATE_DEVICE_UPDATED, z)
+zigate.dispatcher.connect(callback_command, zigate.const.ZIGATE_DEVICE_REMOVED, z)
+zigate.dispatcher.connect(callback_command, zigate.const.ZIGATE_ATTRIBUTE_ADDED, z)
+zigate.dispatcher.connect(callback_command, zigate.const.ZIGATE_ATTRIBUTE_UPDATED, z)
+zigate.dispatcher.connect(callback_command, zigate.const.ZIGATE_DEVICE_NEED_REFRESH, z)
 
 z.autoStart()
 z.start_auto_save()

@@ -13,9 +13,9 @@ echo 20 > ${PROGRESS_FILE}
 sudo apt-get remove -y python3-serial
 echo 30 > ${PROGRESS_FILE}
 sudo apt-get install -y python3-pip
-echo 40 > ${PROGRESS_FILE} 
+echo 40 > ${PROGRESS_FILE}
 sudo apt-get install -y python3-requests
-echo 50 > ${PROGRESS_FILE} 
+echo 50 > ${PROGRESS_FILE}
 sudo apt-get install -y python3-setuptools
 echo 60 > ${PROGRESS_FILE}
 sudo pip3 install pip --upgrade
@@ -26,4 +26,3 @@ sudo pip3 install zigate==$zigate_version.* --upgrade
 echo 100 > ${PROGRESS_FILE}
 echo "Installation des dépendances terminé !"
 rm ${PROGRESS_FILE}
-
