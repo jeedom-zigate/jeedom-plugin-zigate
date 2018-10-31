@@ -28,19 +28,6 @@ if (!isConnect()) {
     die();
 }
 
-$pluginVersion = 'Error';
-if (!file_exists(dirname(__FILE__) . '/info.json')) {
-    log::add('zigate', 'warning', 'Pas de fichier info.json');
-}
-$data = json_decode(file_get_contents(dirname(__FILE__) . '/info.json'), true);
-if (!is_array($data)) {
-    log::add('zigate', 'warning', 'Impossible de décoder le fichier info.json');
-}
-try {
-    $pluginVersion = $data['pluginVersion'];
-} catch (\Exception $e) {
-    log::add('zigate', 'warning', 'Impossible de récupérer la version.');
-}
 ?>
 <form class="form-horizontal">
     <fieldset>
@@ -48,7 +35,7 @@ try {
             <label class="col-lg-4 control-label">
                 Plugin ZiGate <sup><i class="fa fa-question-circle tooltips" title="{{C'est la version du plugin ZiGate}}" style="font-size : 1em;color:grey;"></i></sup>
             </label>
-            <span style="top:6px;" class="col-lg-4"><?php echo $pluginVersion; ?></span>
+            <span style="top:6px;" class="col-lg-4"><?php echo zigate::getVersion(); ?></span>
         </div>
         <div class="form-group">
             <label class="col-sm-4 control-label">{{Port clé ZiGate}}</label>

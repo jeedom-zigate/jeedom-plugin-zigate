@@ -629,6 +629,32 @@ class zigate extends eqLogic
         return $plugin->getPathImgIcon();
     }
 
+
+    /**
+     * Return plugin version.
+     *
+     * @return string Version of the plugin.
+     */
+    public static function getVersion()
+    {
+        $pluginVersion = 'Error';
+        if (!file_exists(dirname(__FILE__) . '/../../plugin_info/info.json')) {
+            log::add('zigate', 'warning', 'Pas de fichier info.json');
+        }
+        $data = json_decode(file_get_contents(dirname(__FILE__) . '/../../plugin_info/info.json'), true);
+        if (!is_array($data)) {
+            log::add('zigate', 'warning', 'Impossible de décoder le fichier info.json');
+        }
+        try {
+            $pluginVersion = $data['pluginVersion'];
+        } catch (\Exception $e) {
+            log::add('zigate', 'warning', 'Impossible de récupérer la version.');
+        }
+
+        return $pluginVersion;
+    }
+
+
     /*
      * Fonction exécutée automatiquement toutes les minutes par Jeedom
     public static function cron()
