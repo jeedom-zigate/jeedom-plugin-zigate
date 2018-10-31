@@ -37,8 +37,22 @@ function zigate_install()
  */
 function zigate_update()
 {
+    log::add('zigate', 'debug', 'zigate_update');
+    $daemonInfo = zigate::deamon_info();
+
+    if ($daemonInfo['state'] == 'ok') {
+        zigate::deamon_stop();
+    }
+
     $cache = cache::byKey('dependancy' . 'zigate');
     $cache->remove();
+
+    zigate::dependancy_install();
+
+    message::removeAll('Zigate');
+    message::add('Zigate', 'Mise à jour du plugin Zigate terminée, vous êtes en version ' . zigate::getVersion() . '.', null, null);
+
+    zigate::deamon_start();
 }
 
 /**
