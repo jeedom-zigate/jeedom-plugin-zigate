@@ -27,8 +27,6 @@ if (!isConnect('admin')) {
 $plugin = plugin::byId('zigate');
 sendVarToJS('eqType', $plugin->getId());
 $eqLogics = eqLogic::byType($plugin->getId());
-
-$version = zigate::callZiGate('get_version_text');
 // phpcs:disable  Generic.Files.LineLength.TooLong
 ?>
 
@@ -47,8 +45,7 @@ $version = zigate::callZiGate('get_version_text');
        </div>
    </div>
 
-   <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
-    <legend>Version du firmware ZiGate : <?php echo $version['result']; ?></legend>
+  <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
   <legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
   <div class="eqLogicThumbnailContainer">
     <div class="cursor eqLogicAction" id="bt_permitJoin" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
