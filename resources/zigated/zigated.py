@@ -90,15 +90,21 @@ class JeedomHandler(socketserver.BaseRequestHandler):
         response = {'result': None, 'success': True}
         action = message.get('action')
         args = message.get('args')
-        if action == 'get_libversion':
-            response['result'] = zigate.__version__
-        elif hasattr(z, action):
+        if hasattr(z, action):
             func = getattr(z, action)
+            response['result'] = func
+            if callable(response['result']):
+                response['result'] = response['result'](*args)
+        elif hasattr(self, action):
+            func = getattr(self, action)
             response['result'] = func
             if callable(response['result']):
                 response['result'] = response['result'](*args)
         logging.debug(response)
         self.request.sendall(json.dumps(response, cls=zigate.core.DeviceEncoder).encode())
+        
+    def get_libversion(self):
+        return zigate.__version__
 
 
 def handler(signum=None, frame=None):
