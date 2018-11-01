@@ -102,7 +102,7 @@ class JeedomHandler(socketserver.BaseRequestHandler):
                 response['result'] = response['result'](*args)
         logging.debug(response)
         self.request.sendall(json.dumps(response, cls=zigate.core.DeviceEncoder).encode())
-        
+
     def get_libversion(self):
         return zigate.__version__
 
