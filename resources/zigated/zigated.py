@@ -90,7 +90,9 @@ class JeedomHandler(socketserver.BaseRequestHandler):
         response = {'result': None, 'success': True}
         action = message.get('action')
         args = message.get('args')
-        if hasattr(z, action):
+        if action == 'get_libversion':
+            response['result'] = zigate.__version__
+        elif hasattr(z, action):
             func = getattr(z, action)
             response['result'] = func
             if callable(response['result']):
