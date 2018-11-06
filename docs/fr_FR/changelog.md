@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.1.2 (2018-11-06)
+
+* Enhancement #49: Ajout du support du "Xiaomi Aqara vibration sensor".
+* Enhancement #66: Update des dépendances lors de l'update du plugin.
+* Enhancement #75 & #78: Centraliser les versions dans la page configuration.
+* Enhancement #76: Griser les équipements désactivés dans la page health (merci @Deepcore93).
+* Enhancement #77: Filtre sur la page listant les équipements.
+
 ## v1.1.1 (2018-10-20)
 
 * Enhancement #50: Amélioration de la doc: liste les équipements supportés (merci @ioull).
