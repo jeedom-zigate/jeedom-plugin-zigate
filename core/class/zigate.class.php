@@ -174,7 +174,7 @@ class zigate extends eqLogic
                 $power_source = 3;
             }
             if ($power_source == 3) {
-                $power_source = 3.2;
+                $power_source = 3.1;
             }
             $power_source = floatval($power_source);
             $power_end = 0.9*$power_source;
