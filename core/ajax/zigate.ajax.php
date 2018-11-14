@@ -60,6 +60,14 @@ try {
         } else {
             ajax::error('Echec');
         }
+    } elseif ($action == 'send_data') {	
+        // A fini : définition des arguments
+        // si $data = empty alors c'est une demande d'info, donc retour
+        // si $data != empty alors c'est une commande.
+		$command = intval(init('args')[0]);
+		$data = intval(init('args')[1]);
+        $result = zigate::callZiGate($action,$command); // a revoir
+        ajax::success($result);
     } else {
         // Call metod callZiGate with args.
         $result = zigate::callZiGate($action, init('args'));
