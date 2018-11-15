@@ -61,12 +61,20 @@ try {
             ajax::error('Echec');
         }
     } elseif ($action == 'send_data') {	
-        // A fini : définition des arguments
-        // si $data = empty alors c'est une demande d'info, donc retour
-        // si $data != empty alors c'est une commande.
-		$command = intval(init('args')[0]);
-		$data = intval(init('args')[1]);
-        $result = zigate::callZiGate($action,$command); // a revoir
+		// info 0x0010, response 0x8010
+		$args = json_decode(init('args'), true);
+		log::add('zigate', 'debug', 'ajax received args : '.print_r($args, true));
+		$command = $args['zigate_command'];
+		$data = $args['zigate_data'];
+		log::add('zigate', 'debug', 'ajax command value : '.print_r($command, true));
+		log::add('zigate', 'debug', 'ajax data value : '.print_r($data, true));		
+		if (empty($data)) {
+			$_args = array($command, 'wait_response=0x8010'); // Test a revoir			
+		} else {
+			$_args = array($command, 'data='.$data);
+		}  
+		log::add('zigate', 'debug', 'ajax send args : '.print_r($_args, true));    
+		$result = zigate::callZiGate($action,$_args); 
         ajax::success($result);
     } else {
         // Call metod callZiGate with args.
