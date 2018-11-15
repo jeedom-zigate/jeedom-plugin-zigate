@@ -66,13 +66,16 @@ $eqLogics = zigate::byType('zigate');
 
 <script>
 	$('#btn_sendcommand').on('click', function () {
+		var args = {};
+		$('.pluginAttr[data-l1key=zigateterminal]').each(function(){
+			args[$(this).attr('data-l2key')] = $(this).value();
+		});
 		$.ajax({
 			type: "POST",
 			url: "plugins/zigate/core/ajax/zigate.ajax.php",
 			data: {
 				action: "send_data",
-				command: $('#zigate_command').value(),
-				value: $('#zigate_data').value(),
+				args: json_encode(args)
 			},
 			dataType: 'json',
 			error: function (request, status, error) {
