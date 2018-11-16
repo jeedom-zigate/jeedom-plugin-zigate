@@ -61,15 +61,12 @@ try {
             ajax::error('Echec');
         }
     } elseif ($action == 'send_data') {	
-		// info 0x0010, response 0x8010
 		$args = json_decode(init('args'), true);
 		log::add('zigate', 'debug', 'ajax received args : '.print_r($args, true));
-		log::add('zigate', 'debug', 'ajax command value : '.print_r($args['zigate_command'], true));
-		log::add('zigate', 'debug', 'ajax data value : '.print_r($args['zigate_data'], true));		
 		if (empty($data)) {
-			$_args = array($args['zigate_command'], 'wait_response=0x8010'); //test a revoir		
+			$_args = array($args['zigate_command'], $args['zigate_data'], 'wait_response=0x8010'); //en test, à revoir		
 		} else {
-			$_args = array($args['zigate_command'], 'data='.$args['zigate_data']);
+			$_args = array($args['zigate_command'], $args['zigate_data']); // ca marche pas
 		}  
 		log::add('zigate', 'debug', 'ajax send args : '.print_r($_args, true));    
 		$result = zigate::callZiGate($action,$_args); 
