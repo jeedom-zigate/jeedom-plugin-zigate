@@ -63,7 +63,7 @@ try {
     } elseif ($action == 'send_data') {	
 		$args = json_decode(init('args'), true);
 		log::add('zigate', 'debug', 'ajax received args : '.print_r($args, true));
-		if (empty($data)) {
+		if (empty($args['zigate_data'])) {
 			$_args = array($args['zigate_command'], $args['zigate_data'], 'wait_response=0x8010'); //en test, à revoir		
 		} else {
 			$_args = array($args['zigate_command'], $args['zigate_data']); // ca marche pas
