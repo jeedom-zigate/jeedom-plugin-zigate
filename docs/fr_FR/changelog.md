@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.1.3 (2018-11-17)
+
+* Enhancement #47: Calcul du % de batterie.
+* Enhancement #65: Installation des dépendances ne fonctionne pas.
+
 ## v1.1.2 (2018-11-06)
 
 * Enhancement #49: Ajout du support du "Xiaomi Aqara vibration sensor".
