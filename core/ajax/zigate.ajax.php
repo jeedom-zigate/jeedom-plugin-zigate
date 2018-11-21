@@ -61,7 +61,7 @@ try {
             ajax::error('Echec');
         }
     } elseif ($action == 'send_data') {	
-		$args = json_decode(init('args'), true);
+        $args = json_decode(init('args'), true);
         $result = zigate::callZiGate($action,[$args['zigate_command'],$args['zigate_data']]); 
         ajax::success($result);
     } else {
