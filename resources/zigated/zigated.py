@@ -216,7 +216,7 @@ parser.add_argument('--callback', help='Jeedom callback', default='http://localh
 parser.add_argument('--sharedata', type=int, default=1)
 args = parser.parse_args()
 
-FORMAT = '[%(asctime)-15s][%(levelname)s][%(name)s] : %(message)s'
+FORMAT = '[%(asctime)-15s][%(levelname)s][%(name)s](%(threadName)s) : %(message)s'
 logging.basicConfig(level=convert_log_level(args.loglevel),
                     format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
 urllib3_logger = logging.getLogger('urllib3')
