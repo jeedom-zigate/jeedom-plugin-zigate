@@ -62,8 +62,7 @@ try {
         }
     } elseif ($action == 'send_data') {	
 		$args = json_decode(init('args'), true);
-        $_args = array($args['zigate_command'], $args['zigate_data']);
-		$result = zigate::callZiGate($action,$_args); 
+		$result = zigate::callZiGate($action,$args); 
         ajax::success($result);
     } else {
         // Call method callZiGate with args.
