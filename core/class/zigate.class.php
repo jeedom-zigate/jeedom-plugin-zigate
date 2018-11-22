@@ -83,8 +83,8 @@ class zigate extends eqLogic
         $results = zigate::callZiGate('devices');
         $findDevice = [];
         foreach ($results['result'] as $result) {
-            $addr = zigate::syncDevice($result);
-            array_push($findDevice, $addr);
+            $ieee = zigate::syncDevice($result);
+            array_push($findDevice, $ieee);
         }
 
         foreach (self::byType('zigate') as $eqLogic) {
@@ -104,13 +104,18 @@ class zigate extends eqLogic
     public static function syncDevice($device)
     {
         $addr = $device['info']['addr'];
-        $eqLogic = self::byLogicalId($addr, 'zigate');
+        $ieee = $device['info']['ieee'];
+        if (!$ieee){
+            log::add('zigate', 'error', 'L\'IEEE de l\'équipement est absent, vous devriez refaire l\'association');
+            message::add('zigate', 'L\'IEEE de l\'équipement est absent, vous devriez refaire l\'association');
+        }
+        $eqLogic = self::byLogicalId($ieee, 'zigate');
         if (!is_object($eqLogic)) {
             $eqLogic = new eqLogic();
             $eqLogic->setEqType_name('zigate');
             $eqLogic->setIsEnable(1);
-            $eqLogic->setLogicalId($addr);
-            $eqLogic->setName('Device ' . $addr);
+            $eqLogic->setLogicalId($ieee);
+            $eqLogic->setName('Device ' . $ieee . '(' . $addr . ')');
             $eqLogic->setIsVisible(1);
             $eqLogic->save();
             $eqLogic = self::byId($eqLogic->getId());
@@ -125,19 +130,19 @@ class zigate extends eqLogic
         $eqLogic->save();
         $eqLogic->createCommands($device);
 
-        return $addr;
+        return $ieee;
     }
 
 
     /**
      * Remove a device.
      *
-     * @param  string $addr Device address (Id).
+     * @param  string $ieee Device address (Id).
      * @see https://github.com/Jeedom-Zigate/jeedom-plugin-zigate/issues/30
      */
-    public static function removeDevice($addr)
+    public static function removeDevice($ieee)
     {
-        $eqLogic = self::byLogicalId($addr, 'zigate');
+        $eqLogic = self::byLogicalId($ieee, 'zigate');
         $eqLogic->remove();
     }
 
@@ -208,7 +213,8 @@ class zigate extends eqLogic
             }
         }
 
-        $available_actions = zigate::callZiGate('available_actions', [$this->getLogicalId()]);
+        $addr = $this->getConfiguration('addr');
+        $available_actions = zigate::callZiGate('available_actions', [$addr]);
         foreach ($available_actions['result'] as $endpoint_id => $actions) {
             foreach ($actions as $action) {
                 switch ($action) {
@@ -339,7 +345,8 @@ class zigate extends eqLogic
             }
         }
 
-        $cmd_info->setConfiguration('addr', $this->getLogicalId());
+        $cmd_info->setConfiguration('addr', $this->getConfiguration('addr'));
+        $cmd_info->setConfiguration('ieee', $this->getLogicalId());
         $cmd_info->setConfiguration('endpoint', $endpoint_id);
         $cmd_info->setConfiguration('cluster', $cluster_id);
         $cmd_info->setConfiguration('attribute', $attribute_id);
@@ -412,7 +419,8 @@ class zigate extends eqLogic
         }
         $cmd_action->setType('action');
         $cmd_action->setSubType($subtype);
-        $cmd_action->setConfiguration('addr', $this->getLogicalId());
+        $cmd_action->setConfiguration('addr', $this->getConfiguration('addr'));
+        $cmd_action->setConfiguration('ieee', $this->getLogicalId());
         $cmd_action->setConfiguration('endpoint', $endpoint_id);
         $cmd_action->setConfiguration('action', $action);
 
@@ -722,7 +730,7 @@ class zigate extends eqLogic
      */
     public function preRemove()
     {
-        zigate::callZiGate('remove_device', [$this->getLogicalId()]);
+        zigate::callZiGate('remove_device', [$this->getConfiguration('addr')]);
     }
 
     /**

@@ -40,7 +40,7 @@ try {
         // eqLogic page: reresh the eqLogic.
         $id = intval(init('args')[0]);
         $eqLogic = zigate::byId($id);
-        $addr = $eqLogic->getLogicalId();
+        $addr = $eqLogic->getConfiguration('addr');
         $result = zigate::callZiGate('refresh_device', [$addr]);
 
         if ($result['success']) {
@@ -52,7 +52,7 @@ try {
         // eqLogic page: identify the eqLogic.
         $id = intval(init('args')[0]);
         $eqLogic = zigate::byId($id);
-        $addr = $eqLogic->getLogicalId();
+        $addr = $eqLogic->getConfiguration('addr');
         $result = zigate::callZiGate('identify_device', [$addr,10]);
 
         if ($result['success']) {
