@@ -105,9 +105,10 @@ class zigate extends eqLogic
     {
         $addr = $device['info']['addr'];
         $ieee = $device['info']['ieee'];
-        if (!$ieee){
+        if (!$ieee) {
             log::add('zigate', 'error', 'L\'IEEE de l\'équipement est absent, vous devriez refaire l\'association');
             message::add('zigate', 'L\'IEEE de l\'équipement est absent, vous devriez refaire l\'association');
+            return;
         }
         $eqLogic = self::byLogicalId($ieee, 'zigate');
         if (!is_object($eqLogic)) {
