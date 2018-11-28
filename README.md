@@ -5,6 +5,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/4cf84a075d3eadda0a13/maintainability)](https://codeclimate.com/github/Jeedom-Zigate/jeedom-plugin-zigate/maintainability)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Jeedom-Zigate/jeedom-plugin-zigate.svg)](http://isitmaintained.com/project/Jeedom-Zigate/jeedom-plugin-zigate "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/Jeedom-Zigate/jeedom-plugin-zigate.svg)](http://isitmaintained.com/project/Jeedom-Zigate/jeedom-plugin-zigate "Percentage of issues still open")
+ [![Gitter chat](https://badges.gitter.im/Jeedom-Zigate.png)](https://gitter.im/Jeedom-Zigate)
 [![GitHub license](https://img.shields.io/github/license/Jeedom-Zigate/jeedom-plugin-zigate.svg)](https://github.com/Jeedom-Zigate/jeedom-plugin-zigate/blob/master/LICENSE)
 
 ![Logo](plugin_info/zigate_icon.png)
