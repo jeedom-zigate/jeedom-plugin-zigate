@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.4 (2018-11-29)
+
+* Now requires Python lib in v0.22.0
+
 ## v1.1.3 (2018-11-17)
 
 * Enhancement #47: Calcul du % de batterie.
