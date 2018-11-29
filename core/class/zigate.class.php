@@ -120,7 +120,7 @@ class zigate extends eqLogic
                 $eqLogic = self::byId($eqLogic->getId());
                 
                 $cmds = zigateCmd::byEqLogicId($eqLogic->getId());
-                foreach($cmds as $cmd){
+                foreach ($cmds as $cmd) {
                     $key = $cmd->logicalId();
                     $key = str_replace($addr, $ieee, $key);
                     $cmd->setLogicalId($key);
