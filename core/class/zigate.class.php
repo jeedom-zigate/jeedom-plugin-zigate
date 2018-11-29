@@ -106,11 +106,28 @@ class zigate extends eqLogic
         $addr = $device['info']['addr'];
         $ieee = $device['info']['ieee'];
         if (!$ieee) {
-            log::add('zigate', 'error', 'L\'IEEE de l\'équipement est absent, vous devriez refaire l\'association');
-            message::add('zigate', 'L\'IEEE de l\'équipement est absent, vous devriez refaire l\'association');
+            log::add('zigate', 'error', 'L\'IEEE de l\'équipement '.$addr.' est absent, vous devriez refaire l\'association');
+            message::add('zigate', 'L\'IEEE de l\'équipement '.$addr.' est absent, vous devriez refaire l\'association');
             return;
         }
         $eqLogic = self::byLogicalId($ieee, 'zigate');
+        if (!is_object($eqLogic)) {
+            /* Migration addr => IEEE */
+            $eqLogic = self::byLogicalId($addr, 'zigate');
+            if (is_object($eqLogic)) {
+                $eqLogic->setLogicalId($ieee);
+                $eqLogic->save();
+                $eqLogic = self::byId($eqLogic->getId());
+                
+                $cmds = zigateCmd::byEqLogicId($eqLogic->getId());
+                foreach($cmds as $cmd){
+                    $key = $cmd->logicalId();
+                    $key = str_replace($addr, $ieee, $key);
+                    $cmd->setLogicalId($key);
+                    $cmd->save();
+                }
+            }
+        }
         if (!is_object($eqLogic)) {
             $eqLogic = new eqLogic();
             $eqLogic->setEqType_name('zigate');
