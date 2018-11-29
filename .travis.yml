@@ -1,12 +1,31 @@
+language: php
+
 matrix:
   include:
 
-  - language: php
-    php:
-    - 7.2
-    - 7.1
-    - 7.0
-    - 5.6
+  - php: 7.2
+    install:
+    - composer install
+    addons:
+      sonarcloud:
+        organization: "jeedom-zigate"
+    script:
+    - cd ${TRAVIS_BUILD_DIR}
+    - composer run-script test
+    - sonar-scanner
+  - php: 7.1
+    install:
+    - composer install
+    script:
+    - cd ${TRAVIS_BUILD_DIR}
+    - composer run-script test
+  - php: 7.0
+    install:
+    - composer install
+    script:
+    - cd ${TRAVIS_BUILD_DIR}
+    - composer run-script test
+  - php: 5.6
     install:
     - composer install
     script:
@@ -15,7 +34,26 @@ matrix:
 
   - language: python
     python:
+    - 3.6
+    env: TOXENV=py36
+    install:
+    - pip install flake8
+    script:
+    - cd ${TRAVIS_BUILD_DIR}
+    - flake8 .
+  - language: python
+    python:
     - 3.5
+    env: TOXENV=py35
+    install:
+    - pip install flake8
+    script:
+    - cd ${TRAVIS_BUILD_DIR}
+    - flake8 .
+  - language: python
+    python:
+    - 3.4
+    env: TOXENV=py34
     install:
     - pip install flake8
     script:
