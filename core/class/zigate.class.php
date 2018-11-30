@@ -80,6 +80,7 @@ class zigate extends eqLogic
      */
     public static function syncEqLogicWithZiGate()
     {
+        log::add('zigate', 'debug', 'Synchronisation des équipements entre le démon et jeedom');
         $results = zigate::callZiGate('devices');
         $findDevice = [];
         foreach ($results['result'] as $result) {
@@ -115,16 +116,31 @@ class zigate extends eqLogic
             /* Migration addr => IEEE */
             $eqLogic = self::byLogicalId($addr, 'zigate');
             if (is_object($eqLogic)) {
+                log::add('zigate', 'debug', 'Migration - Equipement '.$eqLogic->getId().' : '.$addr.' => '.$ieee);
                 $eqLogic->setLogicalId($ieee);
                 $eqLogic->save();
                 $eqLogic = self::byId($eqLogic->getId());
+                if ($ieee == $eqLogic->logicalId()) {
+                    log::add('zigate', 'debug', 'Migration ok '.$addr.' => '.$ieee);
+                }
+                else {
+                    log::add('zigate', 'error', 'Migration échec pour '.$addr.' '.$eqLogic->logicalId().' != '.$ieee);
+                }
                 
                 $cmds = zigateCmd::byEqLogicId($eqLogic->getId());
                 foreach ($cmds as $cmd) {
                     $key = $cmd->logicalId();
-                    $key = str_replace($addr, $ieee, $key);
-                    $cmd->setLogicalId($key);
+                    $new_key = str_replace($addr, $ieee, $key);
+                    log::add('zigate', 'debug', 'Migration - Commande '.$cmd->getId().' : '.$key.' => '.$new_key);
+                    $cmd->setLogicalId($new_key);
                     $cmd->save();
+                    $cmd = zigateCmd::byId($cmd->getId());
+                    if ($new_key == $cmd->logicalId()) {
+                        log::add('zigate', 'debug', 'Migration ok Commande '.$cmd->getId().' : '.$key.' => '.$new_key);
+                    }
+                    else {
+                        log::add('zigate', 'error', 'Migration échec Commande '.$cmd->getId().' '.$cmd->logicalId().' != '.$new_key);
+                    }
                 }
             }
         }
@@ -604,6 +620,7 @@ class zigate extends eqLogic
 
         message::removeAll('zigate', 'unableStartDeamon');
         log::add('zigate', 'info', 'Démon zigate lancé');
+        zigate::syncEqLogicWithZiGate();
     }
 
 
