@@ -122,8 +122,7 @@ class zigate extends eqLogic
                 $eqLogic = self::byId($eqLogic->getId());
                 if ($ieee == $eqLogic->logicalId()) {
                     log::add('zigate', 'debug', 'Migration ok '.$addr.' => '.$ieee);
-                }
-                else {
+                } else {
                     log::add('zigate', 'error', 'Migration échec pour '.$addr.' '.$eqLogic->logicalId().' != '.$ieee);
                 }
                 
@@ -137,8 +136,7 @@ class zigate extends eqLogic
                     $cmd = zigateCmd::byId($cmd->getId());
                     if ($new_key == $cmd->logicalId()) {
                         log::add('zigate', 'debug', 'Migration ok Commande '.$cmd->getId().' : '.$key.' => '.$new_key);
-                    }
-                    else {
+                    } else {
                         log::add('zigate', 'error', 'Migration échec Commande '.$cmd->getId().' '.$cmd->logicalId().' != '.$new_key);
                     }
                 }
