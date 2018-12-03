@@ -126,7 +126,7 @@ class zigate extends eqLogic
                     log::add('zigate', 'error', 'Migration échec pour '.$addr.' '.$eqLogic->logicalId().' != '.$ieee);
                 }
                 
-                $cmds = zigateCmd::byEqLogicId($eqLogic->getId());
+                $cmds = $eqLogic->getCmd();
                 foreach ($cmds as $cmd) {
                     $key = $cmd->logicalId();
                     $new_key = str_replace($addr, $ieee, $key);
