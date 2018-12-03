@@ -1,4 +1,6 @@
 language: php
+git:
+  depth: 9999999
 
 matrix:
   include:
