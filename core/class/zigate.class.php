@@ -127,6 +127,7 @@ class zigate extends eqLogic
                 }
                 
                 $cmds = $eqLogic->getCmd();
+                log::add('zigate', 'debug', 'Migration des commandes : '.count($cmds));
                 foreach ($cmds as $cmd) {
                     $key = $cmd->logicalId();
                     $new_key = str_replace($addr, $ieee, $key);

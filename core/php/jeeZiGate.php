@@ -53,7 +53,11 @@ if ($action == 'syncEqLogicWithZiGate') {
 } elseif ($action == 'ZIGATE_DEVICE_NEED_REFRESH') {
     $device = $results['device'];
     $eqLogic = zigate::byLogicalId($device['ieee'], 'zigate');
-    message::add('zigate', 'L\'équipement ZiGate '.$eqLogic->getHumanName().' requiert un rafraichissement.');
+    $humanName = $device['ieee'];
+    if (is_object($eqLogic)) {
+        $humanName = $eqLogic->getHumanName();
+    }
+    message::add('zigate', 'L\'équipement ZiGate '.$humanName.' requiert un rafraichissement.');
 } elseif ($action == 'ZIGATE_ATTRIBUTE_ADDED') {
     zigate::syncDevice($results['device']);
 } elseif ($action == 'ZIGATE_ATTRIBUTE_UPDATED') {
