@@ -101,9 +101,9 @@ $eqLogics = eqLogic::byType($plugin->getId());
             foreach ($eqLogics as $eqLogic) {
                 $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
                 echo '<div class="eqLogicDisplayCard cursor" data-logical-id="' . $eqLogic->getLogicalId() . '" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
-                echo "<p class="text-center">";
+                echo '<p class="text-center">';
                 echo '<img src="' . $eqLogic->getImage() . '" height="105" width="95" />';
-                echo "</p>";
+                echo '</p>';
                 echo '<span class="name" style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><p class="text-center">' . $eqLogic->getHumanName(true, true) . '</p></span>';
                 echo '</div>';
             }
