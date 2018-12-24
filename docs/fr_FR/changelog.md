@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.6 (2018-12-24)
+
+* Now requires Python lib in v0.24.2
+
 ## v1.1.5 (2018-12-22)
 
 * Fix pip2 VS pip3 issue.
