@@ -1,9 +1,14 @@
 # Changelog
 
+## v1.1.5 (2018-12-22)
+
+* Fix pip2 VS pip3 issue.
+
 ## v1.1.4 (2018-11-29)
 
 * Now requires Python lib in v0.22.0
 
+>>>>>>> release/v1.1.5
 ## v1.1.3 (2018-11-17)
 
 * Enhancement #47: Calcul du % de batterie.
