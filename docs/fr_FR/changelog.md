@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.7 (2018-12-31)
+
+* Bugfix #98: Problème lors de l'installation des dépendances sur debian Jessie
+
 ## v1.1.6 (2018-12-24)
 
 * Now requires Python lib in v0.24.2
