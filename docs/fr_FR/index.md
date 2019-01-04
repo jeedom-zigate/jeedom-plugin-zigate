@@ -138,6 +138,16 @@ $ sudo python3 -m pip uninstall pip
 $ sudo apt-get remove python3-pip python-pip
 $ sudo apt-get install python3-pip python-pip
 $ sudo python2 -m pip uninstall pip
-$ sudo apt-get remove python-pip python-pip
-$ sudo apt-get install python-pip python-pip
+$ sudo apt-get remove python-pip
+$ sudo apt-get install python-pip
 ```
+Si ça ne fonctionne toujours pas vérifier que pip existe:
+```bash
+$ which pip
+/usr/bin/pip
+```
+Si la commande ne retourne rien c'est que pip est manquant, il faut alors le recréer:
+```bash
+$ sudo cp /usr/bin/pip2 /usr/bin/pip
+```
+
