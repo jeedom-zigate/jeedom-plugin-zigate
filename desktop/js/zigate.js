@@ -97,6 +97,15 @@ $('.eqLogicAction[data-action=refresh_device]').on('click', function () {
     }
 });
 
+$('.eqLogicAction[data-action=discover_device]').on('click', function () {
+    if ($('.li_eqLogic.active').attr('data-eqLogic_id') != undefined) {
+        id = $('.li_eqLogic.active').attr('data-eqLogic_id');
+        discover_eqlogic(id);
+    } else {
+        $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner un}} ' + eqType, level: 'danger'});
+    }
+});
+
 $('.eqLogicAction[data-action=identify_device]').on('click', function () {
     if ($('.li_eqLogic.active').attr('data-eqLogic_id') != undefined) {
         id = $('.li_eqLogic.active').attr('data-eqLogic_id');
@@ -215,6 +224,32 @@ function refresh_eqlogic(id)
                 return;
             } else {
                 $('#div_alert').showAlert({message: 'Rafraichissement de l\'équipement lancé.<br>' +
+                        'Les équipements sur pile doivent être activés manuellement pour transmettre les infos' +
+                        ' (Appui sur le bouton de synchro, manipulation, etc)', level: 'warning'});
+            }
+        }
+    });
+}
+
+function discover_eqlogic(id)
+{
+    $.ajax({
+        type: "POST",
+        url: "plugins/zigate/core/ajax/zigate.ajax.php",
+        data: {
+            action: "discover_eqlogic",
+            args: [id]
+        },
+        dataType: 'json',
+        error: function (request, status, error) {
+            handleAjaxError(request, status, error);
+        },
+        success: function (data) {
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
+            } else {
+                $('#div_alert').showAlert({message: 'Découverte de l\'équipement lancé.<br>' +
                         'Les équipements sur pile doivent être activés manuellement pour transmettre les infos' +
                         ' (Appui sur le bouton de synchro, manipulation, etc)', level: 'warning'});
             }

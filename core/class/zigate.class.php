@@ -42,7 +42,7 @@ class zigate extends eqLogic
     public static $_excludeOnSendPlugin = ['.zigate.json', '.key', '_config.yml'];
 
     /**
-     * Call the ziagte Python daemon.
+     * Call the zigate Python daemon.
      *
      * @param  string $action Action calling.
      * @param  string $args   Other arguments.
@@ -281,7 +281,9 @@ class zigate extends eqLogic
             }
         }
 
-        $key = $this->_create_action(0, 'refresh', 'resync', 'other');
+        $key = $this->_create_action(0, 'refresh', 'refresh', 'other');
+        array_push($created_commands, $key);
+        $key = $this->_create_action(0, 'discover', 'discover', 'other');
         array_push($created_commands, $key);
     }
 

@@ -284,7 +284,7 @@ zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_UPDATED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_REMOVED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_UPDATED, z)
-zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_NEED_REFRESH, z)
+zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_NEED_DISCOVERY, z)
 
 z.autoStart()
 z.start_auto_save()

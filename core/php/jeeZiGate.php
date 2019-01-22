@@ -50,7 +50,7 @@ if ($action == 'syncEqLogicWithZiGate') {
     $device = $results['device'];
     zigate::removeDevice($device['ieee']);
     event::add('zigate::device_changed', '');
-} elseif ($action == 'ZIGATE_DEVICE_NEED_REFRESH') {
+} elseif ($action == 'ZIGATE_DEVICE_NEED_DISCOVERY') {
     $device = $results['device'];
     $eqLogic = zigate::byLogicalId($device['ieee'], 'zigate');
     $humanName = $device['ieee'];

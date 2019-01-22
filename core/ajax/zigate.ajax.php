@@ -37,7 +37,7 @@ try {
         zigate::syncEqLogicWithZiGate();
         ajax::success();
     } elseif ($action == 'refresh_eqlogic') {
-        // eqLogic page: reresh the eqLogic.
+        // eqLogic page: refresh the eqLogic.
         $id = intval(init('args')[0]);
         $eqLogic = zigate::byId($id);
         $addr = $eqLogic->getConfiguration('addr');
@@ -48,7 +48,21 @@ try {
         } else {
             ajax::error('Echec');
         }
-    } elseif ($action == 'identify_device') {
+        
+    } elseif ($action == 'discover_eqlogic') {
+        // eqLogic page: discover the eqLogic.
+        $id = intval(init('args')[0]);
+        $eqLogic = zigate::byId($id);
+        $addr = $eqLogic->getConfiguration('addr');
+        $result = zigate::callZiGate('discover_device', [$addr]);
+        
+        if ($result['success']) {
+            ajax::success();
+        } else {
+            ajax::error('Echec');
+        }
+        
+    }elseif ($action == 'identify_device') {
         // eqLogic page: identify the eqLogic.
         $id = intval(init('args')[0]);
         $eqLogic = zigate::byId($id);
