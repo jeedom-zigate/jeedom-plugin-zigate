@@ -48,7 +48,6 @@ try {
         } else {
             ajax::error('Echec');
         }
-        
     } elseif ($action == 'discover_eqlogic') {
         // eqLogic page: discover the eqLogic.
         $id = intval(init('args')[0]);
@@ -61,8 +60,7 @@ try {
         } else {
             ajax::error('Echec');
         }
-        
-    }elseif ($action == 'identify_device') {
+    } elseif ($action == 'identify_device') {
         // eqLogic page: identify the eqLogic.
         $id = intval(init('args')[0]);
         $eqLogic = zigate::byId($id);
