@@ -856,21 +856,25 @@ class zigateCmd extends cmd
                 break;
 
             case 'color':
-                zigate::CallZiGate('actions_move_colour_hex', [$addr, $endpoint, $value]);
+                zigate::CallZiGate('action_move_colour_hex', [$addr, $endpoint, $value]);
                 break;
 
             case 'temperature':
                 // min 1700 max 6500
                 $value = intval(($value*(6500-1700)/100)+1700);
-                zigate::CallZiGate('actions_move_temperature', [$addr, $endpoint, $value]);
+                zigate::CallZiGate('action_move_temperature', [$addr, $endpoint, $value]);
                 break;
 
             case 'hue':
-                zigate::CallZiGate('actions_move_hue_hex', [$addr, $endpoint, $value]);
+                zigate::CallZiGate('action_move_hue_hex', [$addr, $endpoint, $value]);
                 break;
 
             case 'refresh':
                 zigate::callZiGate('refresh_device', [$addr]);
+                break;
+                
+            case 'discover':
+                zigate::callZiGate('discover_device', [$addr]);
                 break;
         }
     }
