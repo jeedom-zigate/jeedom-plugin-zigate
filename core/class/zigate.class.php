@@ -120,25 +120,25 @@ class zigate extends eqLogic
                 $eqLogic->setLogicalId($ieee);
                 $eqLogic->save();
                 $eqLogic = self::byId($eqLogic->getId());
-                if ($ieee == $eqLogic->logicalId()) {
+                if ($ieee == $eqLogic->getLogicalId()) {
                     log::add('zigate', 'debug', 'Migration ok '.$addr.' => '.$ieee);
                 } else {
-                    log::add('zigate', 'error', 'Migration échec pour '.$addr.' '.$eqLogic->logicalId().' != '.$ieee);
+                    log::add('zigate', 'error', 'Migration échec pour '.$addr.' '.$eqLogic->getLogicalId().' != '.$ieee);
                 }
                 
-                $cmds = $eqLogic->getCmd();
+                $cmds = cmd::byEqLogicId($eqLogic->getId());
                 log::add('zigate', 'debug', 'Migration des commandes : '.count($cmds));
                 foreach ($cmds as $cmd) {
-                    $key = $cmd->logicalId();
+                    $key = $cmd->getLogicalId();
                     $new_key = str_replace($addr, $ieee, $key);
                     log::add('zigate', 'debug', 'Migration - Commande '.$cmd->getId().' : '.$key.' => '.$new_key);
                     $cmd->setLogicalId($new_key);
                     $cmd->save();
                     $cmd = zigateCmd::byId($cmd->getId());
-                    if ($new_key == $cmd->logicalId()) {
+                    if ($new_key == $cmd->getLogicalId()) {
                         log::add('zigate', 'debug', 'Migration ok Commande '.$cmd->getId().' : '.$key.' => '.$new_key);
                     } else {
-                        log::add('zigate', 'error', 'Migration échec Commande '.$cmd->getId().' '.$cmd->logicalId().' != '.$new_key);
+                        log::add('zigate', 'error', 'Migration échec Commande '.$cmd->getId().' '.$cmd->getLogicalId().' != '.$new_key);
                     }
                 }
             }
