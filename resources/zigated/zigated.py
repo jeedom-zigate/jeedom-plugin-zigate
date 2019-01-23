@@ -281,6 +281,7 @@ else:
     z = zigate.ZiGate(args.device, persistent_file, auto_start=False)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_UPDATED, z)
+zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_ADDRESS_CHANGED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_REMOVED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_UPDATED, z)
