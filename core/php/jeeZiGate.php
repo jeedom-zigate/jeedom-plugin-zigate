@@ -46,6 +46,8 @@ if ($action == 'syncEqLogicWithZiGate') {
     event::add('zigate::device_changed', $eqLogic->getId());
 } elseif ($action == 'ZIGATE_DEVICE_UPDATED') {
     zigate::syncDevice($results['device']);
+} elseif ($action == 'ZIGATE_DEVICE_ADDRESS_CHANGED') {
+    zigate::syncDevice($results['device']);
 } elseif ($action == 'ZIGATE_DEVICE_REMOVED') {
     $device = $results['device'];
     zigate::removeDevice($device['ieee']);
