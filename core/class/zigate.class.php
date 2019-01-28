@@ -812,8 +812,7 @@ class zigateCmd extends cmd
         if (is_object($result)) {
             if ($this->getLogicalId() != $result->getLogicalId()) {
                 $this->setName($this->getName() . $this.getConfiguration('endpoint'));
-            }
-            else {
+            } else {
                 $result->remove();
             }
         }
