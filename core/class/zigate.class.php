@@ -805,10 +805,15 @@ class zigateCmd extends cmd
      */
     public function preSave()
     {
-        // We check if the name is not already used, if yes, we delete the old one
+        // We check if the name is not already used
+        // if yes : remove the old one if it's the same logicalId
+        // else we rename the new one
         $result = zigateCmd::byEqLogicIdCmdName($this->getEqLogic_id(), $this->getName());
         if (is_object($result)) {
             if ($this->getLogicalId() != $result->getLogicalId()) {
+                $this->setName($this->getName() . $this.getConfiguration('endpoint'));
+            }
+            else {
                 $result->remove();
             }
         }
