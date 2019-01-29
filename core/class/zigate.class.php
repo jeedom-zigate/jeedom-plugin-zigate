@@ -93,6 +93,19 @@ class zigate extends eqLogic
                 $eqLogic->remove();
             }
         }
+        
+        log::add('zigate', 'debug', 'Désactivation des équipements manquants');
+        $results = zigate::callZiGate('get_missing');
+        foreach ($results['result'] as $device) {
+            $ieee = $device['info']['ieee'];
+            $eqLogic = self::byLogicalId($ieee, 'zigate');
+            if (is_object($eqLogic)) {
+                $eqLogic->setIsEnable(0);
+                $eqLogic->save();
+                $humanName = $eqLogic->getHumanName();
+                message::add('zigate', 'L\'équipement '.$humanName.' semble manquant, il a été désactivé.');
+            }
+        }
     }
 
 
