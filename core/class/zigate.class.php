@@ -810,7 +810,7 @@ class zigateCmd extends cmd
         // else we rename the new one
         $result = zigateCmd::byEqLogicIdCmdName($this->getEqLogic_id(), $this->getName());
         while (is_object($result) && $this->getId() != $result->getId()) {
-            if ($this->getConfiguration('endpoint') != $result->getConfiguration('endpoint')){
+            if ($this->getConfiguration('endpoint') != $result->getConfiguration('endpoint')) {
                 $this->setName($this->getName() . $this->getConfiguration('endpoint'));
                 $result = zigateCmd::byEqLogicIdCmdName($this->getEqLogic_id(), $this->getName());
             } else {
