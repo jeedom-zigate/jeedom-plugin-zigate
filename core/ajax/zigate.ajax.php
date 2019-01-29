@@ -73,7 +73,7 @@ try {
             ajax::error('Echec');
         }
     } else {
-        // Call metod callZiGate with args.
+        // Call method callZiGate with args.
         $result = zigate::callZiGate($action, init('args'));
         if ($result['success']) {
             ajax::success();
