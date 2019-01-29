@@ -599,6 +599,7 @@ class zigate extends eqLogic
         }
         $port = config::byKey('port', 'zigate');
         $host = config::byKey('host', 'zigate');
+        $channel = config::byKey('channel', 'zigate');
         $sharedata = config::byKey('sharedata', 'zigate');
         $zigate_path = dirname(__FILE__) . '/../../resources';
         $callback = network::getNetworkAccess('internal', 'proto:127.0.0.1:port:comp') . '/plugins/zigate/core/php/jeeZiGate.php';
@@ -616,6 +617,7 @@ class zigate extends eqLogic
         $cmd .= ' --socket ' . jeedom::getTmpFolder('zigate') . '/daemon.sock';
         $cmd .= ' --callback ' . $callback;
         $cmd .= ' --sharedata ' . $sharedata;
+        $cmd .= ' --channel ' . $channel;
 
         log::add('zigate', 'info', 'Lancement démon zigate : ' . $cmd);
         exec($cmd . ' >> ' . log::getPathToLog('zigate') . ' 2>&1 &');

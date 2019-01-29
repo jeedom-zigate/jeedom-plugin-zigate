@@ -214,6 +214,7 @@ parser.add_argument('--apikey', help='API Key', default='nokey')
 parser.add_argument('--device', help='ZiGate port', default='auto')
 parser.add_argument('--callback', help='Jeedom callback', default='http://localhost')
 parser.add_argument('--sharedata', type=int, default=1)
+parser.add_argument('--channel', type=int, default=None)
 args = parser.parse_args()
 
 FORMAT = '[%(asctime)-15s][%(levelname)s][%(name)s](%(threadName)s) : %(message)s'
@@ -287,7 +288,7 @@ zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_UPDATED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_NEED_DISCOVERY, z)
 
-z.autoStart()
+z.autoStart(args.channel)
 z.start_auto_save()
 
 version = z.get_version_text()
