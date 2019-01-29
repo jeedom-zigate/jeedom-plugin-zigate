@@ -88,6 +88,22 @@ $('#bt_networkscan').on('click', function () {
     callZiGate('start_network_scan');
 });
 
+$('#bt_cleanup_devices').on('click', function () {
+	bootbox.confirm('{{Etes-vous sûr de vouloir effacer les équipements manquants ?}}', function (result) {
+		if (result) {
+			callZiGate('cleanup_devices');
+		}
+	});
+});
+
+$('#bt_erasepdm').on('click', function () {
+	bootbox.confirm('{{Etes-vous sûr de vouloir effacer les données de la zigate ?}}', function (result) {
+		if (result) {
+			callZiGate('erase_persistent');
+		}
+	});
+});
+
 $('.eqLogicAction[data-action=refresh_device]').on('click', function () {
     if ($('.li_eqLogic.active').attr('data-eqLogic_id') != undefined) {
         id = $('.li_eqLogic.active').attr('data-eqLogic_id');

@@ -73,11 +73,23 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 </p>
                 <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><p class="text-center">{{Synchroniser}}</p></span>
             </div>
+            <div class="cursor eqLogicAction" id="bt_cleanup_devices" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
+                <p class="text-center">
+                    <i class="fa fa-broom" style="font-size : 6em;color:#767676;"></i>
+                </p>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><p class="text-center">{{Nettoyer}}</p></span>
+            </div>
             <div class="cursor eqLogicAction" id="bt_reset" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
                 <p class="text-center">
                     <i class="fa fa-recycle" style="font-size : 6em;color:#767676;"></i>
                 </p>
                 <span style="font-size : 1.1em;position:relative; top : 23px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><p class="text-center">{{Reset ZiGate}}</p></span>
+            </div>
+            <div class="cursor eqLogicAction" id="bt_erasepdm" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
+                <p class="text-center">
+                    <i class="fa fa-eraser" style="font-size : 6em;color:#767676;"></i>
+                </p>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><p class="text-center">{{Erase PDM}}</p></span>
             </div>
             <div class="cursor eqLogicAction" data-action="gotoPluginConf" style="text-align: center; background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
                 <p class="text-center">
