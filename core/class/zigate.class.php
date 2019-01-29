@@ -435,7 +435,9 @@ class zigate extends eqLogic
         }
 
         $cmd_info->save();
-        $cmd_info->event($value);
+        if ($value != $cmd_info->getCache('value', '')){
+            $cmd_info->event($value);
+        }
 
         return $key;
     }
