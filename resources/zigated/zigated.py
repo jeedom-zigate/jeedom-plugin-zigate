@@ -245,12 +245,12 @@ signal.signal(signal.SIGINT, handler)
 signal.signal(signal.SIGTERM, handler)
 
 
-persistent_file = os.path.join(os.path.dirname(__file__), '.zigate.json')
+persistent_file = os.path.join(os.path.dirname(__file__), 'zigate.json')
 # old version
 if not os.path.exists(persistent_file):
-    if os.path.exists(os.path.join(os.path.dirname(__file__), 'zigate.json')):
-        os.rename(os.path.join(os.path.dirname(__file__), 'zigate.json'),
-                  os.path.join(os.path.dirname(__file__), '.zigate.json'))
+    if os.path.exists(os.path.join(os.path.dirname(__file__), '.zigate.json')):
+        os.rename(os.path.join(os.path.dirname(__file__), '.zigate.json'),
+                  os.path.join(os.path.dirname(__file__), 'zigate.json'))
 
 key_file = os.path.join(os.path.dirname(__file__), '.key')
 
