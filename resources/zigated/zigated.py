@@ -107,7 +107,7 @@ class JeedomHandler(socketserver.BaseRequestHandler):
 
     def get_libversion(self):
         return zigate.__version__
-    
+
     def raw_command(self, cmd, data):
         cmd = cmd.lower()
         if 'x' in cmd:
