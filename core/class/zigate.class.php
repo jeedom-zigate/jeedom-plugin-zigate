@@ -617,7 +617,9 @@ class zigate extends eqLogic
         $cmd .= ' --socket ' . jeedom::getTmpFolder('zigate') . '/daemon.sock';
         $cmd .= ' --callback ' . $callback;
         $cmd .= ' --sharedata ' . $sharedata;
-        $cmd .= ' --channel ' . $channel;
+        if ($channel) {
+            $cmd .= ' --channel ' . $channel;
+        }
 
         log::add('zigate', 'info', 'Lancement démon zigate : ' . $cmd);
         exec($cmd . ' >> ' . log::getPathToLog('zigate') . ' 2>&1 &');
