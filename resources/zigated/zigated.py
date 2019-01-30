@@ -112,7 +112,9 @@ class JeedomHandler(socketserver.BaseRequestHandler):
             cmd = int(cmd, 16)
         else:
             cmd = int(cmd)
-        return z.send_data(cmd, data)
+        r = z.send_data(cmd, data)
+        if r:
+            return r.data
 
 
 def handler(signum=None, frame=None):
