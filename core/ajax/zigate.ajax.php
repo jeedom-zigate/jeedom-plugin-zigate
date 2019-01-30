@@ -72,6 +72,10 @@ try {
         } else {
             ajax::error('Echec');
         }
+    } elseif ($action == 'send_data') {
+        $args = json_decode(init('args'), true);
+        $result = zigate::callZiGate($action, [$args['zigate_command'], $args['zigate_data']]);
+        ajax::success($result);
     } else {
         // Call method callZiGate with args.
         $result = zigate::callZiGate($action, init('args'));
@@ -81,7 +85,6 @@ try {
             ajax::error('Echec');
         }
     }
-
     throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
 } catch (Exception $e) {
     ajax::error(displayExeption($e), $e->getCode());

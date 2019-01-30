@@ -19,6 +19,11 @@ $('#bt_healthzigate').on('click', function () {
     $('#md_modal').load('index.php?v=d&plugin=zigate&modal=health').dialog('open');
 });
 
+$('#bt_terminalzigate').on('click', function () {
+    $('#md_modal').dialog({title: "{{Terminal Zigate}}"});
+    $('#md_modal').load('index.php?v=d&plugin=zigate&modal=terminal').dialog('open');
+});
+
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 /*
  * Fonction pour l'ajout de commande, appellé automatiquement par plugin.zigate
@@ -304,4 +309,3 @@ $('body').off('zigate::device_changed').on('zigate::device_changed', function (_
         window.location.href = 'index.php?v=d&p=zigate&m=zigate&id=' + _options;
     }
 });
-        

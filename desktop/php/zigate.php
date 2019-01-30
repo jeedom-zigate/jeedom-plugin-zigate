@@ -49,59 +49,65 @@ $eqLogics = eqLogic::byType($plugin->getId());
     <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
         <legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
         <div class="eqLogicThumbnailContainer">
-            <div class="cursor eqLogicAction" id="bt_permitJoin" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
-                <p class="text-center">
+            <div class="cursor eqLogicAction" id="bt_permitJoin" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
+                <center>
                     <i class="fa fa-sign-in fa-rotate-90" style="font-size : 6em;color:#94ca02;"></i>
-                </p>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#94ca02"><p class="text-center">{{Mode inclusion}}</p></span>
+                </center>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#94ca02"><center>{{Mode inclusion}}</center></span>
             </div>
-            <div class="cursor eqLogicAction" id="bt_touchlink" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
-                <p class="text-center">
+            <div class="cursor eqLogicAction" id="bt_touchlink" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
+                <center>
                     <i class="fa fa-link" style="font-size : 6em;color:#0299ca;"></i>
-                </p>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#0299ca"><p class="text-center">{{TouchLink}}</p></span>
+                </center>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#0299ca"><center>{{TouchLink}}</center></span>
             </div>
-            <div class="cursor eqLogicAction" id="bt_networkscan" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
-                <p class="text-center">
+            <div class="cursor eqLogicAction" id="bt_networkscan" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
+                <center>
                     <i class="fa fa-search" style="font-size : 6em;color:#767676;"></i>
-                </p>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><p class="text-center">{{Network Scan}}</p></span>
+                </center>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Network Scan}}</center></span>
             </div>
-            <div class="cursor eqLogicAction" id="bt_syncEqLogic" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
-                <p class="text-center">
+            <div class="cursor eqLogicAction" id="bt_syncEqLogic" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;">
+                <center>
                     <i class="fa fa-refresh" style="font-size : 6em;color:#767676;"></i>
-                </p>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><p class="text-center">{{Synchroniser}}</p></span>
+                </center>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Synchroniser}}</center></span>
             </div>
-            <div class="cursor eqLogicAction" id="bt_cleanup_devices" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
-                <p class="text-center">
+            <div class="cursor eqLogicAction" id="bt_cleanup_devices" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;">
+                <center>
                     <i class="fa fa-shower" style="font-size : 6em;color:#767676;"></i>
-                </p>
+                </center>
                 <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><p class="text-center">{{Nettoyer}}</p></span>
             </div>
-            <div class="cursor eqLogicAction" id="bt_reset" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
-                <p class="text-center">
+            <div class="cursor eqLogicAction" id="bt_reset" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
+                <center>
                     <i class="fa fa-recycle" style="font-size : 6em;color:#767676;"></i>
-                </p>
-                <span style="font-size : 1.1em;position:relative; top : 23px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><p class="text-center">{{Reset ZiGate}}</p></span>
+                </center>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Reset ZiGate}}</center></span>
             </div>
-            <div class="cursor eqLogicAction" id="bt_erasepdm" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
-                <p class="text-center">
+            <div class="cursor eqLogicAction" id="bt_erasepdm" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;">
+                <center>
                     <i class="fa fa-eraser" style="font-size : 6em;color:#767676;"></i>
-                </p>
+                </center>
                 <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><p class="text-center">{{Erase PDM}}</p></span>
             </div>
-            <div class="cursor eqLogicAction" data-action="gotoPluginConf" style="text-align: center; background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
-                <p class="text-center">
+            <div class="cursor eqLogicAction" data-action="gotoPluginConf" style="text-align: center; background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;">
+                <center>
                     <i class="fa fa-wrench" style="font-size : 6em;color:#767676;"></i>
-                </p>
+                </center>
                 <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676">{{Configuration}}</span>
             </div>
-            <div class="cursor" id="bt_healthzigate" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
-                <p class="text-center">
+            <div class="cursor" id="bt_healthzigate" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
+                <center>
                     <i class="fa fa-medkit" style="font-size : 6em;color:#767676;"></i>
-                </p>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><p class="text-center">{{Santé}}</p></span>
+                </center>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Santé}}</center></span>
+            </div>
+            <div class="cursor" id="bt_terminalzigate" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
+                <center>
+                    <i class="fa fa-terminal" style="font-size : 6em;color:#767676;"></i>
+                </center>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Terminal}}</center></span>
             </div>
         </div>
 
@@ -113,10 +119,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
             foreach ($eqLogics as $eqLogic) {
                 $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
                 echo '<div class="eqLogicDisplayCard cursor" data-logical-id="' . $eqLogic->getLogicalId() . '" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
-                echo '<p class="text-center">';
+                echo "<center>";
                 echo '<img src="' . $eqLogic->getImage() . '" height="105" width="95" />';
-                echo '</p>';
-                echo '<span class="name" style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><p class="text-center">' . $eqLogic->getHumanName(true, true) . '</p></span>';
+                echo "</center>";
+                echo '<span class="name" style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><center>' . $eqLogic->getHumanName(true, true) . '</center></span>';
                 echo '</div>';
             }
             // phpcs:enable Generic.Files.LineLength.TooLong
