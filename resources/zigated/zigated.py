@@ -100,6 +100,8 @@ class JeedomHandler(socketserver.BaseRequestHandler):
             response['result'] = func
             if callable(response['result']):
                 response['result'] = response['result'](*args)
+        if isinstance(response['result'], zigate.responses.Response):
+            response['result'] = response['result'].data
         logging.debug(response)
         self.request.sendall(json.dumps(response, cls=zigate.core.DeviceEncoder).encode())
 
@@ -112,9 +114,7 @@ class JeedomHandler(socketserver.BaseRequestHandler):
             cmd = int(cmd, 16)
         else:
             cmd = int(cmd)
-        r = z.send_data(cmd, data)
-        if r:
-            return r.data
+        return z.send_data(cmd, data)
 
 
 def handler(signum=None, frame=None):
