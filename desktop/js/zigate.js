@@ -309,4 +309,3 @@ $('body').off('zigate::device_changed').on('zigate::device_changed', function (_
         window.location.href = 'index.php?v=d&p=zigate&m=zigate&id=' + _options;
     }
 });
-        
