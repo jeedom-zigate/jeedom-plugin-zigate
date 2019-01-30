@@ -89,7 +89,6 @@ $eqLogics = zigate::byType('zigate');
             handleAjaxError(request, status, error);
             },
             success: function (data) {
-                console.log(data)
                 if (data.state != 'ok') {
                     $('#pre_logZigateCommand').empty();
                     $('#pre_logZigateCommand').prepend(data.state);

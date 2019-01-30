@@ -75,7 +75,7 @@ try {
     } elseif ($action == 'raw_command') {
         $args = json_decode(init('args'), true);
         $result = zigate::callZiGate($action, [$args['zigate_command'], $args['zigate_data']]);
-        ajax::success($result);
+        ajax::success(var_export($result['result'], true));
     } else {
         // Call method callZiGate with args.
         $result = zigate::callZiGate($action, init('args'));
