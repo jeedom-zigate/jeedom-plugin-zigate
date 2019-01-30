@@ -81,7 +81,7 @@ $eqLogics = zigate::byType('zigate');
             type: "POST",
             url: "plugins/zigate/core/ajax/zigate.ajax.php",
             data: {
-                action: "send_data",
+                action: "raw_command",
                 args: json_encode(args)
             },
             dataType: 'json',
