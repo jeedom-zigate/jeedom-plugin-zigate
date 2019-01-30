@@ -279,7 +279,9 @@ zigate.dispatcher.connect(callback_command, zigate.ZIGATE_FAILED_TO_CONNECT)
 if os.path.exists(args.socket):
     os.unlink(args.socket)
 server = socketserver.UnixStreamServer(args.socket, JeedomHandler)
-if '.' in args.device:  # supposed I.P:PORT
+if args.device == 'fake':
+    z = zigate.core.FakeZiGate(args.device, persistent_file, auto_start=False)
+elif '.' in args.device:  # supposed I.P:PORT
     host_port = args.device.split(':', 1)
     host = host_port[0]
     port = None
