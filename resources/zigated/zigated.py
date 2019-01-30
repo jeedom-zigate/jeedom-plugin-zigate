@@ -95,8 +95,16 @@ class JeedomHandler(socketserver.BaseRequestHandler):
             response['result'] = func
             if callable(response['result']):
                 response['result'] = response['result'](*args)
+        elif hasattr(self, action):
+            func = getattr(self, action)
+            response['result'] = func
+            if callable(response['result']):
+                response['result'] = response['result'](*args)
         logging.debug(response)
         self.request.sendall(json.dumps(response, cls=zigate.core.DeviceEncoder).encode())
+
+    def get_libversion(self):
+        return zigate.__version__
 
 
 def handler(signum=None, frame=None):
@@ -206,9 +214,10 @@ parser.add_argument('--apikey', help='API Key', default='nokey')
 parser.add_argument('--device', help='ZiGate port', default='auto')
 parser.add_argument('--callback', help='Jeedom callback', default='http://localhost')
 parser.add_argument('--sharedata', type=int, default=1)
+parser.add_argument('--channel', type=int, default=None)
 args = parser.parse_args()
 
-FORMAT = '[%(asctime)-15s][%(levelname)s][%(name)s] : %(message)s'
+FORMAT = '[%(asctime)-15s][%(levelname)s][%(name)s](%(threadName)s) : %(message)s'
 logging.basicConfig(level=convert_log_level(args.loglevel),
                     format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
 urllib3_logger = logging.getLogger('urllib3')
@@ -273,12 +282,13 @@ else:
     z = zigate.ZiGate(args.device, persistent_file, auto_start=False)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_UPDATED, z)
+zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_ADDRESS_CHANGED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_REMOVED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_UPDATED, z)
-zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_NEED_REFRESH, z)
+zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_NEED_DISCOVERY, z)
 
-z.autoStart()
+z.autoStart(args.channel)
 z.start_auto_save()
 
 version = z.get_version_text()
@@ -287,6 +297,11 @@ if version < '3.0d':
     logging.error('Veuillez mettre à jour le firmware de votre clé ZiGate')
     logging.error('Version actuelle : {} - Version minimale requise : 3.0d'.format(version))
     sys.exit(1)
+
+if args.sharedata:
+    t = threading.Thread(target=sharedata)
+    t.setDaemon(True)
+    t.start()
 
 t = threading.Thread(target=server.serve_forever)
 t.start()

@@ -1,0 +1,4 @@
+enabled: true
+bundles: "auto"
+report:
+  pullRequest: "onChangedLinesOnly"

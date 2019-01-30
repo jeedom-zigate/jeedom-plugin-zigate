@@ -29,6 +29,7 @@ if (!isConnect()) {
 }
 
 $versionFirmware = zigate::callZiGate('get_version_text');
+$versionLib = zigate::callZiGate('get_libversion');
 
 ?>
 <form class="form-horizontal">
@@ -38,6 +39,13 @@ $versionFirmware = zigate::callZiGate('get_version_text');
                 {{ Version plugin }} <sup><i class="fa fa-question-circle tooltips" title="{{C'est la version du plugin ZiGate}}" style="font-size : 1em;color:grey;"></i></sup>
             </label>
             <span style="top:6px;" class="col-lg-4"><?php echo zigate::getVersion(); ?></span>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">
+                {{ Version lib }}
+                <sup><i class="fa fa-question-circle tooltips" title="{{C'est la version de la librairie Python ZiGate}}" style="font-size : 1em;color:grey;"></i></sup>
+            </label>
+            <span style="top:6px;" class="col-lg-4"><?php echo $versionLib['result']; ?></span>
         </div>
         <div class="form-group">
             <label class="col-lg-4 control-label">
@@ -63,6 +71,12 @@ $versionFirmware = zigate::callZiGate('get_version_text');
             <label class="col-sm-3 control-label">{{ou Adresse ZiGate Wifi}}</label>
             <div class="col-sm-3">
                 <input type="text" class="configKey form-control" data-l1key="host" placeholder="ip:port"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">{{Channel}}</label>
+            <div class="col-sm-3">
+                <input type="text" class="configKey form-control" data-l1key="channel" placeholder="11"/>
             </div>
         </div>
         <div class="form-group">

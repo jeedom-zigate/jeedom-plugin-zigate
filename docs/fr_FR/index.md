@@ -117,3 +117,40 @@ AttributeError: 'NoneType' object has no attribute 'data'
 * Arrêter manuelelment le daemon.
 * Attendre 2 mn.
 * Relancer manuelelment le daemon.
+
+### Problème de dépendances python
+
+Le plugin ZiGate utilise Python3. Python 2 et 3 doivent collaborer au sein de Jeedom. Assurez-vous de n'avoir pas mis à jour votre stack pip et d'avoir les bonnes versions (9.0.x).
+
+```bash
+$ pip2 -V
+pip 9.0.1 from /usr/lib/python2.7/dist-packages (python 2.7)
+$ pip3 -V
+pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.5)
+$ pip -V
+pip 9.0.1 from /usr/lib/python2.7/dist-packages (python 2.7)
+```
+
+Si ce n'est pas le cas :
+
+```bash
+$ sudo python3 -m pip uninstall pip
+$ sudo apt-get remove python3-pip python-pip
+$ sudo apt-get install python3-pip python-pip
+$ sudo python2 -m pip uninstall pip
+$ sudo apt-get remove python-pip
+$ sudo apt-get install python-pip
+```
+
+Si ça ne fonctionne toujours pas vérifier que pip existe:
+
+```bash
+$ which pip
+/usr/bin/pip
+```
+
+Si la commande ne retourne rien c'est que pip est manquant, il faut alors le recréer:
+
+```bash
+$ sudo cp /usr/bin/pip2 /usr/bin/pip
+```

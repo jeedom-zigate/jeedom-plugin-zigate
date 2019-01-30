@@ -93,10 +93,35 @@ $('#bt_networkscan').on('click', function () {
     callZiGate('start_network_scan');
 });
 
+$('#bt_cleanup_devices').on('click', function () {
+    bootbox.confirm('{{Etes-vous sûr de vouloir effacer les équipements manquants ?}}', function (result) {
+        if (result) {
+            callZiGate('cleanup_devices');
+        }
+    });
+});
+
+$('#bt_erasepdm').on('click', function () {
+    bootbox.confirm('{{Etes-vous sûr de vouloir effacer les données de la zigate ?}}', function (result) {
+        if (result) {
+            callZiGate('erase_persistent');
+        }
+    });
+});
+
 $('.eqLogicAction[data-action=refresh_device]').on('click', function () {
     if ($('.li_eqLogic.active').attr('data-eqLogic_id') != undefined) {
         id = $('.li_eqLogic.active').attr('data-eqLogic_id');
         refresh_eqlogic(id);
+    } else {
+        $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner un}} ' + eqType, level: 'danger'});
+    }
+});
+
+$('.eqLogicAction[data-action=discover_device]').on('click', function () {
+    if ($('.li_eqLogic.active').attr('data-eqLogic_id') != undefined) {
+        id = $('.li_eqLogic.active').attr('data-eqLogic_id');
+        discover_eqlogic(id);
     } else {
         $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner un}} ' + eqType, level: 'danger'});
     }
@@ -220,6 +245,32 @@ function refresh_eqlogic(id)
                 return;
             } else {
                 $('#div_alert').showAlert({message: 'Rafraichissement de l\'équipement lancé.<br>' +
+                        'Les équipements sur pile doivent être activés manuellement pour transmettre les infos' +
+                        ' (Appui sur le bouton de synchro, manipulation, etc)', level: 'warning'});
+            }
+        }
+    });
+}
+
+function discover_eqlogic(id)
+{
+    $.ajax({
+        type: "POST",
+        url: "plugins/zigate/core/ajax/zigate.ajax.php",
+        data: {
+            action: "discover_eqlogic",
+            args: [id]
+        },
+        dataType: 'json',
+        error: function (request, status, error) {
+            handleAjaxError(request, status, error);
+        },
+        success: function (data) {
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
+            } else {
+                $('#div_alert').showAlert({message: 'Découverte de l\'équipement lancé.<br>' +
                         'Les équipements sur pile doivent être activés manuellement pour transmettre les infos' +
                         ' (Appui sur le bouton de synchro, manipulation, etc)', level: 'warning'});
             }

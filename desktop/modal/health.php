@@ -20,7 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 if (!isConnect('admin')) {
     throw new Exception('401 - Accès non autorisé');
 }
@@ -45,7 +44,7 @@ $eqLogics = zigate::byType('zigate');
     <tbody>
         <?php
         foreach ($eqLogics as $eqLogic) {
-			$opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+            $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
             echo '<tr><td><img src="' . $eqLogic->getImage() . '" height="55" width="55" /></td><td><a href="' . $eqLogic->getLinkToConfiguration() .
                 '" style="' . $opacity . '">' . $eqLogic->getHumanName(true) . '</a></td>';
             echo '<td><span class="label label-info" style="font-size : 1em; cursor : default;' . $opacity . '">' . $eqLogic->getId() . '</span></td>';
