@@ -41,13 +41,13 @@ $eqLogics = zigate::byType('zigate');
                     <div class="form-group">
                         <label class="col-sm-4 control-label">{{Commande}}</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control tooltips pluginAttr" data-l1key="zigateterminal" data-l2key="zigate_command"/>
+                            <input type="text" class="form-control tooltips pluginAttr" data-l1key="zigateterminal" data-l2key="zigate_command" placeholder="0x0000"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">{{Data}}</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control tooltips pluginAttr" data-l1key="zigateterminal" data-l2key="zigate_data"/>
+                            <input type="text" class="form-control tooltips pluginAttr" data-l1key="zigateterminal" data-l2key="zigate_data" placeholder="0123456789abcdef"/>
                         </div>
                     </div>
                     <div class="col-sm-4">
