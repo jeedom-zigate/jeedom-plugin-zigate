@@ -30,9 +30,6 @@ $eqLogics = zigate::byType('zigate');
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="zigatepanel">
         <div class="tab-pane">
-            <a class="btn btn-success" id="btn_nwkscan">{{Network Scan}}</a>
-            <a class="btn btn-success" id="btn_reset">{{Reset}}</a>
-            <a class="btn btn-success" id="btn_getversion">{{Get Version}}</a>
             <a class="btn btn-success" id="btn_startstop">{{Start/Stop Terminal}}</a>
         </div>
     </div>
@@ -92,10 +89,10 @@ $eqLogics = zigate::byType('zigate');
     }
     function startstopTimer(){
         if (intervalHandle){
-        	clearInterval(intervalHandle);
-        	intervalHandle = null;
+            clearInterval(intervalHandle);
+            intervalHandle = null;
         } else {
-        	intervalHandle = setInterval(get_last_responses, 1000);
+            intervalHandle = setInterval(get_last_responses, 1000);
         }
     }
     startstopTimer();
@@ -121,34 +118,6 @@ $eqLogics = zigate::byType('zigate');
         });
     });
     $('#btn_startstop').on('click', function () {
-    	startstopTimer();
-    });
-    $('#btn_nwkscan').on('click', function () {
-    });
-    $('#btn_reset').on('click', function () {
-        
-    });
-    $('#btn_getversion').on('click', function () {
-        $.ajax({
-            type: "POST",
-            url: "plugins/zigate/core/ajax/zigate.ajax.php",
-            data: {
-                action: "get_version",
-            },
-            dataType: 'json',
-            error: function (request, status, error) {
-                handleAjaxError(request, status, error);
-            },
-            success: function (data) {
-            console.log(data)
-            if (data.state != 'ok') {
-                $('#pre_logZigateCommand').empty();
-                $('#pre_logZigateCommand').prepend(data.state);
-                return;
-            }
-                $('#pre_logZigateCommand').empty();
-                $('#pre_logZigateCommand').prepend(data.result.result['version']);
-            }
-        });
+        startstopTimer();
     });
 </script>
