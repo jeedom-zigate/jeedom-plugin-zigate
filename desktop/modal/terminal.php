@@ -67,7 +67,7 @@ $eqLogics = zigate::byType('zigate');
 </div>
 
 <script>
-	var timeOutId = 0;
+    var timeOutId = 0;
     function get_last_responses(){
         $.ajax({
             type: "POST",
