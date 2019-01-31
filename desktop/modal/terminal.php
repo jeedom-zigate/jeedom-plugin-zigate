@@ -33,6 +33,7 @@ $eqLogics = zigate::byType('zigate');
             <a class="btn btn-success" id="btn_nwkscan">{{Network Scan}}</a>
             <a class="btn btn-success" id="btn_reset">{{Reset}}</a>
             <a class="btn btn-success" id="btn_getversion">{{Get Version}}</a>
+            <a class="btn btn-success" id="btn_startstop">{{Start/Stop Terminal}}</a>
         </div>
     </div>
     <div role="tabpanel" class="tab-pane active" id="zigateterminal">
@@ -72,8 +73,9 @@ $eqLogics = zigate::byType('zigate');
 </div>
 
 <script>
-	function get_last_responses(){
-		$.ajax({
+    var intervalHandle = null;
+    function get_last_responses(){
+        $.ajax({
             type: "POST",
             url: "plugins/zigate/core/ajax/zigate.ajax.php",
             data: {
@@ -81,17 +83,22 @@ $eqLogics = zigate::byType('zigate');
             },
             dataType: 'json',
             error: function (request, status, error) {
-            	handleAjaxError(request, status, error);
+                handleAjaxError(request, status, error);
             },
             success: function (data) {
                 $('#pre_logZigateCommand').prepend(data.result);
             }
         });
-	}
-	intervalHandle = setInterval(get_last_responses, 1000);
-	function stopTimer(){
-		clearInterval(intervalHandle);
-	}
+    }
+    function startstopTimer(){
+        if (intervalHandle){
+        	clearInterval(intervalHandle);
+        	intervalHandle = null;
+        } else {
+        	intervalHandle = setInterval(get_last_responses, 1000);
+        }
+    }
+    startstopTimer();
     $('#btn_sendcommand').on('click', function () {
         var args = {};
         $('.pluginAttr[data-l1key=zigateterminal]').each(function(){
@@ -119,10 +126,13 @@ $eqLogics = zigate::byType('zigate');
             }
         });
     });
+    $('#btn_startstop').on('click', function () {
+    	startstopTimer();
+    });
     $('#btn_nwkscan').on('click', function () {
     });
     $('#btn_reset').on('click', function () {
-    	stopTimer();
+        
     });
     $('#btn_getversion').on('click', function () {
         $.ajax({
