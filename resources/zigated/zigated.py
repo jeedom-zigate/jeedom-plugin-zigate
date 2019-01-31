@@ -18,9 +18,19 @@ import requests
 import threading
 import uuid
 import subprocess
+import collections
+
 
 BASE_PATH = os.path.join(os.path.dirname(__file__), '..', '..', '..', '..')
 BASE_PATH = os.path.abspath(BASE_PATH)
+
+
+# store last 15 responses for terminal
+LAST_RESPONSES = collections.deque([], 15)
+
+
+def store_response(response):
+    LAST_RESPONSES.append(str(response))
 
 
 class JeedomCallback:
@@ -109,12 +119,25 @@ class JeedomHandler(socketserver.BaseRequestHandler):
         return zigate.__version__
 
     def raw_command(self, cmd, data):
+        '''
+        send raw command to zigate
+        '''
         cmd = cmd.lower()
         if 'x' in cmd:
             cmd = int(cmd, 16)
         else:
             cmd = int(cmd)
         return z.send_data(cmd, data)
+
+    def get_last_responses(self):
+        '''
+        get last received responses
+        '''
+        responses = []
+        while len(LAST_RESPONSES) > 0 or len(responses) < 15:
+            responses.append(LAST_RESPONSES.popleft())
+        responses = '\n'.join(responses)
+        return responses
 
 
 def handler(signum=None, frame=None):
@@ -299,6 +322,7 @@ zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_REMOVED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_UPDATED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_NEED_DISCOVERY, z)
+zigate.dispatcher.connect(store_response, zigate.ZIGATE_RESPONSE_RECEIVED, z)
 
 z.autoStart(args.channel)
 z.start_auto_save()

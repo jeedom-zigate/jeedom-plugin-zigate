@@ -72,6 +72,26 @@ $eqLogics = zigate::byType('zigate');
 </div>
 
 <script>
+	function get_last_responses(){
+		$.ajax({
+            type: "POST",
+            url: "plugins/zigate/core/ajax/zigate.ajax.php",
+            data: {
+                action: "get_last_responses",
+            },
+            dataType: 'json',
+            error: function (request, status, error) {
+            	handleAjaxError(request, status, error);
+            },
+            success: function (data) {
+                $('#pre_logZigateCommand').prepend(data.result);
+            }
+        });
+	}
+	intervalHandle = setInterval(get_last_responses, 1000);
+	function stopTimer(){
+		clearInterval(intervalHandle);
+	}
     $('#btn_sendcommand').on('click', function () {
         var args = {};
         $('.pluginAttr[data-l1key=zigateterminal]').each(function(){
@@ -102,6 +122,7 @@ $eqLogics = zigate::byType('zigate');
     $('#btn_nwkscan').on('click', function () {
     });
     $('#btn_reset').on('click', function () {
+    	stopTimer();
     });
     $('#btn_getversion').on('click', function () {
         $.ajax({
