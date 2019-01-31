@@ -86,7 +86,7 @@ $eqLogics = zigate::byType('zigate');
                 handleAjaxError(request, status, error);
             },
             success: function (data) {
-                $('#pre_logZigateCommand').prepend(data.result);
+                $('#pre_logZigateCommand').prepend(data.result.result);
             }
         });
     }
@@ -116,13 +116,7 @@ $eqLogics = zigate::byType('zigate');
             handleAjaxError(request, status, error);
             },
             success: function (data) {
-                if (data.state != 'ok') {
-                    $('#pre_logZigateCommand').empty();
-                    $('#pre_logZigateCommand').prepend(data.state);
-                    return;
-                }
-                $('#pre_logZigateCommand').empty();
-                $('#pre_logZigateCommand').prepend(data.result.result);
+                $('#pre_logZigateCommand').append('Commande envoyée\n');
             }
         });
     });

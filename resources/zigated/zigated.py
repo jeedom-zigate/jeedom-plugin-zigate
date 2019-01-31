@@ -134,10 +134,10 @@ class JeedomHandler(socketserver.BaseRequestHandler):
         get last received responses
         '''
         responses = []
-        while len(LAST_RESPONSES) > 0 or len(responses) < 15:
+        while len(LAST_RESPONSES) > 0 and len(responses) < 15:
             responses.append(LAST_RESPONSES.popleft())
         responses = '\n'.join(responses)
-        return responses
+        return responses + '\n'
 
 
 def handler(signum=None, frame=None):
@@ -322,7 +322,7 @@ zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_REMOVED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_UPDATED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_NEED_DISCOVERY, z)
-zigate.dispatcher.connect(store_response, zigate.ZIGATE_RESPONSE_RECEIVED, z)
+zigate.dispatcher.connect(store_response, zigate.ZIGATE_RESPONSE_RECEIVED, weak=True)
 
 z.autoStart(args.channel)
 z.start_auto_save()
