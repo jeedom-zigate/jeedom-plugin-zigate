@@ -29,12 +29,9 @@ $eqLogics = zigate::byType('zigate');
 ?>
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="zigatepanel">
-        <div class="tab-pane">
-            <a class="btn btn-success" id="btn_startstop">{{Start/Stop Terminal}}</a>
-        </div>
     </div>
     <div role="tabpanel" class="tab-pane active" id="zigateterminal">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <form class="form-horizontal">
                 <fieldset>
                     <legend>{{Commande}}</legend>
@@ -56,7 +53,7 @@ $eqLogics = zigate::byType('zigate');
                 </fieldset>
             </form>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-8">
             <form class="form-horizontal">
                 <fieldset>
                     <legend>{{Résultat}}</legend>
@@ -70,7 +67,7 @@ $eqLogics = zigate::byType('zigate');
 </div>
 
 <script>
-    var intervalHandle = null;
+	var timeOutId = 0;
     function get_last_responses(){
         $.ajax({
             type: "POST",
@@ -83,19 +80,18 @@ $eqLogics = zigate::byType('zigate');
                 handleAjaxError(request, status, error);
             },
             success: function (data) {
-                $('#pre_logZigateCommand').prepend(data.result.result);
+                console.log("State:"+data.state);
+                console.log("result:"+data.result.result);               
+                if (data.state == 'ok') {
+                    $('#pre_logZigateCommand').html(data.result.result);
+                    clearTimeout(timeOutId);
+                } else {
+                    timeOutId = setTimeout(function(){ get_last_responses(); }, 2000);
+                    console.log("call");
+                }
             }
         });
     }
-    function startstopTimer(){
-        if (intervalHandle){
-            clearInterval(intervalHandle);
-            intervalHandle = null;
-        } else {
-            intervalHandle = setInterval(get_last_responses, 1000);
-        }
-    }
-    startstopTimer();
     $('#btn_sendcommand').on('click', function () {
         var args = {};
         $('.pluginAttr[data-l1key=zigateterminal]').each(function(){
@@ -113,11 +109,9 @@ $eqLogics = zigate::byType('zigate');
             handleAjaxError(request, status, error);
             },
             success: function (data) {
-                $('#pre_logZigateCommand').append('Commande envoyée\n');
+                console.log("Commande envoyée");
+                timeOutId = setTimeout(function(){ get_last_responses(); }, 2000);
             }
         });
-    });
-    $('#btn_startstop').on('click', function () {
-        startstopTimer();
     });
 </script>
