@@ -71,12 +71,12 @@ $nodesCount = count($eqLogics);
                             <td>{{Vide pour le moment}}</td>
                         </tr>
                         <tr>
-                            <td><a data-action="bt_Zigatereset" class="btn btn-success controller_action"><i class="fa fa-recycle"></i> {{Reset}}</a></td>
+                            <td><a data-action="bt_Zigatereset" class="btn btn-warning controller_action"><i class="fa fa-recycle"></i> {{Redémarrage}}</a></td>
                             <td>{{équivalent à un débranchement/rebranchement de la ZiGate. Cette commande ne supprime aucune donnée.}}</td>
                         </tr>
                         <tr>
-                            <td><a data-action="bt_ZigateerasePDM" class="btn btn-warning controller_action"><i class="fa fa-eraser"></i> {{Erase PDM}}</a></td>
-                            <td>{{Vide pour le moment}}</td>
+                            <td><a data-action="bt_ZigateerasePDM" class="btn btn-warning controller_action"><i class="fa fa-eraser"></i> {{Remise à zéro}}</a></td>
+                            <td>{{Remise à zéro du contrôleur. Remet à zéro un contrôleur.}}</td>
                         </tr>
                     </table>
                 </div>
@@ -88,16 +88,25 @@ $nodesCount = count($eqLogics);
     $('.controller_action').on('click',function(){
         if($(this).data('action') == 'bt_ZigateerasePDM'){
             $action = $(this).data('action');
-            bootbox.confirm("Etes-vous sûr ? Cette opération est risquée", function (result) {
+            bootbox.confirm("Etes-vous sûr de vouloir effacer les données de la zigate ?", function (result) {
                 if (result) {
+                    callZiGate('erase_persistent');
                 }
             });
         }
         if($(this).data('action') == 'bt_ZigateSync'){
+            callZiGate('start_network_scan');
         }
         if($(this).data('action') == 'bt_ZigateClean'){
+            $action = $(this).data('action');
+            bootbox.confirm("Etes-vous sûr de vouloir effacer les équipements manquants ?", function (result) {
+                if (result) {
+                    callZiGate('cleanup_devices');
+                }
+            });
         }
         if($(this).data('action') == 'bt_Zigatereset'){
+            reset();
         }
     });
 </script>
