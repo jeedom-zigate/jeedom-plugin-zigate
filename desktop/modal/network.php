@@ -63,19 +63,19 @@ $nodesCount = count($eqLogics);
                 <div class="tab-pane" id="actions_network">
                     <table class="table">
                         <tr>
-                            <td><a class="btn btn-success bt_addDevice" data-secure="0"><i class="fa fa-refresh"></i> {{Synchroniser}}</a></td>
+                            <td><a data-action="bt_ZigateSync" class="btn btn-success controller_action"><i class="fa fa-refresh"></i> {{Synchroniser}}</a></td>
                             <td>{{Synchronise les informations du plugin avec les informations réelles du réseau ZigBee.}}</td>
                         </tr>
                         <tr>
-                            <td><a class="btn btn-success bt_addDevice" data-secure="0"><i class="fa fa-shower"></i> {{Nettoyer}}</a></td>
+                            <td><a data-action="bt_ZigateClean" class="btn btn-success controller_action"><i class="fa fa-shower"></i> {{Nettoyer}}</a></td>
                             <td>{{Vide pour le moment}}</td>
                         </tr>
                         <tr>
-                            <td><a class="btn btn-success bt_addDevice" data-secure="0"><i class="fa fa-recycle"></i> {{Reset}}</a></td>
+                            <td><a data-action="bt_Zigatereset" class="btn btn-success controller_action"><i class="fa fa-recycle"></i> {{Reset}}</a></td>
                             <td>{{équivalent à un débranchement/rebranchement de la ZiGate. Cette commande ne supprime aucune donnée.}}</td>
                         </tr>
                         <tr>
-                            <td><a class="btn btn-success bt_addDevice" data-secure="0"><i class="fa fa-eraser"></i> {{Erase PDM}}</a></td>
+                            <td><a data-action="bt_ZigateerasePDM" class="btn btn-warning controller_action"><i class="fa fa-eraser"></i> {{Erase PDM}}</a></td>
                             <td>{{Vide pour le moment}}</td>
                         </tr>
                     </table>
@@ -84,3 +84,20 @@ $nodesCount = count($eqLogics);
         </div>
     </div>
 </div>
+<script>
+    $('.controller_action').on('click',function(){
+        if($(this).data('action') == 'bt_ZigateerasePDM'){
+            $action = $(this).data('action');
+            bootbox.confirm("Etes-vous sûr ? Cette opération est risquée", function (result) {
+                if (result) {
+                }
+            });
+        }
+        if($(this).data('action') == 'bt_ZigateSync'){
+        }
+        if($(this).data('action') == 'bt_ZigateClean'){
+        }
+        if($(this).data('action') == 'bt_Zigatereset'){
+        }
+    });
+</script>
