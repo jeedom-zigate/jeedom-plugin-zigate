@@ -23,6 +23,10 @@ $('#bt_terminalzigate').on('click', function () {
     $('#md_modal').dialog({title: "{{Terminal Zigate}}"});
     $('#md_modal').load('index.php?v=d&plugin=zigate&modal=terminal').dialog('open');
 });
+$('#bt_networkzigate').on('click', function () {
+    $('#md_modal').dialog({title: "{{Réseau Zigate}}"});
+    $('#md_modal').load('index.php?v=d&plugin=zigate&modal=network').dialog('open');
+});
 
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 /*
