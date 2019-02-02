@@ -75,8 +75,8 @@ $nodesCount = count($eqLogics);
                             <td>{{équivalent à un débranchement/rebranchement de la ZiGate. Cette commande ne supprime aucune donnée.}}</td>
                         </tr>
                         <tr>
-                            <td><a data-action="bt_ZigateerasePDM" class="btn btn-warning controller_action"><i class="fa fa-eraser"></i> {{Remise à zéro}}</a></td>
-                            <td>{{Remise à zéro du contrôleur. Remet à zéro un contrôleur.}}</td>
+                            <td><a data-action="bt_ZigateerasePDM" class="btn btn-danger controller_action"><i class="fa fa-eraser"></i> {{Remise à zéro}}</a></td>
+                            <td>{{Remise à zéro du contrôleur}}</td>
                         </tr>
                     </table>
                 </div>
