@@ -96,11 +96,11 @@ if ($DeamonInfo['launchable'] == 'ok') {
                         </tr>
                         <tr>
                             <td><a data-action="bt_ZigateClean" class="btn btn-success controller_action"><i class="fa fa-shower"></i> {{Nettoyer}}</a></td>
-                            <td>{{Vide pour le moment}}</td>
+                            <td>{{Supprime les équipements fantômes.}}</td>
                         </tr>
                         <tr>
                             <td><a data-action="bt_Zigatereset" class="btn btn-warning controller_action"><i class="fa fa-recycle"></i> {{Redémarrage}}</a></td>
-                            <td>{{équivalent à un débranchement/rebranchement de la ZiGate. Cette commande ne supprime aucune donnée.}}</td>
+                            <td>{{Equivalent à un débranchement/rebranchement de la ZiGate. Cette commande ne supprime aucune donnée.}}</td>
                         </tr>
                         <tr>
                             <td><a data-action="bt_ZigateerasePDM" class="btn btn-danger controller_action"><i class="fa fa-eraser"></i> {{Remise à zéro}}</a></td>
