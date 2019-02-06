@@ -18,9 +18,19 @@ import requests
 import threading
 import uuid
 import subprocess
+import collections
+
 
 BASE_PATH = os.path.join(os.path.dirname(__file__), '..', '..', '..', '..')
 BASE_PATH = os.path.abspath(BASE_PATH)
+
+
+# store last 15 responses for terminal
+LAST_RESPONSES = collections.deque([], 15)
+
+
+def store_response(response):
+    LAST_RESPONSES.append(str(response))
 
 
 class JeedomCallback:
@@ -100,11 +110,34 @@ class JeedomHandler(socketserver.BaseRequestHandler):
             response['result'] = func
             if callable(response['result']):
                 response['result'] = response['result'](*args)
+        if isinstance(response['result'], zigate.responses.Response):
+            response['result'] = response['result'].data
         logging.debug(response)
         self.request.sendall(json.dumps(response, cls=zigate.core.DeviceEncoder).encode())
 
     def get_libversion(self):
         return zigate.__version__
+
+    def raw_command(self, cmd, data):
+        '''
+        send raw command to zigate
+        '''
+        cmd = cmd.lower()
+        if 'x' in cmd:
+            cmd = int(cmd, 16)
+        else:
+            cmd = int(cmd)
+        return z.send_data(cmd, data)
+
+    def get_last_responses(self):
+        '''
+        get last received responses
+        '''
+        responses = []
+        while len(LAST_RESPONSES) > 0 and len(responses) < 15:
+            responses.append(LAST_RESPONSES.popleft())
+        responses = '\n'.join(responses)
+        return responses + '\n'
 
 
 def handler(signum=None, frame=None):
@@ -245,12 +278,12 @@ signal.signal(signal.SIGINT, handler)
 signal.signal(signal.SIGTERM, handler)
 
 
-persistent_file = os.path.join(os.path.dirname(__file__), '.zigate.json')
+persistent_file = os.path.join(os.path.dirname(__file__), 'zigate.json')
 # old version
 if not os.path.exists(persistent_file):
-    if os.path.exists(os.path.join(os.path.dirname(__file__), 'zigate.json')):
-        os.rename(os.path.join(os.path.dirname(__file__), 'zigate.json'),
-                  os.path.join(os.path.dirname(__file__), '.zigate.json'))
+    if os.path.exists(os.path.join(os.path.dirname(__file__), '.zigate.json')):
+        os.rename(os.path.join(os.path.dirname(__file__), '.zigate.json'),
+                  os.path.join(os.path.dirname(__file__), 'zigate.json'))
 
 key_file = os.path.join(os.path.dirname(__file__), '.key')
 
@@ -269,7 +302,9 @@ zigate.dispatcher.connect(callback_command, zigate.ZIGATE_FAILED_TO_CONNECT)
 if os.path.exists(args.socket):
     os.unlink(args.socket)
 server = socketserver.UnixStreamServer(args.socket, JeedomHandler)
-if '.' in args.device:  # supposed I.P:PORT
+if args.device == 'fake':
+    z = zigate.core.FakeZiGate(args.device, persistent_file, auto_start=False)
+elif '.' in args.device:  # supposed I.P:PORT
     host_port = args.device.split(':', 1)
     host = host_port[0]
     port = None
@@ -287,6 +322,7 @@ zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_REMOVED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_UPDATED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_NEED_DISCOVERY, z)
+zigate.dispatcher.connect(store_response, zigate.ZIGATE_RESPONSE_RECEIVED, weak=True)
 
 z.autoStart(args.channel)
 z.start_auto_save()

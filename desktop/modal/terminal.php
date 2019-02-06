@@ -31,6 +31,7 @@ if (!isConnect('admin')) {
         <div class="tab-pane">
             <a class="btn btn-success" id="btn_startstop">{{Stop Terminal}}</a>
             <a class="btn btn-warning" id="btn-reset-output"><i class="fa fa-times"></i> {{Vider les résultats}}</a>
+
         </div>
     </div>
     <div role="tabpanel" class="tab-pane active" id="zigateterminal">
@@ -68,7 +69,6 @@ if (!isConnect('admin')) {
         </div>
     </div>
 </div>
-
 <script>
     var intervalHandle = null;
     function get_last_responses(){

@@ -50,12 +50,12 @@ if ($action == 'syncEqLogicWithZiGate') {
     zigate::syncDevice($results['device']);
 } elseif ($action == 'ZIGATE_DEVICE_REMOVED') {
     $device = $results['device'];
-    zigate::removeDevice($device['ieee']);
+    zigate::removeDevice($device['info']['ieee']);
     event::add('zigate::device_changed', '');
 } elseif ($action == 'ZIGATE_DEVICE_NEED_DISCOVERY') {
     $device = $results['device'];
-    $eqLogic = zigate::byLogicalId($device['ieee'], 'zigate');
-    $humanName = $device['ieee'];
+    $eqLogic = zigate::byLogicalId($device['info']['ieee'], 'zigate');
+    $humanName = $device['info']['ieee'];
     if (is_object($eqLogic)) {
         $humanName = $eqLogic->getHumanName();
     }
@@ -65,7 +65,7 @@ if ($action == 'syncEqLogicWithZiGate') {
 } elseif ($action == 'ZIGATE_ATTRIBUTE_UPDATED') {
     if (isset($results['device'])) {
         $device = $results['device'];
-        $eqLogic = zigate::byLogicalId($device['ieee'], 'zigate');
+        $eqLogic = zigate::byLogicalId($device['info']['ieee'], 'zigate');
         if (is_object($eqLogic)) {
             $attribute = $results['attribute'];
             $eqLogic->update_command($attribute['endpoint'], $attribute['cluster'], $attribute);
