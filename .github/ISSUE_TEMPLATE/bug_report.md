@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 **Description du bug**
-Une description claire et précise du problème
+Une description claire et précise du problème.
 
 **Pour Reproduire**
 Etapes pour reproduire le problème:
@@ -21,10 +21,11 @@ Etapes pour reproduire le problème:
 Une description claire et précise du fonctionnement attendu.
 
 **Screenshots**
-Des captures d'écrans du problème (si applicable)
+Des captures d'écrans du problème (si applicable).
 
 **Informations:**
- - Type de l'équipement : [lumi.sensor, ....]
- - Version Jeedom
- - Version Plugin
-- Version lib zigate
+- Type de l'équipement : [lumi.sensor, ....]
+- Version Jeedom :
+- Version Plugin :
+- Version lib zigate :
+- Version du firmware :
