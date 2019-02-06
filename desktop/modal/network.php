@@ -31,8 +31,29 @@ $awakedDelay = '';
 $versionFirmware = zigate::callZiGate('get_version_text');
 $versionLib = zigate::callZiGate('get_libversion');
 $usbPort = config::byKey('Port', 'Zigate');
-$nodesCount = count($eqLogics);
+$JeedomNodesCount = count($eqLogics);
+$ZigateNodes = zigate::callZiGate('devices');
+$ZigateNodesCount = count($ZigateNodes["result"]);
+
+$DeamonInfo = zigate::deamon_info();
+if ($DeamonInfo['launchable'] == 'ok') {
+    $DeamonState = "<i class=\"fa fa-circle fa-lg greeniconcolor\"></i> Demon actif";
+} else {
+    $DeamonState = "<i class=\"fa fa-circle fa-lg rediconcolor\"></i> Demon non actif : ".$DeamonInfo['launchable_message'];
+}
+
 ?>
+<style>
+    .greeniconcolor {
+        color: green;
+    }
+    .yellowiconcolor {
+        color: #FFD700;
+    }
+    .rediconcolor {
+        color: red;
+    }
+</style>
 <div id='div_networkZigateAlert' style="display: none;"></div>
 <div class='network' nid='' id="div_templateNetwork">
     <div class="container-fluid">
@@ -48,15 +69,22 @@ $nodesCount = count($eqLogics);
                         <div class="panel-heading"><h4 class="panel-title">{{Informations}}</h4></div>
                         <div class="panel-body">
                             <p>{{Réseau démarré le}} <span class="zigateNetworkAttr label label-default" style="font-size : 1em;" data-l1key="startTime"><?php echo $startTime ?></span></p>
-                            <p>{{Le réseau contient}} <b><span class="zigateNetworkAttr" data-l1key="nodesCount"><?php echo $nodesCount ?></span></b> {{noeuds, actuellement}} </p>
+                            <p>{{Le réseau Jeedom contient}} <b><span class="zigateNetworkAttr" data-l1key="JeedomNodesCount"><?php echo $JeedomNodesCount ?></span></b> {{noeuds, actuellement}} </p>
+                            <p>{{Le réseau Zigate contient}} <b><span class="zigateNetworkAttr" data-l1key="ZigateNodesCount"><?php echo $ZigateNodesCount ?></span></b> {{noeuds, actuellement}} </p>
                         </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h4 class="panel-title">{{Etat}}</h4></div>
+                        <div class="panel-body">
+                            <p><span class="zigateNetworkAttr" data-l1key="state"></span> {{Etat actuel :}} <span class="zigateNetworkAttr label label-default" data-l1key="stateDescription" style="font-size : 1em;"><?php echo $DeamonState ?></span></p>
+                       </div>
                     </div>
                     <div class="panel panel-primary">
                         <div class="panel-heading"><h4 class="panel-title">{{Système}}</h4></div>
                         <div class="panel-body">
-                            <p>{{Chemin du contrôleur Zigate :}} <span class="zwaveNetworkAttr label label-default" data-l1key="devicePath" style="font-size : 1em;"><?php echo $usbPort ?></span></p>
-                            <p>{{Version du firmware Zigate :}} <span class="zwaveNetworkAttr label label-default" data-l1key="ZigateFirmwareVersion" style="font-size : 1em;"><?php echo $versionFirmware['result']; ?></span></p>
-                            <p>{{Version de la librairie Zigate :}} <span class="zwaveNetworkAttr label label-default" data-l1key="ZigateLibraryVersion" style="font-size : 1em;"><?php echo $versionLib['result']; ?></span></p>
+                            <p>{{Chemin du contrôleur Zigate :}} <span class="zigateNetworkAttr label label-default" data-l1key="devicePath" style="font-size : 1em;"><?php echo $usbPort ?></span></p>
+                            <p>{{Version du firmware Zigate :}} <span class="zigateNetworkAttr label label-default" data-l1key="ZigateFirmwareVersion" style="font-size : 1em;"><?php echo $versionFirmware['result']; ?></span></p>
+                            <p>{{Version de la librairie Zigate :}} <span class="zigateNetworkAttr label label-default" data-l1key="ZigateLibraryVersion" style="font-size : 1em;"><?php echo $versionLib['result']; ?></span></p>
                         </div>
                     </div>
                 </div>
@@ -76,7 +104,7 @@ $nodesCount = count($eqLogics);
                         </tr>
                         <tr>
                             <td><a data-action="bt_ZigateerasePDM" class="btn btn-danger controller_action"><i class="fa fa-eraser"></i> {{Remise à zéro}}</a></td>
-                            <td>{{Remise à zéro du contrôleur}}</td>
+                            <td>{{Remise à zéro du contrôleur.}}</td>
                         </tr>
                     </table>
                 </div>
