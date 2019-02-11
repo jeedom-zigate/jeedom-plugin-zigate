@@ -14,8 +14,8 @@
 |<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/lumi.sensor_86sw1.jpg" alt="lumi.sensor_86sw1" width="80"/>|Interrupteur mural sur pile simple touche|lumi.sensor_86sw1||
 |<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/lumi.sensor_86sw2.jpg" alt="lumi.sensor_86sw2" width="80"/>|Interrupteur mural sur pile double touche|lumi.sensor_86sw2||
 |<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/lumi.sensor_switch.jpg" alt="lumi.sensor_switch" width="80"/>|Bouton Aqara rond|lumi.sensor_switch||
-|<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/lumi.sensor_switch.aq2.jpg" alt="lumi.sensor_switch.aq2" width="80"/>|Bouton Aqara carré|lumi.sensor_switch.aq2<br> lumi.remote.b1acn01||
-|<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/lumi.sensor_cube.jpg" alt="lumi.sensor_cube" width="80"/>|Cube magic|lumi.sensor_cube lumi.sensor_cube.aqgl01||
+|<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/lumi.sensor_switch.aq2.jpg" alt="lumi.sensor_switch.aq2" width="80"/>|Bouton Aqara carré|lumi.sensor_switch.aq2<br>lumi.remote.b1acn01<br>lumi.remote.b286acn01||
+|<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/lumi.sensor_cube.jpg" alt="lumi.sensor_cube" width="80"/>|Cube magic|lumi.sensor_cube<br>lumi.sensor_cube.aqgl01||
 |<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/lumi.sensor_wleak.aq1.jpg" alt="lumi.sensor_wleak.aq1" width="80"/>|Capteur inondation|lumi.sensor_wleak.aq1||
 |<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/lumi.sensor_smoke.jpg" alt="lumi.sensor_smoke" width="80"/>|Détecteur de fumée|lumi.sensor_smoke||
 |<img src="https://raw.githubusercontent.com/Jeedom-Zigate/jeedom-plugin-zigate/master/images/lumi.ctrl_ln1.jpg" alt="lumi.ctrl_ln1" width="80"/>|Interrupteur mural|lumi.ctrl_ln1.aq1||

@@ -36,29 +36,36 @@ $action = $results['action'];
 if ($action == 'syncEqLogicWithZiGate') {
     zigate::syncEqLogicWithZiGate();
 } elseif ($action == 'ZIGATE_DEVICE_ADDED') {
-    $addr = zigate::syncDevice($results['device']);
+    $ieee = zigate::syncDevice($results['device']);
     event::add('jeedom::alert', array(
         'level' => 'warning',
         'page' => 'zigate',
         'message' => 'Nouvel équipement ZiGate ajouté',
     ));
-    $eqLogic = zigate::byLogicalId($addr, 'zigate');
+    $eqLogic = zigate::byLogicalId($ieee, 'zigate');
     event::add('zigate::device_changed', $eqLogic->getId());
 } elseif ($action == 'ZIGATE_DEVICE_UPDATED') {
     zigate::syncDevice($results['device']);
+} elseif ($action == 'ZIGATE_DEVICE_ADDRESS_CHANGED') {
+    zigate::syncDevice($results['device']);
 } elseif ($action == 'ZIGATE_DEVICE_REMOVED') {
-    zigate::removeDevice($results['addr']);
-    event::add('zigate::device_changed', '');
-} elseif ($action == 'ZIGATE_DEVICE_NEED_REFRESH') {
     $device = $results['device'];
-    $eqLogic = zigate::byLogicalId($device['addr'], 'zigate');
-    message::add('zigate', 'L\'équipement ZiGate '.$eqLogic->getHumanName().' requiert un rafraichissement.');
+    zigate::removeDevice($device['info']['ieee']);
+    event::add('zigate::device_changed', '');
+} elseif ($action == 'ZIGATE_DEVICE_NEED_DISCOVERY') {
+    $device = $results['device'];
+    $eqLogic = zigate::byLogicalId($device['info']['ieee'], 'zigate');
+    $humanName = $device['info']['ieee'];
+    if (is_object($eqLogic)) {
+        $humanName = $eqLogic->getHumanName();
+    }
+    message::add('zigate', 'L\'équipement ZiGate '.$humanName.' requiert un rafraichissement.');
 } elseif ($action == 'ZIGATE_ATTRIBUTE_ADDED') {
     zigate::syncDevice($results['device']);
 } elseif ($action == 'ZIGATE_ATTRIBUTE_UPDATED') {
     if (isset($results['device'])) {
         $device = $results['device'];
-        $eqLogic = zigate::byLogicalId($device['addr'], 'zigate');
+        $eqLogic = zigate::byLogicalId($device['info']['ieee'], 'zigate');
         if (is_object($eqLogic)) {
             $attribute = $results['attribute'];
             $eqLogic->update_command($attribute['endpoint'], $attribute['cluster'], $attribute);

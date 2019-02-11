@@ -1,5 +1,24 @@
 # Changelog
 
+## v1.2.0 (2019-02-11)
+
+* Enhancement #83: Support du firmware 3.0e.
+* Enhancement #71 Utiliser l'adresse IEEE comme LogicalId.
+* Enhancement #9: Ajout de la console (Merci @Deepcore93).
+* Enhancement #115 & #118: Documentation plus à jour.
+* Enhancement #90: Possibilité de changer la température du blanc d'une ampoule Philips Hue.
+* Enhancement #105: Pas de contrôle de la temperature des ampoules IKEA Tradfri.
+* Enhancement 71: Migration de CodeClimate vers SonarCloud.io.
+* Bugfix #121: Interrupteur simple Aqara (Xiaomi) lumi.remote.b186acn01.
+* Bugfix #95: Problème avec bouton xiaomi WXKG02LM lumi.remote.b286acn01.
+* Bugfix #84: bouton xiaomi aqara v2 mal reconnu lumi.remote.b1acn01.
+* Bugfix #53: Le demarrage du plugin lance les scenarios sur changement de valeur.
+* Bugfix #46: Date de dernier message pas à jour ?
+* Bugfix #108: Mijia Door Sensor no battery info.
+* Bugfix #101: Hue : Pas de mise à jour sans resync.
+* Bugfix #113: Volet Profalux Commande info.
+* Bugfix #96: Sonde température ronde mal reconnue lumi.sensor_ht.
+
 ## v1.1.7 (2018-12-31)
 
 * Bugfix #98: Problème lors de l'installation des dépendances sur debian Jessie
@@ -16,6 +35,7 @@
 
 * Now requires Python lib in v0.22.0
 
+>>>>>>> release/v1.1.5
 ## v1.1.3 (2018-11-17)
 
 * Enhancement #47: Calcul du % de batterie.

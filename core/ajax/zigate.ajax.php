@@ -37,12 +37,24 @@ try {
         zigate::syncEqLogicWithZiGate();
         ajax::success();
     } elseif ($action == 'refresh_eqlogic') {
-        // eqLogic page: reresh the eqLogic.
+        // eqLogic page: refresh the eqLogic.
         $id = intval(init('args')[0]);
         $eqLogic = zigate::byId($id);
-        $addr = $eqLogic->getLogicalId();
+        $addr = $eqLogic->getConfiguration('addr');
         $result = zigate::callZiGate('refresh_device', [$addr]);
 
+        if ($result['success']) {
+            ajax::success();
+        } else {
+            ajax::error('Echec');
+        }
+    } elseif ($action == 'discover_eqlogic') {
+        // eqLogic page: discover the eqLogic.
+        $id = intval(init('args')[0]);
+        $eqLogic = zigate::byId($id);
+        $addr = $eqLogic->getConfiguration('addr');
+        $result = zigate::callZiGate('discover_device', [$addr]);
+        
         if ($result['success']) {
             ajax::success();
         } else {
@@ -52,7 +64,7 @@ try {
         // eqLogic page: identify the eqLogic.
         $id = intval(init('args')[0]);
         $eqLogic = zigate::byId($id);
-        $addr = $eqLogic->getLogicalId();
+        $addr = $eqLogic->getConfiguration('addr');
         $result = zigate::callZiGate('identify_device', [$addr,10]);
 
         if ($result['success']) {
@@ -60,16 +72,19 @@ try {
         } else {
             ajax::error('Echec');
         }
+    } elseif ($action == 'raw_command') {
+        $args = json_decode(init('args'), true);
+        $result = zigate::callZiGate($action, [$args['zigate_command'], $args['zigate_data']]);
+        ajax::success(var_export($result['result'], true));
     } else {
-        // Call metod callZiGate with args.
+        // Call method callZiGate with args.
         $result = zigate::callZiGate($action, init('args'));
         if ($result['success']) {
-            ajax::success();
+            ajax::success($result);
         } else {
             ajax::error('Echec');
         }
     }
-
     throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
 } catch (Exception $e) {
     ajax::error(displayExeption($e), $e->getCode());

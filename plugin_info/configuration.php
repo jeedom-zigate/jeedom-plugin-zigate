@@ -74,9 +74,15 @@ $versionLib = zigate::callZiGate('get_libversion');
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-3 control-label">{{Channel}}</label>
+            <div class="col-sm-3">
+                <input type="text" class="configKey form-control" data-l1key="channel" placeholder="11"/>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-3 control-label">{{J'autorise l'envoi de données anonymes pour aider le développement}}</label>
             <div class="col-sm-3">
-                <input type="checkbox" class="configKey form-control" data-l1key="sharedata" checked/>
+                <input type="checkbox" class="configKey form-control" data-l1key="sharedata"/>
             </div>
         </div>
     </fieldset>

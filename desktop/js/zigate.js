@@ -19,6 +19,11 @@ $('#bt_healthzigate').on('click', function () {
     $('#md_modal').load('index.php?v=d&plugin=zigate&modal=health').dialog('open');
 });
 
+$('#bt_terminalzigate').on('click', function () {
+    $('#md_modal').dialog({title: "{{Terminal Zigate}}"});
+    $('#md_modal').load('index.php?v=d&plugin=zigate&modal=terminal').dialog('open');
+});
+
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 /*
  * Fonction pour l'ajout de commande, appellé automatiquement par plugin.zigate
@@ -88,10 +93,35 @@ $('#bt_networkscan').on('click', function () {
     callZiGate('start_network_scan');
 });
 
+$('#bt_cleanup_devices').on('click', function () {
+    bootbox.confirm('{{Etes-vous sûr de vouloir effacer les équipements manquants ?}}', function (result) {
+        if (result) {
+            callZiGate('cleanup_devices');
+        }
+    });
+});
+
+$('#bt_erasepdm').on('click', function () {
+    bootbox.confirm('{{Etes-vous sûr de vouloir effacer les données de la zigate ?}}', function (result) {
+        if (result) {
+            callZiGate('erase_persistent');
+        }
+    });
+});
+
 $('.eqLogicAction[data-action=refresh_device]').on('click', function () {
     if ($('.li_eqLogic.active').attr('data-eqLogic_id') != undefined) {
         id = $('.li_eqLogic.active').attr('data-eqLogic_id');
         refresh_eqlogic(id);
+    } else {
+        $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner un}} ' + eqType, level: 'danger'});
+    }
+});
+
+$('.eqLogicAction[data-action=discover_device]').on('click', function () {
+    if ($('.li_eqLogic.active').attr('data-eqLogic_id') != undefined) {
+        id = $('.li_eqLogic.active').attr('data-eqLogic_id');
+        discover_eqlogic(id);
     } else {
         $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner un}} ' + eqType, level: 'danger'});
     }
@@ -222,6 +252,32 @@ function refresh_eqlogic(id)
     });
 }
 
+function discover_eqlogic(id)
+{
+    $.ajax({
+        type: "POST",
+        url: "plugins/zigate/core/ajax/zigate.ajax.php",
+        data: {
+            action: "discover_eqlogic",
+            args: [id]
+        },
+        dataType: 'json',
+        error: function (request, status, error) {
+            handleAjaxError(request, status, error);
+        },
+        success: function (data) {
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
+            } else {
+                $('#div_alert').showAlert({message: 'Découverte de l\'équipement lancé.<br>' +
+                        'Les équipements sur pile doivent être activés manuellement pour transmettre les infos' +
+                        ' (Appui sur le bouton de synchro, manipulation, etc)', level: 'warning'});
+            }
+        }
+    });
+}
+
 function identify_device(id)
 {
     $.ajax({
@@ -253,4 +309,3 @@ $('body').off('zigate::device_changed').on('zigate::device_changed', function (_
         window.location.href = 'index.php?v=d&p=zigate&m=zigate&id=' + _options;
     }
 });
-        

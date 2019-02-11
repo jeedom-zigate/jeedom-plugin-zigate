@@ -18,9 +18,19 @@ import requests
 import threading
 import uuid
 import subprocess
+import collections
+
 
 BASE_PATH = os.path.join(os.path.dirname(__file__), '..', '..', '..', '..')
 BASE_PATH = os.path.abspath(BASE_PATH)
+
+
+# store last 15 responses for terminal
+LAST_RESPONSES = collections.deque([], 15)
+
+
+def store_response(response):
+    LAST_RESPONSES.append(str(response))
 
 
 class JeedomCallback:
@@ -100,11 +110,34 @@ class JeedomHandler(socketserver.BaseRequestHandler):
             response['result'] = func
             if callable(response['result']):
                 response['result'] = response['result'](*args)
+        if isinstance(response['result'], zigate.responses.Response):
+            response['result'] = response['result'].data
         logging.debug(response)
         self.request.sendall(json.dumps(response, cls=zigate.core.DeviceEncoder).encode())
 
     def get_libversion(self):
         return zigate.__version__
+
+    def raw_command(self, cmd, data):
+        '''
+        send raw command to zigate
+        '''
+        cmd = cmd.lower()
+        if 'x' in cmd:
+            cmd = int(cmd, 16)
+        else:
+            cmd = int(cmd)
+        return z.send_data(cmd, data)
+
+    def get_last_responses(self):
+        '''
+        get last received responses
+        '''
+        responses = []
+        while len(LAST_RESPONSES) > 0 and len(responses) < 15:
+            responses.append(LAST_RESPONSES.popleft())
+        responses = '\n'.join(responses)
+        return responses + '\n'
 
 
 def handler(signum=None, frame=None):
@@ -214,9 +247,10 @@ parser.add_argument('--apikey', help='API Key', default='nokey')
 parser.add_argument('--device', help='ZiGate port', default='auto')
 parser.add_argument('--callback', help='Jeedom callback', default='http://localhost')
 parser.add_argument('--sharedata', type=int, default=1)
+parser.add_argument('--channel', type=int, default=None)
 args = parser.parse_args()
 
-FORMAT = '[%(asctime)-15s][%(levelname)s][%(name)s] : %(message)s'
+FORMAT = '[%(asctime)-15s][%(levelname)s][%(name)s](%(threadName)s) : %(message)s'
 logging.basicConfig(level=convert_log_level(args.loglevel),
                     format=FORMAT, datefmt="%Y-%m-%d %H:%M:%S")
 urllib3_logger = logging.getLogger('urllib3')
@@ -244,12 +278,12 @@ signal.signal(signal.SIGINT, handler)
 signal.signal(signal.SIGTERM, handler)
 
 
-persistent_file = os.path.join(os.path.dirname(__file__), '.zigate.json')
+persistent_file = os.path.join(os.path.dirname(__file__), 'zigate.json')
 # old version
 if not os.path.exists(persistent_file):
-    if os.path.exists(os.path.join(os.path.dirname(__file__), 'zigate.json')):
-        os.rename(os.path.join(os.path.dirname(__file__), 'zigate.json'),
-                  os.path.join(os.path.dirname(__file__), '.zigate.json'))
+    if os.path.exists(os.path.join(os.path.dirname(__file__), '.zigate.json')):
+        os.rename(os.path.join(os.path.dirname(__file__), '.zigate.json'),
+                  os.path.join(os.path.dirname(__file__), 'zigate.json'))
 
 key_file = os.path.join(os.path.dirname(__file__), '.key')
 
@@ -268,7 +302,9 @@ zigate.dispatcher.connect(callback_command, zigate.ZIGATE_FAILED_TO_CONNECT)
 if os.path.exists(args.socket):
     os.unlink(args.socket)
 server = socketserver.UnixStreamServer(args.socket, JeedomHandler)
-if '.' in args.device:  # supposed I.P:PORT
+if args.device == 'fake':
+    z = zigate.core.FakeZiGate(args.device, persistent_file, auto_start=False)
+elif '.' in args.device:  # supposed I.P:PORT
     host_port = args.device.split(':', 1)
     host = host_port[0]
     port = None
@@ -281,12 +317,14 @@ else:
     z = zigate.ZiGate(args.device, persistent_file, auto_start=False)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_UPDATED, z)
+zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_ADDRESS_CHANGED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_REMOVED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_ATTRIBUTE_UPDATED, z)
-zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_NEED_REFRESH, z)
+zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_NEED_DISCOVERY, z)
+zigate.dispatcher.connect(store_response, zigate.ZIGATE_RESPONSE_RECEIVED, weak=True)
 
-z.autoStart()
+z.autoStart(args.channel)
 z.start_auto_save()
 
 version = z.get_version_text()
@@ -295,6 +333,11 @@ if version < '3.0d':
     logging.error('Veuillez mettre à jour le firmware de votre clé ZiGate')
     logging.error('Version actuelle : {} - Version minimale requise : 3.0d'.format(version))
     sys.exit(1)
+
+if args.sharedata:
+    t = threading.Thread(target=sharedata)
+    t.setDaemon(True)
+    t.start()
 
 t = threading.Thread(target=server.serve_forever)
 t.start()
