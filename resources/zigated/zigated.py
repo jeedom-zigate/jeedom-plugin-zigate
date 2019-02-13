@@ -218,7 +218,7 @@ def try_sharedata(key, file):
         payload = {'key': key}
         with open(file, 'rb') as fp:
             files = {'file': fp}
-            requests.post('http://doudz.pythonanywhere.com',
+            requests.post('https://doudz.pythonanywhere.com',
                           data=payload,
                           files=files)
 
