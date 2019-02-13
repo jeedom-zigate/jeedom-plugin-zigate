@@ -384,7 +384,7 @@ class zigate extends eqLogic
 
         if (isset($attribute['name'])) {
             $cmd_info->setConfiguration('property', $name);
-            if ($cluster_id == 0) {
+            if ($cluster_id < 5) {
                 $this->setConfiguration($name, $attribute['value']);
                 if ($name == 'type' && $attribute['value'] && $this->getName() == 'Device ' . $this->getLogicalId()) {
                     $this->setName('Device ' . $this->getLogicalId(). ' '.$attribute['value']);
@@ -399,9 +399,12 @@ class zigate extends eqLogic
         $cmd_info->setConfiguration('cluster', $cluster_id);
         $cmd_info->setConfiguration('attribute', $attribute_id);
 
-        if ($name == 'battery') {
+        if ($name == 'battery' or $name == 'battery_voltage') {
             $this->evaluateBattery($value);
+        } elseif ($name == 'battery_percent') {
+            $this->batteryStatus($value);
         }
+        
 
         switch (gettype($value)) {
             case 'boolean':
