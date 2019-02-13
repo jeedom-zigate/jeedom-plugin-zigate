@@ -903,7 +903,7 @@ class zigateCmd extends cmd
                 break;
                 
             case 'discover':
-                zigate::callZiGate('discover_device', [$addr]);
+                zigate::callZiGate('discover_device', [$addr, true]);
                 break;
         }
     }
