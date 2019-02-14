@@ -899,7 +899,6 @@ class zigateCmd extends cmd
             case 'refresh':
                 zigate::callZiGate('refresh_device', [$addr]);
                 break;
-                
         }
     }
 }
