@@ -296,8 +296,6 @@ class zigate extends eqLogic
 
         $key = $this->_create_action(0, 'refresh', 'refresh', 'other');
         array_push($created_commands, $key);
-        $key = $this->_create_action(0, 'discover', 'discover', 'other');
-        array_push($created_commands, $key);
     }
 
 
@@ -900,10 +898,6 @@ class zigateCmd extends cmd
 
             case 'refresh':
                 zigate::callZiGate('refresh_device', [$addr]);
-                break;
-                
-            case 'discover':
-                zigate::callZiGate('discover_device', [$addr]);
                 break;
         }
     }
