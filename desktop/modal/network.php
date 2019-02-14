@@ -42,6 +42,8 @@ if ($DeamonInfo['launchable'] == 'ok') {
     $DeamonState = "<i class=\"fa fa-circle fa-lg rediconcolor\"></i> Demon non actif : ".$DeamonInfo['launchable_message'];
 }
 
+//$z_json_content = file_get_contents('../../resources/zigated/zigate.json', true);
+$zigatetree_content = file_get_contents('./plugins/zigate/resources/zigated/zigate.json', true);
 ?>
 <style>
     .greeniconcolor {
@@ -61,6 +63,8 @@ if ($DeamonInfo['launchable'] == 'ok') {
             <ul id="tabs_network" class="nav nav-tabs" data-tabs="tabs">
                 <li class="active"><a href="#summary_network" data-toggle="tab"><i class="fa fa-tachometer"></i> {{Résumé}}</a></li>
                 <li><a href="#actions_network" data-toggle="tab"><i class="fa fa-sliders"></i> {{Actions}}</a></li>
+                <li><a href="#graphic_network" data-toggle="tab"><i class="fa fa-sliders"></i> {{Graphique du réseau}}</a></li>
+                <li><a href="#tree_network" data-toggle="tab"><i class="fa fa-sliders"></i> {{Arbre Zigate}}</a></li>
             </ul>
             <div id="network-tab-content" class="tab-content">
                 <div class="tab-pane active" id="summary_network">
@@ -100,13 +104,21 @@ if ($DeamonInfo['launchable'] == 'ok') {
                         </tr>
                         <tr>
                             <td><a data-action="bt_Zigatereset" class="btn btn-warning controller_action"><i class="fa fa-recycle"></i> {{Redémarrage}}</a></td>
-                            <td>{{Equivalent à un débranchement/rebranchement de la ZiGate. Cette commande ne supprime aucune donnée.}}</td>
+                            <td>{{équivalent à un débranchement/rebranchement de la ZiGate. Cette commande ne supprime aucune donnée.}}</td>
                         </tr>
                         <tr>
                             <td><a data-action="bt_ZigateerasePDM" class="btn btn-danger controller_action"><i class="fa fa-eraser"></i> {{Remise à zéro}}</a></td>
                             <td>{{Remise à zéro du contrôleur.}}</td>
                         </tr>
                     </table>
+                </div>
+                <div class="tab-pane" id="graphic_network">
+                    <p>Hard work in progress...</p>
+                </div>
+                <div class="tab-pane" id="tree_network">
+                    <div style="overflow: scroll; height: 100%;">
+                        <pre id="pre_treeZigate" style="height: 100%;"><?php echo $zigatetree_content ?></pre>
+                    </div>
                 </div>
             </div>
         </div>
