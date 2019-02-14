@@ -53,7 +53,7 @@ try {
         $id = intval(init('args')[0]);
         $eqLogic = zigate::byId($id);
         $addr = $eqLogic->getConfiguration('addr');
-        $result = zigate::callZiGate('discover_device', [$addr]);
+        $result = zigate::callZiGate('discover_device', [$addr, true]);
         
         if ($result['success']) {
             ajax::success();
