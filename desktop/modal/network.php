@@ -95,6 +95,10 @@ $zigatetree_content = file_get_contents('./plugins/zigate/resources/zigated/ziga
                 <div class="tab-pane" id="actions_network">
                     <table class="table">
                         <tr>
+                            <td><a data-action="bt_ZigateScan" class="btn btn-success controller_action"><i class="fa fa-refresh"></i> {{Network Scan}}</a></td>
+                            <td>{{Lancement d’un scan du réseau ZigBee. Peut résoudre des problèmes d’association, mais pour l’instant l’impact est inconnu.}}</td>
+                        </tr>
+                        <tr>
                             <td><a data-action="bt_ZigateSync" class="btn btn-success controller_action"><i class="fa fa-refresh"></i> {{Synchroniser}}</a></td>
                             <td>{{Synchronise les informations du plugin avec les informations réelles du réseau ZigBee.}}</td>
                         </tr>
@@ -134,8 +138,11 @@ $zigatetree_content = file_get_contents('./plugins/zigate/resources/zigated/ziga
                 }
             });
         }
-        if($(this).data('action') == 'bt_ZigateSync'){
+        if($(this).data('action') == 'bt_ZigateScan'){
             callZiGate('start_network_scan');
+        }
+        if($(this).data('action') == 'bt_ZigateSync'){
+            syncEqLogicWithZiGate();
         }
         if($(this).data('action') == 'bt_ZigateClean'){
             $action = $(this).data('action');
