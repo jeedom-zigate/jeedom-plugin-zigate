@@ -34,7 +34,7 @@ $eqLogics = zigate::byType('zigate');
             <th>{{Module}}</th>
             <th>{{ID}}</th>
             <th>{{Modèle}}</th>
-            <th>{{Rssi}}</th>
+            <th>{{LQI}}</th>
             <th>{{Statut}}</th>
             <th>{{Batterie}}</th>
             <th>{{Dernière communication}}</th>
