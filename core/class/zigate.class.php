@@ -476,11 +476,10 @@ class zigate extends eqLogic
         $cmd_action->setConfiguration('action', $action);
 
         if (!is_null($value)) {
-            if ($subtype == 'slider'){
+            if ($subtype == 'slider') {
                 $cmd_action->setConfiguration('minValue', $value[0]);
                 $cmd_action->setConfiguration('maxValue', $value[1]);
-            }
-            else {
+            } else {
                 $cmd_action->setConfiguration('value', $value);
             }
         }
