@@ -218,7 +218,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                         <div class="form-group">
                             <label class="col-sm-3 control-label">{{Link quality (1-255)}}</label>
                             <div class="col-sm-3">
-                                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="rssi" placeholder="0" readonly=true/>
+                                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="LQI" placeholder="0" readonly=true/>
                             </div>
                         </div>
                         <div class="form-group">
