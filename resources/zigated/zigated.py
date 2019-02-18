@@ -192,8 +192,6 @@ def sharedata():
     if os.path.exists(key_file):
         with open(key_file, 'r') as fp:
             key = fp.read()
-            if key == '3d5c898817b211e88b59080027ca08a3':  # banned key
-                key = ''
     if not key:
         key = uuid.uuid1().hex
         with open(key_file, 'w') as fp:
