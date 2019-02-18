@@ -275,7 +275,7 @@ class zigate extends eqLogic
                         array_push($created_commands, $key);
                         break;
                     case 'level':
-                        $key = $this->_create_action($endpoint_id, $action, 'level', 'slider');
+                        $key = $this->_create_action($endpoint_id, $action, 'level', 'slider', [0, 100]);
                         array_push($created_commands, $key);
                         break;
                     case 'color':
@@ -283,7 +283,7 @@ class zigate extends eqLogic
                         array_push($created_commands, $key);
                         break;
                     case 'temperature':
-                        $key = $this->_create_action($endpoint_id, $action, 'temperature', 'slider');
+                        $key = $this->_create_action($endpoint_id, $action, 'temperature', 'slider', [1700, 6500]);
                         array_push($created_commands, $key);
                         break;
                     case 'hue':
@@ -457,7 +457,7 @@ class zigate extends eqLogic
     {
         log::add('zigate', 'debug', 'create action '.$action.' for endpoint '.$endpoint_id);
         $key = $this->getLogicalId().'.'.$endpoint_id.'.'.$action;
-        if (!is_null($value)) {
+        if (!is_null($value) and $subtype != 'slider') {
             $key = $key.'.'.$value;
         }
 
@@ -476,7 +476,13 @@ class zigate extends eqLogic
         $cmd_action->setConfiguration('action', $action);
 
         if (!is_null($value)) {
-            $cmd_action->setConfiguration('value', $value);
+            if ($subtype == 'slider'){
+                $cmd_action->setConfiguration('minValue', $value[0]);
+                $cmd_action->setConfiguration('maxValue', $value[1]);
+            }
+            else {
+                $cmd_action->setConfiguration('value', $value);
+            }
         }
         $cmd_action->save();
 
@@ -888,8 +894,7 @@ class zigateCmd extends cmd
 
             case 'temperature':
                 // min 1700 max 6500
-                $value = intval(($value*(6500-1700)/100)+1700);
-                zigate::CallZiGate('action_move_temperature', [$addr, $endpoint, $value]);
+                zigate::CallZiGate('action_move_temperature_kelvin', [$addr, $endpoint, $value]);
                 break;
 
             case 'hue':
