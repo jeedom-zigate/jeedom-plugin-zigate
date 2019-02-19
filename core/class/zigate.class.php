@@ -688,6 +688,7 @@ class zigate extends eqLogic
     {
         $filename = $this->getConfiguration('type') . '.jpg';
         $filename = str_replace(' ', '_', $filename);
+        $filename = str_replace('/', '_', $filename);
         $path = dirname(__FILE__). '/../../images/'. $filename;
         if (file_exists($path)) {
             return 'plugins/zigate/images/' . $filename;
