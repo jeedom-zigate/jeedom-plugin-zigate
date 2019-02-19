@@ -172,7 +172,7 @@ class zigate extends eqLogic
         }
 
         $eqLogic->setStatus('lastCommunication', $device['info']['last_seen']);
-        $eqLogic->setStatus('rssi', $device['info']['rssi']);
+        $eqLogic->setStatus('lqi', $device['info']['lqi']);
         $eqLogic->save();
         $eqLogic->createCommands($device);
 

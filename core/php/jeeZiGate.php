@@ -70,7 +70,7 @@ if ($action == 'syncEqLogicWithZiGate') {
             $attribute = $results['attribute'];
             $eqLogic->update_command($attribute['endpoint'], $attribute['cluster'], $attribute);
             $eqLogic->setStatus('lastCommunication', $device['info']['last_seen']);
-            $eqLogic->setStatus('rssi', $device['info']['rssi']);
+            $eqLogic->setStatus('lqi', $device['info']['lqi']);
         }
     }
 } elseif ($action == 'ZIGATE_FAILED_TO_CONNECT') {
