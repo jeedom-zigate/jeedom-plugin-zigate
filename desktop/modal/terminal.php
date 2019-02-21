@@ -24,17 +24,16 @@
 if (!isConnect('admin')) {
     throw new Exception('401 - Accès non autorisé');
 }
-$plugin = plugin::byId('zigate');
-$eqLogics = zigate::byType('zigate');
 ?>
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="zigatepanel">
         <div class="tab-pane">
-            <a class="btn btn-success" id="btn_startstop">{{Start/Stop Terminal}}</a>
+            <a class="btn btn-success" id="btn_startstop">{{Stop Terminal}}</a>
+            <a class="btn btn-warning" id="btn-reset-output"><i class="fa fa-times"></i> {{Vider les résultats}}</a>
         </div>
     </div>
     <div role="tabpanel" class="tab-pane active" id="zigateterminal">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <form class="form-horizontal">
                 <fieldset>
                     <legend>{{Commande}}</legend>
@@ -56,12 +55,12 @@ $eqLogics = zigate::byType('zigate');
                 </fieldset>
             </form>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-8">
             <form class="form-horizontal">
                 <fieldset>
                     <legend>{{Résultat}}</legend>
                     <div style="overflow: scroll; height: 250px;">
-                        <pre id="pre_logZigateCommand"></pre>
+                        <pre id="pre_logZigateCommand" style="height: 100%;"></pre>
                     </div>
                 </fieldset>
             </form>
@@ -79,11 +78,15 @@ $eqLogics = zigate::byType('zigate');
                 action: "get_last_responses",
             },
             dataType: 'json',
+            async: true,
+            global : false,
             error: function (request, status, error) {
                 handleAjaxError(request, status, error);
             },
             success: function (data) {
-                $('#pre_logZigateCommand').prepend(data.result.result);
+                if (data.result.result.length > 1){
+                    $('#pre_logZigateCommand').append(data.result.result);
+                }
             }
         });
     }
@@ -91,8 +94,10 @@ $eqLogics = zigate::byType('zigate');
         if (intervalHandle){
             clearInterval(intervalHandle);
             intervalHandle = null;
+            $("#btn_startstop").text("Start Terminal");
         } else {
             intervalHandle = setInterval(get_last_responses, 1000);
+            $("#btn_startstop").text("Stop Terminal");
         }
     }
     startstopTimer();
@@ -109,6 +114,8 @@ $eqLogics = zigate::byType('zigate');
                 args: json_encode(args)
             },
             dataType: 'json',
+            async: true,
+            global : false,
             error: function (request, status, error) {
             handleAjaxError(request, status, error);
             },
@@ -119,5 +126,8 @@ $eqLogics = zigate::byType('zigate');
     });
     $('#btn_startstop').on('click', function () {
         startstopTimer();
+    });
+    $('#btn-reset-output').on('click',function(){
+        $('#pre_logZigateCommand').empty();
     });
 </script>
