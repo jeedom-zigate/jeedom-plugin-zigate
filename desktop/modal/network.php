@@ -42,9 +42,27 @@ if ($DeamonInfo['launchable'] == 'ok') {
     $DeamonState = "<i class=\"fa fa-circle fa-lg rediconcolor\"></i> Demon non actif : ".$DeamonInfo['launchable_message'];
 }
 
-//$z_json_content = file_get_contents('../../resources/zigated/zigate.json', true);
 $zigatetree_content = file_get_contents('./plugins/zigate/resources/zigated/zigate.json', true);
+
+$infonodes = array();
+
+$infonode=array();
+$infonode['id'] = '0';
+$infonode['name'] = 'Zigate';
+$infonode['addr'] = '0000';
+$infonode['lqi'] = '0';
+$infonodes[$infonode['addr']]=$infonode;
+foreach ($eqLogics as $eqLogic){
+    $infonode['id'] = $eqLogic->getId();
+    $infonode['name'] = $eqLogic->getHumanName(true);
+    $infonode['addr'] = $eqLogic->getConfiguration('addr');
+    $infonode['lqi'] = $eqLogic->getConfiguration('rssi');
+    $infonodes[$infonode['addr']]=$infonode;
+}
+sendVarToJS('infonodes', $infonodes);
+
 ?>
+<script type="text/javascript" src="./plugins/zigate/3rdparty/vivagraph/vivagraph.min.js"></script>
 <style>
     .greeniconcolor {
         color: green;
@@ -55,6 +73,16 @@ $zigatetree_content = file_get_contents('./plugins/zigate/resources/zigated/ziga
     .rediconcolor {
         color: red;
     }
+    
+    #graph_network {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+    #graph_network > svg {
+        height: 100%;
+        width: 100%;
+    }
 </style>
 <div id='div_networkZigateAlert' style="display: none;"></div>
 <div class='network' nid='' id="div_templateNetwork">
@@ -63,8 +91,8 @@ $zigatetree_content = file_get_contents('./plugins/zigate/resources/zigated/ziga
             <ul id="tabs_network" class="nav nav-tabs" data-tabs="tabs">
                 <li class="active"><a href="#summary_network" data-toggle="tab"><i class="fa fa-tachometer"></i> {{Résumé}}</a></li>
                 <li><a href="#actions_network" data-toggle="tab"><i class="fa fa-sliders"></i> {{Actions}}</a></li>
-                <li><a href="#graphic_network" data-toggle="tab"><i class="fa fa-sliders"></i> {{Graphique du réseau}}</a></li>
-                <li><a href="#tree_network" data-toggle="tab"><i class="fa fa-sliders"></i> {{Arbre Zigate}}</a></li>
+                <li id="tab_graph"><a href="#graph_network" data-toggle="tab"><i class="fa fa-picture-o"></i> {{Graphique du réseau}}</a></li>
+                <li><a href="#tree_network" data-toggle="tab"><i class="fa fa-tree"></i> {{Arbre Zigate}}</a></li>
             </ul>
             <div id="network-tab-content" class="tab-content">
                 <div class="tab-pane active" id="summary_network">
@@ -116,8 +144,8 @@ $zigatetree_content = file_get_contents('./plugins/zigate/resources/zigated/ziga
                         </tr>
                     </table>
                 </div>
-                <div class="tab-pane" id="graphic_network">
-                    <p>Hard work in progress...</p>
+                <div class="tab-pane" id="graph_network" >
+                    <div id="graph-node-name"></div>
                 </div>
                 <div class="tab-pane" id="tree_network">
                     <div style="overflow: scroll; height: 100%;">
@@ -128,32 +156,4 @@ $zigatetree_content = file_get_contents('./plugins/zigate/resources/zigated/ziga
         </div>
     </div>
 </div>
-<script>
-    $('.controller_action').on('click',function(){
-        if($(this).data('action') == 'bt_ZigateerasePDM'){
-            $action = $(this).data('action');
-            bootbox.confirm("Etes-vous sûr de vouloir effacer les données de la zigate ?", function (result) {
-                if (result) {
-                    callZiGate('erase_persistent');
-                }
-            });
-        }
-        if($(this).data('action') == 'bt_ZigateScan'){
-            callZiGate('start_network_scan');
-        }
-        if($(this).data('action') == 'bt_ZigateSync'){
-            syncEqLogicWithZiGate();
-        }
-        if($(this).data('action') == 'bt_ZigateClean'){
-            $action = $(this).data('action');
-            bootbox.confirm("Etes-vous sûr de vouloir effacer les équipements manquants ?", function (result) {
-                if (result) {
-                    callZiGate('cleanup_devices');
-                }
-            });
-        }
-        if($(this).data('action') == 'bt_Zigatereset'){
-            reset();
-        }
-    });
-</script>
+<?php include_file('desktop', 'network', 'js', 'zigate');?>
