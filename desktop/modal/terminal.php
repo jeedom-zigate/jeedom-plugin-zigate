@@ -59,7 +59,7 @@ if (!isConnect('admin')) {
             <form class="form-horizontal">
                 <fieldset>
                     <legend>{{Résultat}}</legend>
-                    <div style="overflow: scroll; height: 250px;">
+                    <div style="overflow: scroll; height: 500px;">
                         <pre id="pre_logZigateCommand" style="height: 100%;"></pre>
                     </div>
                 </fieldset>
