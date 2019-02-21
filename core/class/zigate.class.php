@@ -483,7 +483,7 @@ class zigate extends eqLogic
                 $cmd_action->setConfiguration('value', $value);
             }
         }
-        $cmd_info->setIsHistorized(0);
+        $cmd_action->setIsHistorized(0);
         $cmd_action->save();
 
         return $key;
