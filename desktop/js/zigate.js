@@ -22,7 +22,7 @@ $('#bt_healthzigate').on('click', function () {
 $('#bt_terminalzigate').on('click', function () {
     $('#md_modal').dialog({
         title: "{{Terminal Zigate}}",
-        close: function() {
+        close: function () {
             startstopTimer();
         }
     });
