@@ -277,6 +277,9 @@ class zigate extends eqLogic
                     case 'level':
                         $key = $this->_create_action($endpoint_id, $action, 'level', 'slider', [0, 100]);
                         array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, 'stop', 'stop', 'other');
+                        array_push($created_commands, $key);
                         break;
                     case 'color':
                         $key = $this->_create_action($endpoint_id, $action, 'color', 'color');
@@ -882,6 +885,10 @@ class zigateCmd extends cmd
                     $onoff = 0;
                 }
                 zigate::CallZiGate('action_move_level_onoff', [$addr, $endpoint, $onoff, $value]);
+                break;
+                
+            case 'stop':
+                zigate::CallZiGate('action_move_stop_onoff', [$addr, $endpoint]);
                 break;
 
             case 'lock':
