@@ -368,13 +368,16 @@ class zigate extends eqLogic
             $cmd_info->setLogicalId($key);
             $cmd_info->setType('info');
             $cmd_info->setEqLogic_id($this->getId());
-            $cmd_info->setIsHistorized(1);
+            $cmd_info->setIsHistorized(0);
             if (!isset($attribute['name'])) {
                 $cmd_info->setIsVisible(0);
                 $cmd_info->setIsHistorized(0);
             }
-            if ($cluster_id == 0) {
+            // by default hide "basic" clusters
+            if ($cluster_id < 5) {
                 $cmd_info->setIsVisible(0);
+            } else {
+                $cmd_info->setIsHistorized(1);
             }
             $cmd_info->setName($name);
         }
@@ -387,6 +390,7 @@ class zigate extends eqLogic
             $cmd_info->setConfiguration('property', $name);
             if ($cluster_id < 5) {
                 $this->setConfiguration($name, $attribute['value']);
+                // rename device to add type in name if not renamed
                 if ($name == 'type' && $attribute['value'] && $this->getName() == 'Device ' . $this->getLogicalId()) {
                     $this->setName('Device ' . $this->getLogicalId(). ' '.$attribute['value']);
                 }
