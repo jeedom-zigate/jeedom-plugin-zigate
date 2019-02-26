@@ -202,7 +202,7 @@ def sharedata():
             try_sharedata(key, persistent_file)
             try_sharedata('z'+key, os.path.join(BASE_PATH, 'log', 'zigate'))
             try_sharedata('zu'+key, os.path.join(BASE_PATH, 'log', 'zigate_update'))
-            try_sharedata('http.error.'+key, os.path.join(BASE_PATH, 'log', 'http.error'))
+#             try_sharedata('http.error.'+key, os.path.join(BASE_PATH, 'log', 'http.error'))
         except Exception:
             pass
         time.sleep(60*60*6)
