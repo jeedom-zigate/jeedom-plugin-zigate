@@ -390,7 +390,7 @@ class zigate extends eqLogic
             $cmd_info->setConfiguration('property', $name);
             if ($cluster_id < 5) {
                 $this->setConfiguration($name, $attribute['value']);
-                // rename device to add type in name if not renamed 
+                // rename device to add type in name if not renamed
                 if ($name == 'type' && $attribute['value'] && $this->getName() == 'Device ' . $this->getLogicalId()) {
                     $this->setName('Device ' . $this->getLogicalId(). ' '.$attribute['value']);
                 }
