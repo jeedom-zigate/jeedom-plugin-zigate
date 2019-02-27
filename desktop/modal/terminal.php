@@ -28,7 +28,7 @@ if (!isConnect('admin')) {
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="zigatepanel">
         <div class="tab-pane">
-            <a class="btn btn-success" id="btn_startstop">{{Stop Terminal}}</a>
+            <a class="btn btn-success" id="btn_startstop">{{Arrêter Terminal}}</a>
             <a class="btn btn-warning" id="btn-reset-output"><i class="fa fa-times"></i> {{Vider les résultats}}</a>
         </div>
     </div>
@@ -94,10 +94,10 @@ if (!isConnect('admin')) {
         if (intervalHandle){
             clearInterval(intervalHandle);
             intervalHandle = null;
-            $("#btn_startstop").text("Start Terminal");
+            $("#btn_startstop").text("Démarrer Terminal");
         } else {
             intervalHandle = setInterval(get_last_responses, 1000);
-            $("#btn_startstop").text("Stop Terminal");
+            $("#btn_startstop").text("Arrêter Terminal");
         }
     }
     startstopTimer();
@@ -120,7 +120,7 @@ if (!isConnect('admin')) {
             handleAjaxError(request, status, error);
             },
             success: function (data) {
-                $('#pre_logZigateCommand').append('Commande envoyée\n');
+                $('#pre_logZigateCommand').append('{{Commande envoyée}}\n');
             }
         });
     });
