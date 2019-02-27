@@ -74,7 +74,7 @@ $versionLib = zigate::callZiGate('get_libversion');
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">{{Channel}}</label>
+            <label class="col-sm-3 control-label">{{Canal}}</label>
             <div class="col-sm-3">
                 <input type="text" class="configKey form-control" data-l1key="channel" placeholder="11"/>
             </div>
