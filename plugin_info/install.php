@@ -50,7 +50,7 @@ function zigate_update()
     zigate::dependancy_install();
 
     message::removeAll('Zigate');
-    message::add('Zigate', 'Mise à jour du plugin Zigate terminée, vous êtes en version ' . zigate::getVersion() . '.', null, null);
+    message::add('Zigate', '{{Mise à jour du plugin Zigate terminée, vous êtes en version }}' . zigate::getVersion() . '.', null, null);
 
     zigate::deamon_start();
 }
