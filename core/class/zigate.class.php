@@ -80,7 +80,7 @@ class zigate extends eqLogic
      */
     public static function syncEqLogicWithZiGate()
     {
-        log::add('zigate', 'debug', 'Synchronisation des équipements entre le démon et jeedom');
+        log::add('zigate', 'debug', '{{Synchronisation des équipements entre le démon et jeedom}}');
         $results = zigate::callZiGate('devices');
         $findDevice = [];
         foreach ($results['result'] as $result) {
@@ -94,7 +94,7 @@ class zigate extends eqLogic
             }
         }
         
-        log::add('zigate', 'debug', 'Désactivation des équipements manquants');
+        log::add('zigate', 'debug', '{{Désactivation des équipements manquants}}');
         $results = zigate::callZiGate('get_missing');
         foreach ($results['result'] as $device) {
             $ieee = $device['info']['ieee'];
@@ -103,7 +103,7 @@ class zigate extends eqLogic
                 $eqLogic->setIsEnable(0);
                 $eqLogic->save();
                 $humanName = $eqLogic->getHumanName();
-                message::add('zigate', 'L\'équipement '.$humanName.' semble manquant, il a été désactivé.');
+                message::add('zigate', '{{L\'équipement }}'.$humanName.'{{ semble manquant, il a été désactivé.}}');
             }
         }
     }
@@ -120,8 +120,8 @@ class zigate extends eqLogic
         $addr = $device['info']['addr'];
         $ieee = $device['info']['ieee'];
         if (!$ieee) {
-            log::add('zigate', 'error', 'L\'IEEE de l\'équipement '.$addr.' est absent, vous devriez refaire l\'association');
-            message::add('zigate', 'L\'IEEE de l\'équipement '.$addr.' est absent, vous devriez refaire l\'association');
+            log::add('zigate', 'error', '{{L\'IEEE de l\'équipement }}'.$addr.'{{ est absent, vous devriez refaire l\'association}}');
+            message::add('zigate', '{{L\'IEEE de l\'équipement }}'.$addr.'{{ est absent, vous devriez refaire l\'association}}');
             return;
         }
         $eqLogic = self::byLogicalId($ieee, 'zigate');
@@ -129,29 +129,29 @@ class zigate extends eqLogic
             /* Migration addr => IEEE */
             $eqLogic = self::byLogicalId($addr, 'zigate');
             if (is_object($eqLogic)) {
-                log::add('zigate', 'debug', 'Migration - Equipement '.$eqLogic->getId().' : '.$addr.' => '.$ieee);
+                log::add('zigate', 'debug', '{{Migration - Equipement }}'.$eqLogic->getId().' : '.$addr.' => '.$ieee);
                 $eqLogic->setLogicalId($ieee);
                 $eqLogic->save();
                 $eqLogic = self::byId($eqLogic->getId());
                 if ($ieee == $eqLogic->getLogicalId()) {
-                    log::add('zigate', 'debug', 'Migration ok '.$addr.' => '.$ieee);
+                    log::add('zigate', 'debug', '{{Migration ok }}'.$addr.' => '.$ieee);
                 } else {
-                    log::add('zigate', 'error', 'Migration échec pour '.$addr.' '.$eqLogic->getLogicalId().' != '.$ieee);
+                    log::add('zigate', 'error', '{{Migration échec pour }}'.$addr.' '.$eqLogic->getLogicalId().' != '.$ieee);
                 }
                 
                 $cmds = cmd::byEqLogicId($eqLogic->getId());
-                log::add('zigate', 'debug', 'Migration des commandes : '.count($cmds));
+                log::add('zigate', 'debug', '{{Migration des commandes : }}'.count($cmds));
                 foreach ($cmds as $cmd) {
                     $key = $cmd->getLogicalId();
                     $new_key = str_replace($addr, $ieee, $key);
-                    log::add('zigate', 'debug', 'Migration - Commande '.$cmd->getId().' : '.$key.' => '.$new_key);
+                    log::add('zigate', 'debug', '{{Migration - Commande }}'.$cmd->getId().' : '.$key.' => '.$new_key);
                     $cmd->setLogicalId($new_key);
                     $cmd->save();
                     $cmd = zigateCmd::byId($cmd->getId());
                     if ($new_key == $cmd->getLogicalId()) {
-                        log::add('zigate', 'debug', 'Migration ok Commande '.$cmd->getId().' : '.$key.' => '.$new_key);
+                        log::add('zigate', 'debug', '{{Migration ok Commande }}'.$cmd->getId().' : '.$key.' => '.$new_key);
                     } else {
-                        log::add('zigate', 'error', 'Migration échec Commande '.$cmd->getId().' '.$cmd->getLogicalId().' != '.$new_key);
+                        log::add('zigate', 'error', '{{Migration échec Commande }}'.$cmd->getId().' '.$cmd->getLogicalId().' != '.$new_key);
                     }
                 }
             }
@@ -583,12 +583,12 @@ class zigate extends eqLogic
             $cache = cache::byKey('dependancy' . 'zigate');
             $cache->remove();
             $return['launchable'] = 'nok';
-            $return['launchable_message'] = __('Veuillez (ré-)installer les dépendances', __FILE__);
+            $return['launchable_message'] = __('{{Veuillez (ré-)installer les dépendances}}', __FILE__);
         } else {
             if (!$host) {
                 if (@!file_exists($port) && $port != 'auto') {
                     $return['launchable'] = 'nok';
-                    $return['launchable_message'] = __('Le port n\'est pas configuré ou la zigate n\'est pas connecté.', __FILE__);
+                    $return['launchable_message'] = __('{{Le port n\'est pas configuré ou la zigate n\'est pas connecté.}}', __FILE__);
                 } elseif ($port != 'auto') {
                     exec(system::getCmdSudo() . 'chmod 777 ' . $port . ' > /dev/null 2>&1');
                 }
@@ -608,7 +608,7 @@ class zigate extends eqLogic
         self::deamon_stop();
         $deamon_info = self::deamon_info();
         if ($deamon_info['launchable'] != 'ok') {
-            throw new Exception(__('Veuillez vérifier la configuration', __FILE__));
+            throw new Exception(__('{{Veuillez vérifier la configuration}}', __FILE__));
         }
         $port = config::byKey('port', 'zigate');
         $host = config::byKey('host', 'zigate');
@@ -634,7 +634,7 @@ class zigate extends eqLogic
             $cmd .= ' --channel ' . $channel;
         }
 
-        log::add('zigate', 'info', 'Lancement démon zigate : ' . $cmd);
+        log::add('zigate', 'info', '{{Lancement démon zigate : }}' . $cmd);
         exec($cmd . ' >> ' . log::getPathToLog('zigate') . ' 2>&1 &');
         $i = 0;
         while ($i < 5) {
@@ -647,7 +647,7 @@ class zigate extends eqLogic
         }
 
         if ($i >= 5) {
-            log::add('zigate', 'error', 'Impossible de lancer le démon zigate, relancer le démon en debug et vérifiez la log', 'unableStartDeamon');
+            log::add('zigate', 'error', '{{Impossible de lancer le démon zigate, relancer le démon en debug et vérifiez la log}}', 'unableStartDeamon');
             return false;
         }
 
@@ -680,7 +680,7 @@ class zigate extends eqLogic
             $i++;
         }
         if ($i >= 5) {
-            log::add('zigate', 'error', 'Impossible d\'arrêter le démon zigate, tuons-le');
+            log::add('zigate', 'error', '{{Impossible d\'arrêter le démon zigate, tuons-le}}');
             system::kill('zigated.py');
         }
     }
@@ -716,16 +716,16 @@ class zigate extends eqLogic
     {
         $pluginVersion = 'Error';
         if (!file_exists(dirname(__FILE__) . '/../../plugin_info/info.json')) {
-            log::add('zigate', 'warning', 'Pas de fichier info.json');
+            log::add('zigate', 'warning', '{{Pas de fichier info.json}}');
         }
         $data = json_decode(file_get_contents(dirname(__FILE__) . '/../../plugin_info/info.json'), true);
         if (!is_array($data)) {
-            log::add('zigate', 'warning', 'Impossible de décoder le fichier info.json');
+            log::add('zigate', 'warning', '{{Impossible de décoder le fichier info.json}}');
         }
         try {
             $pluginVersion = $data['pluginVersion'];
         } catch (\Exception $e) {
-            log::add('zigate', 'warning', 'Impossible de récupérer la version.');
+            log::add('zigate', 'warning', '{{Impossible de récupérer la version.}}');
         }
 
         return $pluginVersion;
