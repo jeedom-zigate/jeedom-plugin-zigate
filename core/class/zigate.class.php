@@ -583,12 +583,12 @@ class zigate extends eqLogic
             $cache = cache::byKey('dependancy' . 'zigate');
             $cache->remove();
             $return['launchable'] = 'nok';
-            $return['launchable_message'] = __('{{Veuillez (ré-)installer les dépendances}}', __FILE__);
+            $return['launchable_message'] = __('Veuillez (ré-)installer les dépendances', __FILE__);
         } else {
             if (!$host) {
                 if (@!file_exists($port) && $port != 'auto') {
                     $return['launchable'] = 'nok';
-                    $return['launchable_message'] = __('{{Le port n\'est pas configuré ou la zigate n\'est pas connecté.}}', __FILE__);
+                    $return['launchable_message'] = __('Le port n\'est pas configuré ou la zigate n\'est pas connecté.', __FILE__);
                 } elseif ($port != 'auto') {
                     exec(system::getCmdSudo() . 'chmod 777 ' . $port . ' > /dev/null 2>&1');
                 }
@@ -608,7 +608,7 @@ class zigate extends eqLogic
         self::deamon_stop();
         $deamon_info = self::deamon_info();
         if ($deamon_info['launchable'] != 'ok') {
-            throw new Exception(__('{{Veuillez vérifier la configuration}}', __FILE__));
+            throw new Exception(__('Veuillez vérifier la configuration', __FILE__));
         }
         $port = config::byKey('port', 'zigate');
         $host = config::byKey('host', 'zigate');
