@@ -18,28 +18,11 @@
         "Nouvel équipement ZiGate ajouté": "New Zigate device added"
     },
     "plugins/zigate/core/class/zigate.class.php": {
-        "Synchronisation des équipements entre le démon et jeedom": "Sync devices between the daemon and Jeedom",
-        "Désactivation des équipements manquants": "Disabling missing devices",
         "L\\'équipement ": "The device ",
         " semble manquant, il a été désactivé.": " seems missing, it has been disable.",
-        "L\\'IEEE de l\\'équipement ": "Device IEEE",
-        " est absent, vous devriez refaire l\\'association": " is missing, you need to include it again",
-        "Migration - Equipement ": "Migration - Device ",
-        "Migration ok ": "Migration ok",
-        "Migration échec pour ": "Migration failure for ",
-        "Migration des commandes : ": "Migration of commands",
-        "Migration - Commande ": "Migration - Command",
-        "Migration ok Commande ": "Migration ok for command",
-        "Migration échec Commande ": "Migration failure for the command",
         "Veuillez (ré-)installer les dépendances": "Please, reinstall dependencies",
         "Le port n\\'est pas configuré ou la zigate n\\'est pas connecté.": "The port is not set or the Zigate is not connected.",
         "Veuillez vérifier la configuration": "Please check the settings",
-        "Lancement démon zigate : ": "Launch Zigate Daemon : ",
-        "Impossible de lancer le démon zigate, relancer le démon en debug et vérifiez la log": "Zigate daemon can't be started, restart it in debug mode and check log",
-        "Impossible d\\'arrêter le démon zigate, tuons-le": "Can't stop the zigate daemon, let's kill it",
-        "Pas de fichier info.json": "No info.json file",
-        "Impossible de décoder le fichier info.json": "Can't decode info.json file",
-        "Impossible de récupérer la version.": "Can't retreive the version"
     },
     "plugins/zigate/desktop/php/zigate.php": {
         "Gestion": "Management",
