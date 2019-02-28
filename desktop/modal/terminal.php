@@ -94,10 +94,10 @@ if (!isConnect('admin')) {
         if (intervalHandle){
             clearInterval(intervalHandle);
             intervalHandle = null;
-            $("#btn_startstop").text("Démarrer Terminal");
+            $("#btn_startstop").text("{{Démarrer Terminal}}");
         } else {
             intervalHandle = setInterval(get_last_responses, 1000);
-            $("#btn_startstop").text("Arrêter Terminal");
+            $("#btn_startstop").text("{{Arrêter Terminal}}");
         }
     }
     startstopTimer();
