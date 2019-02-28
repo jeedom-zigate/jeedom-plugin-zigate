@@ -19,10 +19,7 @@
     },
     "plugins/zigate/core/class/zigate.class.php": {
         "L\\'équipement ": "The device ",
-        " semble manquant, il a été désactivé.": " seems missing, it has been disable.",
-        "Veuillez (ré-)installer les dépendances": "Please, reinstall dependencies",
-        "Le port n\\'est pas configuré ou la zigate n\\'est pas connecté.": "The port is not set or the Zigate is not connected.",
-        "Veuillez vérifier la configuration": "Please check the settings",
+        " semble manquant, il a été désactivé.": " seems missing, it has been disable."
     },
     "plugins/zigate/desktop/php/zigate.php": {
         "Gestion": "Management",
