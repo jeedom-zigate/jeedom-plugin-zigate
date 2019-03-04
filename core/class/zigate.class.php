@@ -293,6 +293,16 @@ class zigate extends eqLogic
                         $key = $this->_create_action($endpoint_id, $action, 'hue', 'color');
                         array_push($created_commands, $key);
                         break;
+                    case 'cover':
+                        $key = $this->_create_action($endpoint_id, $action, 'open', 'other', 0);
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, $action, 'close', 'other', 1);
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, $action, 'stop', 'other', 2);
+                        array_push($created_commands, $key);
+                        break;
                 }
             }
         }
@@ -910,6 +920,10 @@ class zigateCmd extends cmd
 
             case 'hue':
                 zigate::CallZiGate('action_move_hue_hex', [$addr, $endpoint, $value]);
+                break;
+                
+            case 'cover':
+                zigate::CallZiGate('action_cover', [$addr, $endpoint, $value]);
                 break;
 
             case 'refresh':
