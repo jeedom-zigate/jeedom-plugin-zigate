@@ -286,7 +286,7 @@ class zigate extends eqLogic
                         array_push($created_commands, $key);
                         break;
                     case 'temperature':
-                        $key = $this->_create_action($endpoint_id, $action, 'temperature', 'slider', [1700, 6500]);
+                        $key = $this->_create_action($endpoint_id, $action, 'temperature', 'slider', [153, 500]);
                         array_push($created_commands, $key);
                         break;
                     case 'hue':
@@ -430,8 +430,8 @@ class zigate extends eqLogic
                     $cmd_info->setConfiguration('maxValue', 100);
                 }
                 if ($name == 'colour_temperature') {
-                    $cmd_info->setConfiguration('minValue', 1700);
-                    $cmd_info->setConfiguration('maxValue', 6500);
+                    $cmd_info->setConfiguration('minValue', 153);
+                    $cmd_info->setConfiguration('maxValue', 500);
                 }
                 break;
             case 'double':
@@ -904,8 +904,8 @@ class zigateCmd extends cmd
                 break;
 
             case 'temperature':
-                // min 1700 max 6500
-                zigate::CallZiGate('action_move_temperature_kelvin', [$addr, $endpoint, $value]);
+                // mired : min 153 max 500
+                zigate::CallZiGate('action_move_temperature', [$addr, $endpoint, $value]);
                 break;
 
             case 'hue':
