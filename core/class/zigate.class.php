@@ -393,10 +393,10 @@ class zigate extends eqLogic
                 $cmd_info->setIsHistorized(1);
             }
             $cmd_info->setName($name);
-        }
-
-        if (isset($attribute['unit'])) {
-            $cmd_info->setUnite($attribute['unit']);
+            
+            if (isset($attribute['unit'])) {
+                $cmd_info->setUnite($attribute['unit']);
+            }
         }
 
         if (isset($attribute['name'])) {
