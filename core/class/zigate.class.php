@@ -124,9 +124,11 @@ class zigate extends eqLogic
             message::add('zigate', 'L\'IEEE de l\'équipement '.$addr.' est absent, vous devriez refaire l\'association');
             return;
         }
+        log::add('zigate', 'debug', 'Recherche eqLogic '.$ieee);
         $eqLogic = self::byLogicalId($ieee, 'zigate');
         if (!is_object($eqLogic)) {
             /* Migration addr => IEEE */
+            log::add('zigate', 'debug', 'eqLogic absent recherche eqLogic '.$addr.' pour migration');
             $eqLogic = self::byLogicalId($addr, 'zigate');
             if (is_object($eqLogic)) {
                 log::add('zigate', 'debug', 'Migration - Equipement '.$eqLogic->getId().' : '.$addr.' => '.$ieee);
@@ -157,6 +159,7 @@ class zigate extends eqLogic
             }
         }
         if (!is_object($eqLogic)) {
+            log::add('zigate', 'debug', 'eqLogic absent, création');
             $eqLogic = new eqLogic();
             $eqLogic->setEqType_name('zigate');
             $eqLogic->setIsEnable(1);
@@ -390,10 +393,10 @@ class zigate extends eqLogic
                 $cmd_info->setIsHistorized(1);
             }
             $cmd_info->setName($name);
-        }
-
-        if (isset($attribute['unit'])) {
-            $cmd_info->setUnite($attribute['unit']);
+            
+            if (isset($attribute['unit'])) {
+                $cmd_info->setUnite($attribute['unit']);
+            }
         }
 
         if (isset($attribute['name'])) {
