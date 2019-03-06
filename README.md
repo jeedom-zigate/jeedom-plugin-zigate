@@ -1,4 +1,4 @@
-# Plugin ZiGate pour Jeedom
+# Plugin ZiGate pour Jeedom/NextDom
 
 [![GitHub version](https://badge.fury.io/gh/Jeedom-Zigate%2Fjeedom-plugin-zigate.svg)](https://github.com/Jeedom-Zigate/jeedom-plugin-zigate)
 [![GitHub license](https://img.shields.io/github/license/Jeedom-Zigate/jeedom-plugin-zigate.svg)](https://github.com/Jeedom-Zigate/jeedom-plugin-zigate/blob/master/LICENSE)

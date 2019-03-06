@@ -192,8 +192,6 @@ def sharedata():
     if os.path.exists(key_file):
         with open(key_file, 'r') as fp:
             key = fp.read()
-            if key == '3d5c898817b211e88b59080027ca08a3':  # banned key
-                key = ''
     if not key:
         key = uuid.uuid1().hex
         with open(key_file, 'w') as fp:
@@ -204,7 +202,7 @@ def sharedata():
             try_sharedata(key, persistent_file)
             try_sharedata('z'+key, os.path.join(BASE_PATH, 'log', 'zigate'))
             try_sharedata('zu'+key, os.path.join(BASE_PATH, 'log', 'zigate_update'))
-            try_sharedata('http.error.'+key, os.path.join(BASE_PATH, 'log', 'http.error'))
+#             try_sharedata('http.error.'+key, os.path.join(BASE_PATH, 'log', 'http.error'))
         except Exception:
             pass
         time.sleep(60*60*6)

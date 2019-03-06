@@ -124,9 +124,11 @@ class zigate extends eqLogic
             message::add('zigate', 'L\'IEEE de l\'équipement '.$addr.' est absent, vous devriez refaire l\'association');
             return;
         }
+        log::add('zigate', 'debug', 'Recherche eqLogic '.$ieee);
         $eqLogic = self::byLogicalId($ieee, 'zigate');
         if (!is_object($eqLogic)) {
             /* Migration addr => IEEE */
+            log::add('zigate', 'debug', 'eqLogic absent recherche eqLogic '.$addr.' pour migration');
             $eqLogic = self::byLogicalId($addr, 'zigate');
             if (is_object($eqLogic)) {
                 log::add('zigate', 'debug', 'Migration - Equipement '.$eqLogic->getId().' : '.$addr.' => '.$ieee);
@@ -157,6 +159,7 @@ class zigate extends eqLogic
             }
         }
         if (!is_object($eqLogic)) {
+            log::add('zigate', 'debug', 'eqLogic absent, création');
             $eqLogic = new eqLogic();
             $eqLogic->setEqType_name('zigate');
             $eqLogic->setIsEnable(1);
@@ -172,7 +175,7 @@ class zigate extends eqLogic
         }
 
         $eqLogic->setStatus('lastCommunication', $device['info']['last_seen']);
-        $eqLogic->setStatus('rssi', $device['info']['rssi']);
+        $eqLogic->setStatus('lqi', $device['info']['lqi']);
         $eqLogic->save();
         $eqLogic->createCommands($device);
 
@@ -275,7 +278,10 @@ class zigate extends eqLogic
                         array_push($created_commands, $key);
                         break;
                     case 'level':
-                        $key = $this->_create_action($endpoint_id, $action, 'level', 'slider');
+                        $key = $this->_create_action($endpoint_id, $action, 'level', 'slider', [0, 100]);
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, 'stop', 'stop', 'other');
                         array_push($created_commands, $key);
                         break;
                     case 'color':
@@ -283,11 +289,21 @@ class zigate extends eqLogic
                         array_push($created_commands, $key);
                         break;
                     case 'temperature':
-                        $key = $this->_create_action($endpoint_id, $action, 'temperature', 'slider');
+                        $key = $this->_create_action($endpoint_id, $action, 'temperature', 'slider', [153, 500]);
                         array_push($created_commands, $key);
                         break;
                     case 'hue':
                         $key = $this->_create_action($endpoint_id, $action, 'hue', 'color');
+                        array_push($created_commands, $key);
+                        break;
+                    case 'cover':
+                        $key = $this->_create_action($endpoint_id, $action, 'open', 'other', 0);
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, $action, 'close', 'other', 1);
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, $action, 'stop', 'other', 2);
                         array_push($created_commands, $key);
                         break;
                 }
@@ -365,25 +381,29 @@ class zigate extends eqLogic
             $cmd_info->setLogicalId($key);
             $cmd_info->setType('info');
             $cmd_info->setEqLogic_id($this->getId());
-            $cmd_info->setIsHistorized(1);
+            $cmd_info->setIsHistorized(0);
             if (!isset($attribute['name'])) {
                 $cmd_info->setIsVisible(0);
                 $cmd_info->setIsHistorized(0);
             }
-            if ($cluster_id == 0) {
+            // by default hide "basic" clusters
+            if ($cluster_id < 5) {
                 $cmd_info->setIsVisible(0);
+            } else {
+                $cmd_info->setIsHistorized(1);
             }
             $cmd_info->setName($name);
-        }
-
-        if (isset($attribute['unit'])) {
-            $cmd_info->setUnite($attribute['unit']);
+            
+            if (isset($attribute['unit'])) {
+                $cmd_info->setUnite($attribute['unit']);
+            }
         }
 
         if (isset($attribute['name'])) {
             $cmd_info->setConfiguration('property', $name);
             if ($cluster_id < 5) {
                 $this->setConfiguration($name, $attribute['value']);
+                // rename device to add type in name if not renamed
                 if ($name == 'type' && $attribute['value'] && $this->getName() == 'Device ' . $this->getLogicalId()) {
                     $this->setName('Device ' . $this->getLogicalId(). ' '.$attribute['value']);
                 }
@@ -423,8 +443,8 @@ class zigate extends eqLogic
                     $cmd_info->setConfiguration('maxValue', 100);
                 }
                 if ($name == 'colour_temperature') {
-                    $cmd_info->setConfiguration('minValue', 1700);
-                    $cmd_info->setConfiguration('maxValue', 6500);
+                    $cmd_info->setConfiguration('minValue', 153);
+                    $cmd_info->setConfiguration('maxValue', 500);
                 }
                 break;
             case 'double':
@@ -457,7 +477,7 @@ class zigate extends eqLogic
     {
         log::add('zigate', 'debug', 'create action '.$action.' for endpoint '.$endpoint_id);
         $key = $this->getLogicalId().'.'.$endpoint_id.'.'.$action;
-        if (!is_null($value)) {
+        if (!is_null($value) and $subtype != 'slider') {
             $key = $key.'.'.$value;
         }
 
@@ -476,7 +496,12 @@ class zigate extends eqLogic
         $cmd_action->setConfiguration('action', $action);
 
         if (!is_null($value)) {
-            $cmd_action->setConfiguration('value', $value);
+            if ($subtype == 'slider') {
+                $cmd_action->setConfiguration('minValue', $value[0]);
+                $cmd_action->setConfiguration('maxValue', $value[1]);
+            } else {
+                $cmd_action->setConfiguration('value', $value);
+            }
         }
         $cmd_action->save();
 
@@ -683,6 +708,7 @@ class zigate extends eqLogic
     {
         $filename = $this->getConfiguration('type') . '.jpg';
         $filename = str_replace(' ', '_', $filename);
+        $filename = str_replace('/', '_', $filename);
         $path = dirname(__FILE__). '/../../images/'. $filename;
         if (file_exists($path)) {
             return 'plugins/zigate/images/' . $filename;
@@ -877,6 +903,10 @@ class zigateCmd extends cmd
                 }
                 zigate::CallZiGate('action_move_level_onoff', [$addr, $endpoint, $onoff, $value]);
                 break;
+                
+            case 'stop':
+                zigate::CallZiGate('action_move_stop_onoff', [$addr, $endpoint]);
+                break;
 
             case 'lock':
                 zigate::CallZiGate('action_lock', [$addr, $endpoint, $value]);
@@ -887,13 +917,16 @@ class zigateCmd extends cmd
                 break;
 
             case 'temperature':
-                // min 1700 max 6500
-                $value = intval(($value*(6500-1700)/100)+1700);
+                // mired : min 153 max 500
                 zigate::CallZiGate('action_move_temperature', [$addr, $endpoint, $value]);
                 break;
 
             case 'hue':
                 zigate::CallZiGate('action_move_hue_hex', [$addr, $endpoint, $value]);
+                break;
+                
+            case 'cover':
+                zigate::CallZiGate('action_cover', [$addr, $endpoint, $value]);
                 break;
 
             case 'refresh':
