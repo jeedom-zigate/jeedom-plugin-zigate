@@ -27,7 +27,7 @@ $plugin = plugin::byId('zigate');
 $eqLogics = zigate::byType('zigate');
 ?>
 
-<table class="table table-condensed tablesorter" id="table_healthikealight">
+<table class="table table-condensed tablesorter" id="table_healthZigate">
     <thead>
         <tr>
             <th>{{Image}}</th>

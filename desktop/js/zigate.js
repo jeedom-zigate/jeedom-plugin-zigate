@@ -158,7 +158,7 @@ function callZiGate(action)
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
-            $('#div_alert').showAlert({message: 'Commande envoyée', level: 'info'});
+            $('#div_alert').showAlert({message: '{{Commande envoyée}}', level: 'info'});
         }
     });
 }
@@ -202,7 +202,7 @@ function permitJoin()
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             } else {
-                $('#div_alert').showAlert({message: 'Mode inclusion lancé pour 30sec.', level: 'warning'});
+                $('#div_alert').showAlert({message: '{{Mode inclusion lancé pour 30sec.}}', level: 'warning'});
             }
         }
     });
@@ -225,7 +225,7 @@ function reset()
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             } else {
-                $('#div_alert').showAlert({message: 'Reset de la clé ZiGate.', level: 'warning'});
+                $('#div_alert').showAlert({message: '{{Reset de la clé ZiGate.}}', level: 'warning'});
             }
         }
     });
@@ -249,9 +249,9 @@ function refresh_eqlogic(id)
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             } else {
-                $('#div_alert').showAlert({message: 'Rafraichissement de l\'équipement lancé.<br>' +
-                        'Les équipements sur pile doivent être activés manuellement pour transmettre les infos' +
-                        ' (Appui sur le bouton de synchro, manipulation, etc)', level: 'warning'});
+                $('#div_alert').showAlert({message: '{{Rafraichissement de l\'équipement lancé.}}<br>' +
+                        '{{Les équipements sur pile doivent être activés manuellement pour transmettre les infos}}' +
+                        ' ({{Appui sur le bouton de synchro, manipulation, etc}})', level: 'warning'});
             }
         }
     });
@@ -275,9 +275,9 @@ function discover_eqlogic(id)
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             } else {
-                $('#div_alert').showAlert({message: 'Découverte de l\'équipement lancé.<br>' +
-                        'Les équipements sur pile doivent être activés manuellement pour transmettre les infos' +
-                        ' (Appui sur le bouton de synchro, manipulation, etc)', level: 'warning'});
+                $('#div_alert').showAlert({message: '{{Découverte de l\'équipement lancé.}}<br>' +
+                        '{{Les équipements sur pile doivent être activés manuellement pour transmettre les infos}}' +
+                        ' ({{Appui sur le bouton de synchro, manipulation, etc}})', level: 'warning'});
             }
         }
     });
