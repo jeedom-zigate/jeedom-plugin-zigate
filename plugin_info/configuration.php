@@ -68,6 +68,12 @@ $versionLib = zigate::callZiGate('get_libversion');
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-3 control-label">{{PiZiGate (GPIO)}}</label>
+            <div class="col-sm-3">
+                <input type="checkbox" class="configKey form-control" data-l1key="gpio"/>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-3 control-label">{{ou Adresse ZiGate Wifi}}</label>
             <div class="col-sm-3">
                 <input type="text" class="configKey form-control" data-l1key="host" placeholder="ip:port"/>
