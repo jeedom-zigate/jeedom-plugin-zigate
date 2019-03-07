@@ -103,7 +103,7 @@ class zigate extends eqLogic
                 $eqLogic->setIsEnable(0);
                 $eqLogic->save();
                 $humanName = $eqLogic->getHumanName();
-                message::add('zigate', '{{L\'équipement }}'.$humanName.'{{ semble manquant, il a été désactivé.}}');
+                message::add('zigate', 'L\'équipement '.$humanName.' semble manquant, il a été désactivé.');
             }
         }
     }
