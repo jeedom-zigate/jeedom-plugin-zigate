@@ -124,7 +124,7 @@ sendVarToJS('eqLs', $eqLs);
                         <div class="panel-body">
                             <p><span class="zigateNetworkAttr" data-l1key="state"></span> {{Etat actuel :}} 
                                <span class="zigateNetworkAttr label label-default" data-l1key="stateDescription" style="font-size : 1em;">
-                                   <?php echo $DeamonState ?>
+                                    <?php echo $DeamonState ?>
                                </span>
                             </p>
                        </div>
