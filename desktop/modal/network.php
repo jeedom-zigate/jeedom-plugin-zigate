@@ -52,11 +52,11 @@ $infoeqL['lqi'] = '0';
 $infoeqL['enable'] = '1';
 $infoeqL['power'] = '0';
 $eqLs['0000']=$infoeqL;
-foreach ($eqLogics as $eqLogic){
+foreach ($eqLogics as $eqLogic) {
     $addr = $eqLogic->getConfiguration('addr');
     $infoeqL['id'] = $eqLogic->getId();
     $infoeqL['addr'] = $addr;
-    $infoeqL['name'] = $eqLogic->getHumanName(True);
+    $infoeqL['name'] = $eqLogic->getHumanName(true);
     $infoeqL['lqi'] = $eqLogic->getConfiguration('rssi');
     $infoeqL['enable'] = $eqLogic->getIsEnable();
     $infoeqL['power'] = $eqLogic->getConfiguration('power_type');
@@ -111,9 +111,12 @@ sendVarToJS('eqLs', $eqLs);
                     <div class="panel panel-primary">
                         <div class="panel-heading"><h4 class="panel-title">{{Informations}}</h4></div>
                         <div class="panel-body">
-                            <p>{{Réseau démarré le}} <span class="zigateNetworkAttr label label-default" style="font-size : 1em;" data-l1key="startTime"><?php echo $startTime ?></span></p>
-                            <p>{{Le réseau Jeedom contient}} <b><span class="zigateNetworkAttr" data-l1key="JeedomNodesCount"><?php echo $JeedomNodesCount ?></span></b> {{noeuds, actuellement}} </p>
-                            <p>{{Le réseau Zigate contient}} <b><span class="zigateNetworkAttr" data-l1key="ZigateNodesCount"><?php echo $ZigateNodesCount ?></span></b> {{noeuds, actuellement}} </p>
+                            <p>{{Réseau démarré le}} <span class="zigateNetworkAttr label label-default" style="font-size : 1em;" data-l1key="startTime">
+                                <?php echo $startTime ?></span></p>
+                            <p>{{Le réseau Jeedom contient}} <b><span class="zigateNetworkAttr" data-l1key="JeedomNodesCount">
+                                <?php echo $JeedomNodesCount ?></span></b> {{noeuds, actuellement}} </p>
+                            <p>{{Le réseau Zigate contient}} <b><span class="zigateNetworkAttr" data-l1key="ZigateNodesCount">
+                                <?php echo $ZigateNodesCount ?></span></b> {{noeuds, actuellement}} </p>
                         </div>
                     </div>
                     <div class="panel panel-primary">
