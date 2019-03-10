@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-$('.controller_action').on('click',function(){
-    if($(this).data('action') == 'bt_ZigateerasePDM'){
+$('.controller_action').on('click',function() {
+    if ($(this).data('action') == 'bt_ZigateerasePDM'){
         $action = $(this).data('action');
         bootbox.confirm("{{Etes-vous sûr de vouloir effacer les données de la zigate ?}}", function (result) {
             if(result){
@@ -28,13 +28,13 @@ $('.controller_action').on('click',function(){
             }
         });
     }
-    if($(this).data('action') == 'bt_ZigateScan'){
+    if ($(this).data('action') == 'bt_ZigateScan'){
         callZiGate('start_network_scan');
     }
-    if($(this).data('action') == 'bt_ZigateSync'){
+    if ($(this).data('action') == 'bt_ZigateSync'){
         syncEqLogicWithZiGate();
     }
-    if($(this).data('action') == 'bt_ZigateClean'){
+    if ($(this).data('action') == 'bt_ZigateClean'){
         $action = $(this).data('action');
         bootbox.confirm("{{Etes-vous sûr de vouloir effacer les équipements manquants ?}}", function (result) {
             if(result){
@@ -51,7 +51,7 @@ $("#tab_graph").off("click").on("click", function () {
     load_graph();
 });
 
-function load_graph(){
+function load_graph() {
     $.ajax({
         type: "POST",
         url: "plugins/zigate/core/ajax/zigate.ajax.php",
@@ -115,7 +115,7 @@ function load_graph(){
                 var nodeColor = '#7BCC7B';
                 if (node.data.addr == "0000"){
                     nodeColor = '#000000';
-                }else if (node.data.power == 1){
+                } else if (node.data.power == 1){
                     nodeColor = '#FF9F33';
                 };
                 ui = Viva.Graph.svg('g'),
