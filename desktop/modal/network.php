@@ -122,15 +122,22 @@ sendVarToJS('eqLs', $eqLs);
                     <div class="panel panel-primary">
                         <div class="panel-heading"><h4 class="panel-title">{{Etat}}</h4></div>
                         <div class="panel-body">
-                            <p><span class="zigateNetworkAttr" data-l1key="state"></span> {{Etat actuel :}} <span class="zigateNetworkAttr label label-default" data-l1key="stateDescription" style="font-size : 1em;"><?php echo $DeamonState ?></span></p>
+                            <p><span class="zigateNetworkAttr" data-l1key="state"></span> {{Etat actuel :}} 
+                               <span class="zigateNetworkAttr label label-default" data-l1key="stateDescription" style="font-size : 1em;">
+                                   <?php echo $DeamonState ?>
+                               </span>
+                            </p>
                        </div>
                     </div>
                     <div class="panel panel-primary">
                         <div class="panel-heading"><h4 class="panel-title">{{Système}}</h4></div>
                         <div class="panel-body">
-                            <p>{{Chemin du contrôleur Zigate :}} <span class="zigateNetworkAttr label label-default" data-l1key="devicePath" style="font-size : 1em;"><?php echo $usbPort ?></span></p>
-                            <p>{{Version du firmware Zigate :}} <span class="zigateNetworkAttr label label-default" data-l1key="ZigateFirmwareVersion" style="font-size : 1em;"><?php echo $versionFirmware['result']; ?></span></p>
-                            <p>{{Version de la librairie Zigate :}} <span class="zigateNetworkAttr label label-default" data-l1key="ZigateLibraryVersion" style="font-size : 1em;"><?php echo $versionLib['result']; ?></span></p>
+                            <p>{{Chemin du contrôleur Zigate :}} <span class="zigateNetworkAttr label label-default" data-l1key="devicePath" style="font-size : 1em;">
+                                <?php echo $usbPort ?></span></p>
+                            <p>{{Version du firmware Zigate :}} <span class="zigateNetworkAttr label label-default" data-l1key="ZigateFirmwareVersion" style="font-size : 1em;">
+                                <?php echo $versionFirmware['result']; ?></span></p>
+                            <p>{{Version de la librairie Zigate :}} <span class="zigateNetworkAttr label label-default" data-l1key="ZigateLibraryVersion" style="font-size : 1em;">
+                                <?php echo $versionLib['result']; ?></span></p>
                         </div>
                     </div>
                 </div>
