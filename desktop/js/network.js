@@ -160,19 +160,19 @@ function load_graph()
                 var toNodeSize = nodeSize,
                     fromNodeSize = nodeSize;
                 var from = geom.intersectRect(
-                    fromPos.x - fromNodeSize / 2, // left
-                    fromPos.y - fromNodeSize / 2, // top
-                    fromPos.x + fromNodeSize / 2, // right
-                    fromPos.y + fromNodeSize / 2, // bottom
-                    fromPos.x, fromPos.y, toPos.x, toPos.y)
-                    || fromPos;
+                fromPos.x - fromNodeSize / 2, // left
+                fromPos.y - fromNodeSize / 2, // top
+                fromPos.x + fromNodeSize / 2, // right
+                fromPos.y + fromNodeSize / 2, // bottom
+                fromPos.x, fromPos.y, toPos.x, toPos.y)
+                || fromPos;
                 var to = geom.intersectRect(
-                    toPos.x - toNodeSize / 2, // left
-                    toPos.y - toNodeSize / 2, // top
-                    toPos.x + toNodeSize / 2, // right
-                    toPos.y + toNodeSize / 2, // bottom
-                    toPos.x, toPos.y, fromPos.x, fromPos.y)
-                    || toPos;
+                toPos.x - toNodeSize / 2, // left
+                toPos.y - toNodeSize / 2, // top
+                toPos.x + toNodeSize / 2, // right
+                toPos.y + toNodeSize / 2, // bottom
+                toPos.x, toPos.y, fromPos.x, fromPos.y)
+                || toPos;
                 var data = 'M' + from.x + ',' + from.y + 'L' + to.x + ',' + to.y;
                 linkUI.attr("d", data);
                 document.getElementById('label_'+linkUI.attr('id'))
