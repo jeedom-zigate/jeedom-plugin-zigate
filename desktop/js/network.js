@@ -19,30 +19,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-$('.controller_action').on('click',function() {
+$('.controller_action').on('click',function () {
     if ($(this).data('action') == 'bt_ZigateerasePDM'){
         $action = $(this).data('action');
         bootbox.confirm("{{Etes-vous sûr de vouloir effacer les données de la zigate ?}}", function (result) {
-            if(result){
+            if (result) {
                 callZiGate('erase_persistent');
             }
         });
     }
-    if ($(this).data('action') == 'bt_ZigateScan'){
+    if ($(this).data('action') == 'bt_ZigateScan') {
         callZiGate('start_network_scan');
     }
-    if ($(this).data('action') == 'bt_ZigateSync'){
+    if ($(this).data('action') == 'bt_ZigateSync') {
         syncEqLogicWithZiGate();
     }
-    if ($(this).data('action') == 'bt_ZigateClean'){
+    if ($(this).data('action') == 'bt_ZigateClean') {
         $action = $(this).data('action');
         bootbox.confirm("{{Etes-vous sûr de vouloir effacer les équipements manquants ?}}", function (result) {
-            if(result){
+            if (result) {
                 callZiGate('cleanup_devices');
             }
         });
     }
-    if($(this).data('action') == 'bt_Zigatereset'){
+    if ($(this).data('action') == 'bt_Zigatereset') {
         reset();
     }
 });
@@ -81,7 +81,7 @@ function load_graph() {
                     });
                 };
             };
-            links.forEach(function(element) {
+            links.forEach(function (element) {
                 if (typeof neighbors[element[0]] != 'undefined') {
                     if (neighbors[element[0]].indexOf(eqLs[element[1]]["id"]) == -1){
                         neighbors[element[0]] += ","+eqLs[element[1]]["id"];
@@ -111,11 +111,11 @@ function load_graph() {
                     });
                 };
             var nodeSize = 7;
-            graphics.node(function(node) {
+            graphics.node(function (node) {
                 var nodeColor = '#7BCC7B';
-                if (node.data.addr == "0000"){
+                if (node.data.addr == "0000") {
                     nodeColor = '#000000';
-                } else if (node.data.power == 1){
+                } else if (node.data.power == 1) {
                     nodeColor = '#FF9F33';
                 };
                 ui = Viva.Graph.svg('g'),
@@ -143,11 +143,11 @@ function load_graph() {
                     highlightRelatedNodes(node.id, false);
                 });
                 return ui;
-            }).placeNode(function(nodeUI, pos){ 
+            }).placeNode(function (nodeUI, pos){ 
                 nodeUI.attr('transform', 'translate('+ pos.x + ',' + pos.y + ')'); 
             });
             var geom = Viva.Graph.geom();
-            graphics.link(function(link){
+            graphics.link(function (link){
                 var label = Viva.Graph.svg('text')
                     .attr('id','label_'+link.data.lqi).text(link.data.lqi)
                     .attr('font-size', '8')
@@ -155,7 +155,7 @@ function load_graph() {
                     return Viva.Graph.svg('path')
                         .attr('stroke', 'gray')
                         .attr('id', link.data.lqi);
-            }).placeLink(function(linkUI, fromPos, toPos) {
+            }).placeLink(function (linkUI, fromPos, toPos) {
                 var toNodeSize = nodeSize,
                     fromNodeSize = nodeSize;
                 var from = geom.intersectRect(
