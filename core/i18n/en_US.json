@@ -111,5 +111,42 @@
         "Envoyer": "Send",
         "Résultat": "Result",
         "Commande envoyée": "Command sent"
+    },
+    "plugins/zigate/desktop/js/network.js": {
+        "Etes-vous sûr de vouloir effacer les équipements manquants ?": "Are you sure you want to delete the missing devices ?",
+        "Etes-vous sûr de vouloir effacer les données de la zigate ?": "Are you sure you want to erase the data from the zigate ?",
+        "voisin(s)": "neighbor(s)"
+    },
+    "plugins/zigate/desktop/modal/network.php": {
+        " Demon actif": " Daemon running",
+        " Demon non actif : ": "Daemon not running : ",
+        "Résumé": "Resume",
+        "Actions": "Actions",
+        "Graphique du réseau": "Network graphic",
+        "Arbre Zigate": "Zigate tree",
+        "Réseau démarré le": "Network started since",
+        "Le réseau Jeedom contient": "Jeedom network has",
+        "Le réseau Zigate contient": "Zigate network has",
+        "noeuds, actuellement": "nodes, actually",
+        "Etat": "State",
+        "Etat actuel :": "Actual state",
+        "Système": "System",
+        "Chemin du contrôleur Zigate :": "Zigate controler port :",
+        "Version du firmware Zigate :": "Zigate firmware version :",
+        "Version de la librairie Zigate :": "Zigate library version :",
+        "Scan réseau": "Network Scan",
+        "Lancement d’un scan du réseau ZigBee. Peut résoudre des problèmes d’association, mais pour l’instant l’impact est inconnu.": "Zigbee network scan. Can solve association problems, but for the moment the impact is unknown.",
+        "Synchroniser": "Synchronize",
+        "Synchronise les informations du plugin avec les informations réelles du réseau ZigBee.": "Synchronize plugin information with real ZigBee network information.",
+        "Nettoyer": "Clean",
+        "Supprime les équipements fantômes.": "Remove ghost devices",
+        "Redémarrage Zigate": "Restart Zigate",
+        "équivalent à un débranchement/rebranchement de la ZiGate. Cette commande ne supprime aucune donnée.": "Like plug/unplug Zigate key",
+        "Effacement Zigate": "Erase Zigate",
+        "Remise à zéro du contrôleur.": "Reset to factory the controller.",
+        "Légende": "Legend",
+        "Coordinateur Zigbee": "Zigbee Coordinator",
+        "Routeur Zigbee (FFD)": "Zigbee router (FFD)",
+        "Terminal Zigbee (RFD)": "Zigbee Terminal (RFD)"
     }
 }
