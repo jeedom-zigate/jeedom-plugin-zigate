@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  */
 $('.controller_action').on('click',function () {
-    if ($(this).data('action') == 'bt_ZigateerasePDM'){
+    if ($(this).data('action') == 'bt_ZigateerasePDM') {
         $action = $(this).data('action');
         bootbox.confirm("{{Etes-vous sûr de vouloir effacer les données de la zigate ?}}", function (result) {
             if (result) {
@@ -51,7 +51,8 @@ $("#tab_graph").off("click").on("click", function () {
     load_graph();
 });
 
-function load_graph() {
+function load_graph() 
+{
     $.ajax({
         type: "POST",
         url: "plugins/zigate/core/ajax/zigate.ajax.php",
@@ -83,12 +84,12 @@ function load_graph() {
             };
             links.forEach(function (element) {
                 if (typeof neighbors[element[0]] != 'undefined') {
-                    if (neighbors[element[0]].indexOf(eqLs[element[1]]["id"]) == -1){
+                    if (neighbors[element[0]].indexOf(eqLs[element[1]]["id"]) == -1) {
                         neighbors[element[0]] += ","+eqLs[element[1]]["id"];
                         graph.addLink(element[0], element[1], {lqi : element[2]});
                     }
                     if (typeof neighbors[element[1]] != 'undefined') {
-                        if (neighbors[element[1]].indexOf(eqLs[element[0]]["id"]) == -1){
+                        if (neighbors[element[1]].indexOf(eqLs[element[0]]["id"]) == -1) {
                             neighbors[element[1]] += ","+eqLs[element[0]]["id"];
                         }
                     } else {
