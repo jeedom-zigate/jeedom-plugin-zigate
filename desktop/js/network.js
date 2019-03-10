@@ -165,14 +165,14 @@ function load_graph()
                     fromPos.x + fromNodeSize / 2, // right
                     fromPos.y + fromNodeSize / 2, // bottom
                     fromPos.x, fromPos.y, toPos.x, toPos.y)
-                || fromPos;
+                    || fromPos;
                 var to = geom.intersectRect(
                     toPos.x - toNodeSize / 2, // left
                     toPos.y - toNodeSize / 2, // top
                     toPos.x + toNodeSize / 2, // right
                     toPos.y + toNodeSize / 2, // bottom
                     toPos.x, toPos.y, fromPos.x, fromPos.y)
-                || toPos;
+                    || toPos;
                 var data = 'M' + from.x + ',' + from.y + 'L' + to.x + ',' + to.y;
                 linkUI.attr("d", data);
                 document.getElementById('label_'+linkUI.attr('id'))
