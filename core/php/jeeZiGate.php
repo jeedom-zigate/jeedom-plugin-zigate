@@ -40,7 +40,7 @@ if ($action == 'syncEqLogicWithZiGate') {
     event::add('jeedom::alert', array(
         'level' => 'warning',
         'page' => 'zigate',
-        'message' => 'Nouvel équipement ZiGate ajouté',
+        'message' => '{{Nouvel équipement ZiGate ajouté}}',
     ));
     $eqLogic = zigate::byLogicalId($ieee, 'zigate');
     event::add('zigate::device_changed', $eqLogic->getId());
@@ -59,7 +59,7 @@ if ($action == 'syncEqLogicWithZiGate') {
     if (is_object($eqLogic)) {
         $humanName = $eqLogic->getHumanName();
     }
-    message::add('zigate', 'L\'équipement ZiGate '.$humanName.' requiert un rafraichissement.');
+    message::add('zigate', '{{L\'équipement ZiGate }}'.$humanName.'{{ requiert un rafraichissement.}}');
 } elseif ($action == 'ZIGATE_ATTRIBUTE_ADDED') {
     zigate::syncDevice($results['device']);
 } elseif ($action == 'ZIGATE_ATTRIBUTE_UPDATED') {

@@ -65,7 +65,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 <center>
                     <i class="fa fa-search" style="font-size : 6em;color:#767676;"></i>
                 </center>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Network Scan}}</center></span>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Scan réseau}}</center></span>
             </div>
             <div class="cursor eqLogicAction" id="bt_syncEqLogic" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;">
                 <center>
@@ -83,13 +83,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 <center>
                     <i class="fa fa-recycle" style="font-size : 6em;color:#767676;"></i>
                 </center>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Reset ZiGate}}</center></span>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Redémarrage Zigate}}</center></span>
             </div>
             <div class="cursor eqLogicAction" id="bt_erasepdm" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;">
                 <center>
                     <i class="fa fa-eraser" style="font-size : 6em;color:#767676;"></i>
                 </center>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><p class="text-center">{{Erase PDM}}</p></span>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><p class="text-center">{{Effacement Zigate}}</p></span>
             </div>
             <div class="cursor eqLogicAction" data-action="gotoPluginConf" style="text-align: center; background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;">
                 <center>
@@ -178,7 +178,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                 <?php
                                 foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
                                     echo '<label class="checkbox-inline">';
-                                    echo '<input type="checkbox" class="eqLogicAttr" data-l1key="category" data-l2key="' . $key . '" />' . $value['name'];
+                                    echo '<input type="checkbox" class="eqLogicAttr" data-l1key="category" data-l2key="' . $key . '" />{{' . $value['name'] .'}}';
                                     echo '</label>';
                                 }
                                 ?>
@@ -216,13 +216,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">{{Link quality (1-255)}}</label>
+                            <label class="col-sm-3 control-label">{{Qualité du lien (1-255)}}</label>
                             <div class="col-sm-3">
                                 <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="lqi" placeholder="0" readonly=true/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">{{Power Source (0=Battery, 1=AC Power)}}</label>
+                            <label class="col-sm-3 control-label">{{Alimentation (0=Batterie, 1=Secteur)}}</label>
                             <div class="col-sm-3">
                                 <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="power_type" placeholder="0" readonly=true/>
                             </div>

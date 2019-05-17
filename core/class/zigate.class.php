@@ -625,6 +625,7 @@ class zigate extends eqLogic
         }
         $port = config::byKey('port', 'zigate');
         $host = config::byKey('host', 'zigate');
+        $gpio = config::byKey('gpio', 'zigate');
         $channel = config::byKey('channel', 'zigate');
         $sharedata = config::byKey('sharedata', 'zigate');
         $zigate_path = dirname(__FILE__) . '/../../resources';
@@ -636,7 +637,7 @@ class zigate extends eqLogic
         } else {
             $cmd .= ' --device ' . $port;
         }
-
+        $cmd .= ' --gpio ' . $gpio;
         $cmd .= ' --loglevel ' . log::convertLogLevel(log::getLogLevel('zigate'));
         $cmd .= ' --apikey ' . jeedom::getApiKey('zigate');
         $cmd .= ' --pid ' . jeedom::getTmpFolder('zigate') . '/daemon.pid';
