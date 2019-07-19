@@ -245,6 +245,7 @@ parser.add_argument('--apikey', help='API Key', default='nokey')
 parser.add_argument('--device', help='ZiGate port', default='auto')
 parser.add_argument('--callback', help='Jeedom callback', default='http://localhost')
 parser.add_argument('--sharedata', type=int, default=1)
+parser.add_argument('--gpio', type=int, default=0)
 parser.add_argument('--channel', type=int, default=None)
 args = parser.parse_args()
 
@@ -311,8 +312,11 @@ elif '.' in args.device:  # supposed I.P:PORT
     logging.info('Démarrage ZiGate WiFi {} {}'.format(host, port))
     z = zigate.ZiGateWiFi(host, port, persistent_file, auto_start=False)
 else:
-    logging.info('Démarrage ZiGate USB {}'.format(args.device))
-    z = zigate.ZiGate(args.device, persistent_file, auto_start=False)
+    logging.info('Démarrage ZiGate {}'.format(args.device))
+    if args.gpio:
+        z = zigate.ZiGateGPIO(args.device, persistent_file, auto_start=False)
+    else:
+        z = zigate.ZiGate(args.device, persistent_file, auto_start=False)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_ADDED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_UPDATED, z)
 zigate.dispatcher.connect(callback_command, zigate.ZIGATE_DEVICE_ADDRESS_CHANGED, z)
