@@ -63,6 +63,9 @@ $versionLib = zigate::callZiGate('get_libversion');
                     foreach (jeedom::getUsbMapping('', true) as $name => $value) {
                         echo '<option value="' . $value . '">' . $name . ' (' . $value . ')</option>';
                     }
+                    foreach (ls('/dev/', 'tty*') as $value) {
+                        echo '<option value="/dev/' . $value . '">/dev/' . $value . '</option>';
+                    }
                     ?>
                 </select>
             </div>
