@@ -16,8 +16,10 @@ sudo apt-get install -y python3-requests
 echo 50 > ${PROGRESS_FILE}
 sudo apt-get install -y python3-setuptools
 echo 60 > ${PROGRESS_FILE}
-sudo apt-get install -y python3-dev
+sudo apt-get install -y python3-rpi.gpio
 echo 70 > ${PROGRESS_FILE}
+sudo apt-get install -y python3-dev
+echo 80 > ${PROGRESS_FILE}
 BASEDIR=$(dirname "$0")
 zigate_version=$(head -1 $BASEDIR/zigate_version.txt)
 sudo python3 -m pip install zigate==$zigate_version
