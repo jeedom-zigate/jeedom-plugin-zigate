@@ -667,7 +667,6 @@ class zigate extends eqLogic
 
         message::removeAll('zigate', 'unableStartDeamon');
         log::add('zigate', 'info', 'Démon zigate lancé');
-        zigate::syncEqLogicWithZiGate();
     }
 
 
