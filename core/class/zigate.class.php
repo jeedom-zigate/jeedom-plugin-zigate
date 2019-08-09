@@ -90,7 +90,9 @@ class zigate extends eqLogic
 
         foreach (self::byType('zigate') as $eqLogic) {
             if (!in_array($eqLogic->getLogicalId(), $findDevice)) {
-                $eqLogic->remove();
+//                 $eqLogic->remove();
+                $eqLogic->setIsEnable(0);
+                $eqLogic->save();
             }
         }
         
