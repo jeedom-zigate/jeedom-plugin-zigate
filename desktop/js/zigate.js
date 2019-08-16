@@ -90,14 +90,6 @@ $('#bt_reset').on('click', function () {
     reset();
 });
 
-$('#bt_touchlink').on('click', function () {
-    callZiGate('initiate_touchlink');
-});
-
-$('#bt_networkscan').on('click', function () {
-    callZiGate('start_network_scan');
-});
-
 $('#bt_cleanup_devices').on('click', function () {
     bootbox.confirm('{{Etes-vous sûr de vouloir effacer les équipements manquants ?}}', function (result) {
         if (result) {
