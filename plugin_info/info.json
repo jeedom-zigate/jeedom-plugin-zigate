@@ -4,7 +4,7 @@
 	"description": "Plugin zigate pour utilisation de la zigate",
 	"licence": "MIT License",
 	"author": "Sébastien RAMAGE",
-	"require": "3.0",
+	"require": "4.0",
 	"category": "automation protocol",
 	"hasDependency": true,
 	"hasOwnDeamon": true,
