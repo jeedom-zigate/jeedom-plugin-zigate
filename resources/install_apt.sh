@@ -25,5 +25,5 @@ zigate_version=$(head -1 $BASEDIR/zigate_version.txt)
 sudo python3 -m pip install zigate==$zigate_version
 echo 100 > ${PROGRESS_FILE}
 sudo usermod -aG gpio www-data
-echo "Installation des dépendances terminé !"
+echo "Installation des dépendances terminée !"
 rm ${PROGRESS_FILE}
