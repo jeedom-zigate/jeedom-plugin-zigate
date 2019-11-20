@@ -29,3 +29,5 @@ echo 100 > ${PROGRESS_FILE}
 sudo usermod -aG gpio www-data
 echo "Installation des dépendances terminée !"
 rm ${PROGRESS_FILE}
+echo "Vérification de la version installée"
+python3 -c 'import zigate;print(zigate.__version__)'
