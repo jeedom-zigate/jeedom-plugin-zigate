@@ -311,22 +311,22 @@ class zigate extends eqLogic
                     case 'ias':
                         $key = $this->_create_action($endpoint_id, $action, 'off', 'other', 0);
                         array_push($created_commands, $key);
-
+                        
                         $key = $this->_create_action($endpoint_id, $action, 'buzzer_2sec', 'other', 2);
                         array_push($created_commands, $key);
-						
+                        
                         $key = $this->_create_action($endpoint_id, $action, 'buzzer_5sec', 'other', 5);
                         array_push($created_commands, $key);
-						
+                        
                         $key = $this->_create_action($endpoint_id, $action, 'buzzer_10sec', 'other', 10);
                         array_push($created_commands, $key);
-						
+                        
                         $key = $this->_create_action($endpoint_id, $action, 'strobe_ON', 'other', 139);
                         array_push($created_commands, $key);
-
+                        
                         $key = $this->_create_action($endpoint_id, $action, 'strobe_ON_Buzzer_ON', 'other', 11);
                         array_push($created_commands, $key);
-
+                        
                         break;
                 }
             }
@@ -967,13 +967,13 @@ class zigateCmd extends cmd
                 break;
 
             case 'ias':
-                if (substr($name,0,6) == "buzzer"){
+                if (substr($name,0,6) == 'buzzer' ) {
                     zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0x18, $value, 1, 1 ]);
-                }else if ((substr($name,0,6) == "strobe")){
+                }else if ((substr($name,0,6) == 'strobe' )) {
                     zigate::CallZiGate('action_ias_squawk', [$addr, $endpoint, $value ]);
                 }else{
                     zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0, 0, 0, 0 ]);
-                } 
+                }
                 break;
         }
     }
