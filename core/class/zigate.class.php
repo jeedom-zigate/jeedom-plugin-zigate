@@ -967,11 +967,11 @@ class zigateCmd extends cmd
                 break;
 
             case 'ias':
-                if (substr($name,0,6) == 'buzzer' ) {
+                if (substr($name,0,6) == 'buzzer') { 
                     zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0x18, $value, 1, 1 ]);
-                }else if ((substr($name,0,6) == 'strobe' )) {
+                } elseif ((substr($name,0,6) == 'strobe')) { 
                     zigate::CallZiGate('action_ias_squawk', [$addr, $endpoint, $value ]);
-                }else{
+                } else { 
                     zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0, 0, 0, 0 ]);
                 }
                 break;
