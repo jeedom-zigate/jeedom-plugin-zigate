@@ -308,17 +308,17 @@ class zigate extends eqLogic
                         $key = $this->_create_action($endpoint_id, $action, 'stop', 'other', 2);
                         array_push($created_commands, $key);
                         break;
-					case 'ias':
+                    case 'ias':
                         $key = $this->_create_action($endpoint_id, $action, 'off', 'other', 0);
                         array_push($created_commands, $key);
 
                         $key = $this->_create_action($endpoint_id, $action, 'buzzer_2sec', 'other', 2);
                         array_push($created_commands, $key);
 						
-						$key = $this->_create_action($endpoint_id, $action, 'buzzer_5sec', 'other', 5);
+                        $key = $this->_create_action($endpoint_id, $action, 'buzzer_5sec', 'other', 5);
                         array_push($created_commands, $key);
 						
-						$key = $this->_create_action($endpoint_id, $action, 'buzzer_10sec', 'other', 10);
+                        $key = $this->_create_action($endpoint_id, $action, 'buzzer_10sec', 'other', 10);
                         array_push($created_commands, $key);
 						
                         $key = $this->_create_action($endpoint_id, $action, 'strobe_ON', 'other', 139);
@@ -913,7 +913,7 @@ class zigateCmd extends cmd
         $endpoint = $this->getConfiguration('endpoint');
         $action = $this->getConfiguration('action');
         $value = $this->getConfiguration('value');
-		$name = $this->getName();
+        $name = $this->getName();
 
         switch ($this->getSubType()) {
             case 'slider':
@@ -965,14 +965,15 @@ class zigateCmd extends cmd
             case 'refresh':
                 zigate::callZiGate('refresh_device', [$addr]);
                 break;
-			case 'ias':
-				if (substr($name,0,6) == "buzzer"){
-					zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0x18, $value, 1, 1 ]);
-				}else if ((substr($name,0,6) == "strobe")){
-					zigate::CallZiGate('action_ias_squawk', [$addr, $endpoint, $value ]);
-				}else{
-					zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0, 0, 0, 0 ]);
-				} 
+
+            case 'ias':
+                if (substr($name,0,6) == "buzzer"){
+                    zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0x18, $value, 1, 1 ]);
+                }else if ((substr($name,0,6) == "strobe")){
+                    zigate::CallZiGate('action_ias_squawk', [$addr, $endpoint, $value ]);
+                }else{
+                    zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0, 0, 0, 0 ]);
+                } 
                 break;
         }
     }
