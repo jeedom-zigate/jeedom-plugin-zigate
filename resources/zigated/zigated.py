@@ -245,6 +245,7 @@ parser.add_argument('--apikey', help='API Key', default='nokey')
 parser.add_argument('--device', help='ZiGate port', default='auto')
 parser.add_argument('--callback', help='Jeedom callback', default='http://localhost')
 parser.add_argument('--sharedata', type=int, default=1)
+parser.add_argument('--gpio', type=int, default=0)
 parser.add_argument('--channel', type=int, default=None)
 args = parser.parse_args()
 
@@ -334,7 +335,7 @@ if version < '3.0d':
     logging.error('Veuillez mettre à jour le firmware de votre clé ZiGate')
     logging.error('Version actuelle : {} - Version minimale requise : 3.0d'.format(version))
     sys.exit(1)
-if version < '3.0f':
+if version < '3.1a':
     jc.send({'action': 'message',
              'message': 'Le firmware de votre ZiGate est ancien, vous devriez le mettre à jour.'})
 
@@ -345,3 +346,5 @@ if args.sharedata:
 
 t = threading.Thread(target=server.serve_forever)
 t.start()
+
+jc.send({'action': 'syncEqLogicWithZiGate'})

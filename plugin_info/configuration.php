@@ -45,7 +45,7 @@ $versionLib = zigate::callZiGate('get_libversion');
                 {{ Version lib }}
                 <sup><i class="fa fa-question-circle tooltips" title="{{C'est la version de la librairie Python ZiGate}}" style="font-size : 1em;color:grey;"></i></sup>
             </label>
-            <span style="top:6px;" class="col-lg-4"><?php echo $versionLib['result']; ?></span>
+            <span style="top:6px;" class="col-lg-4"><?php echo $versionLib['result']; ?><a class="btn btn-success" id="btn_upgradefirmware">{{Mise à jour du firmware}}</a></span>
         </div>
         <div class="form-group">
             <label class="col-lg-4 control-label">
@@ -62,6 +62,9 @@ $versionLib = zigate::callZiGate('get_libversion');
                     <?php
                     foreach (jeedom::getUsbMapping('', true) as $name => $value) {
                         echo '<option value="' . $value . '">' . $name . ' (' . $value . ')</option>';
+                    }
+                    foreach (ls('/dev/', 'tty*') as $value) {
+                        echo '<option value="/dev/' . $value . '">/dev/' . $value . '</option>';
                     }
                     ?>
                 </select>

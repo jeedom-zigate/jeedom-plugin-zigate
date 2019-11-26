@@ -32,102 +32,86 @@ $eqLogics = eqLogic::byType($plugin->getId());
 ?>
 
 <div class="row row-overflow">
-    <div class="col-lg-2 col-md-3 col-sm-4">
-        <div class="bs-sidebar">
-            <ul id="ul_eqLogic" class="nav nav-list bs-sidenav">
-                <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
-                    <?php
-                    foreach ($eqLogics as $eqLogic) {
-                        $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
-                        echo '<li class="cursor li_eqLogic" data-eqLogic_id="' . $eqLogic->getId() . '" style="' . $opacity .'"><a>' . $eqLogic->getHumanName(true) . '</a></li>';
-                    }
-                    ?>
-           </ul>
-       </div>
-    </div>
-
-    <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
-        <legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
+    <div class="col-xs-12 eqLogicThumbnailDisplay">
+        <legend><i class="fas fa-cog"></i>  {{Gestion}}</legend>
         <div class="eqLogicThumbnailContainer">
-            <div class="cursor eqLogicAction" id="bt_permitJoin" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
-                <center>
-                    <i class="fa fa-sign-in fa-rotate-90" style="font-size : 6em;color:#94ca02;"></i>
-                </center>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#94ca02"><center>{{Mode inclusion}}</center></span>
+            <div class="cursor eqLogicAction logoPrimary" id="bt_permitJoin">
+                <i class="fas fa-sign-in-alt fa-rotate-90"></i>
+                <br/>
+                <span>{{Mode inclusion}}</span>
             </div>
-            <div class="cursor eqLogicAction" id="bt_touchlink" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
-                <center>
-                    <i class="fa fa-link" style="font-size : 6em;color:#0299ca;"></i>
-                </center>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#0299ca"><center>{{TouchLink}}</center></span>
+            <div class="cursor eqLogicAction" id="bt_syncEqLogic">
+                    <i class="fas fa-sync"></i>
+                    <br/>
+                <span>{{Synchroniser}}</span>
             </div>
-            <div class="cursor eqLogicAction" data-action="gotoPluginConf" style="text-align: center; background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;">
-                <center>
-                    <i class="fa fa-wrench" style="font-size : 6em;color:#767676;"></i>
-                </center>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676">{{Configuration}}</span>
+            <div class="cursor eqLogicAction" id="bt_cleanup_devices">
+                    <i class="fas fa-shower"></i>
+                    <br/>
+                <span>{{Nettoyer}}</span>
             </div>
-            <div class="cursor eqLogicAction" id="bt_networkscan" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
-                <center>
-                    <i class="fa fa-search" style="font-size : 6em;color:#767676;"></i>
-                </center>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Scan réseau}}</center></span>
+            <div class="cursor eqLogicAction" id="bt_reset" >
+                    <i class="fas fa-recycle"></i>
+                    <br/>
+                <span>{{Redémarrage Zigate}}</span>
             </div>
-            <div class="cursor" id="bt_terminalzigate" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
-                <center>
-                    <i class="fa fa-terminal" style="font-size : 6em;color:#767676;"></i>
-                </center>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Terminal}}</center></span>
+            <div class="cursor eqLogicAction" id="bt_erasepdm">
+                    <i class="fas fa-eraser"></i>
+                    <br/>
+                <span>{{Effacement Zigate}}</span>
             </div>
-            <div class="cursor" id="bt_networkzigate" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
-                <center>
-                    <i class="fa fa-sitemap" style="font-size : 6em;color:#767676;"></i>
-                </center>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Réseau Zigate}}</center></span>
+            <div class="cursor eqLogicAction" data-action="gotoPluginConf">
+                    <i class="fas fa-wrench"></i>
+                    <br/>
+                <span>{{Configuration}}</span>
             </div>
-            <div class="cursor" id="bt_healthzigate" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
-                <center>
-                    <i class="fa fa-medkit" style="font-size : 6em;color:#767676;"></i>
-                </center>
-                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Santé}}</center></span>
+            <div class="cursor" id="bt_healthzigate">
+                    <i class="fas fa-medkit"></i>
+                    <br/>
+                <span>{{Santé}}</span>
             </div>
-
+            <div class="cursor" id="bt_terminalzigate">
+                    <i class="fas fa-terminal"></i>
+                    <br/>
+                <span>{{Terminal}}</span>
+            </div>
         </div>
 
-        <legend><i class="fa fa-table"></i> {{Mes équipements ZiGate}}</legend>
-        <input class="form-control" placeholder="{{Rechercher}}" style="margin-bottom:4px;" id="in_searchEqlogic" />
+        <legend><i class="fas fa-table"></i> {{Mes équipements ZiGate}}</legend>
+        <input class="form-control" placeholder="{{Rechercher}}" id="in_searchEqlogic" />
         <div class="eqLogicThumbnailContainer">
             <?php
-
             foreach ($eqLogics as $eqLogic) {
-                $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
-                echo '<div class="eqLogicDisplayCard cursor" data-logical-id="' . $eqLogic->getLogicalId() . '" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
+                $opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
+                echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-logical-id="' . $eqLogic->getLogicalId() . '" data-eqLogic_id="' . $eqLogic->getId() . '">';
                 echo "<center>";
                 echo '<img src="' . $eqLogic->getImage() . '" height="105" width="95" />';
                 echo "</center>";
-                echo '<span class="name" style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><center>' . $eqLogic->getHumanName(true, true) . '</center></span>';
+                echo '<span class="name" ' . $eqLogic->getHumanName(true, true) . '</span>';
                 echo '</div>';
             }
-            // phpcs:enable Generic.Files.LineLength.TooLong
             ?>
-
         </div>
     </div>
 
-    <div class="col-lg-10 col-md-9 col-sm-8 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
-        <a class="btn btn-success eqLogicAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
-        <a class="btn btn-danger eqLogicAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
-        <a class="btn btn-default eqLogicAction pull-right" data-action="configure"><i class="fa fa-cogs"></i> {{Configuration avancée}}</a>
-        <a class="btn btn-success eqLogicAction pull-right" data-action="refresh_device"><i class="fa fa-refresh"></i> {{Rafraichir l'équipement}}</a>
-        <a class="btn btn-success eqLogicAction pull-right" data-action="discover_device"><i class="fa fa-refresh"></i> {{Découvrir l'équipement}}</a>
-        <a class="btn btn-success eqLogicAction pull-right" data-action="identify_device"><i class="fa fa-refresh"></i> {{Identifier}}</a>
+    <div class="col-xs-12 eqLogic" style="display: none;">
+    <div class="input-group pull-right" style="display:inline-flex">
+    <span class="input-group-btn">
+        <a class="btn btn-success eqLogicAction roundedLeft" data-action="save"><i class="fas fa-check-circle"></i> {{Sauvegarder}}</a>
+        <a class="btn btn-danger eqLogicAction" data-action="remove"><i class="fas fa-minus-circle"></i> {{Supprimer}}</a>
+        <a class="btn btn-default eqLogicAction" data-action="configure"><i class="fas fa-cogs"></i> {{Configuration avancée}}</a>
+        <a class="btn btn-success eqLogicAction" data-action="refresh_device"><i class="fas fa-refresh"></i> {{Rafraichir l'équipement}}</a>
+        <a class="btn btn-success eqLogicAction" data-action="discover_device"><i class="fas fa-refresh"></i> {{Découvrir l'équipement}}</a>
+        <a class="btn btn-success eqLogicAction roundedRight" data-action="identify_device"><i class="fas fa-refresh"></i> {{Identifier}}</a>
+        </span>
+        </div>
 
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay">
-                <i class="fa fa-arrow-circle-left"></i></a>
+                <i class="fas fa-arrow-circle-left"></i></a>
             </li>
-            <li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-tachometer"></i> {{Equipement}}</a></li>
-            <li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes}}</a></li>
+            <li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer"></i> {{Equipement}}</a></li>
+            <li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list-alt"></i> {{Commandes}}</a></li>
         </ul>
 
         <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
@@ -148,7 +132,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                 <select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
                                     <option value="">{{Aucun}}</option>
                                     <?php
-                                    foreach (object::all() as $object) {
+                                    foreach (jeeObject::all() as $object) {
                                         echo '<option value="' . $object->getId() . '">' . $object->getName() . '</option>';
                                     }
                                     ?>
@@ -199,7 +183,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">{{Qualité du lien (1-255)}}</label>
+                            <label class="col-sm-3 control-label">{{Qualité du lien LQI (1-255)}}</label>
                             <div class="col-sm-3">
                                 <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="lqi" placeholder="0" readonly=true/>
                             </div>
