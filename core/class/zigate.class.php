@@ -968,10 +968,10 @@ class zigateCmd extends cmd
             case 'ias_warning':
                     zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0x18, $value, 1, 1 ]);
                 break;
-			case 'ias_off':
+            case 'ias_off':
                     zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0, 0, 0, 0 ]);
                 break;
-			case 'ias_squawk':
+            case 'ias_squawk':
                     zigate::CallZiGate('action_ias_squawk', [$addr, $endpoint, $value ]);
                 break;
         }
