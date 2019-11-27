@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.5.0 (2019-11-27)
+
+* Support Firmware 3.1a et 3.1b
+* Ajout carte du réseau
+* Support Konke
+* Meilleur support Profalux
+* Support Sirène
+* Diverses corrections
+
 ## v1.2.0 (2019-02-11)
 
 * Enhancement #83: Support du firmware 3.0e.

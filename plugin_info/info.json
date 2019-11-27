@@ -10,11 +10,11 @@
 	"hasOwnDeamon": true,
 	"maxDependancyInstallTime": 30,
 	"link": {
-		"forum": "https://www.jeedom.com/forum/viewtopic.php?f=133&t=34490"
+		"forum": "https://community.jeedom.com/t/plugin-zigate"
 	},
 	"changelog": "https://jeedom-zigate.github.io/jeedom-plugin-zigate/fr_FR/changelog",
 	"documentation": "https://jeedom-zigate.github.io/jeedom-plugin-zigate",
 	"language": ["fr_FR", "en_US"],
 	"compatibility": ["miniplus", "smart", "rpi", "docker", "diy"],
-	"pluginVersion": "1.5.0beta"
+	"pluginVersion": "1.5.0"
 }
