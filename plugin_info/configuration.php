@@ -45,7 +45,7 @@ $versionLib = zigate::callZiGate('get_libversion');
                 {{ Version lib }}
                 <sup><i class="fa fa-question-circle tooltips" title="{{C'est la version de la librairie Python ZiGate}}" style="font-size : 1em;color:grey;"></i></sup>
             </label>
-            <span style="top:6px;" class="col-lg-4"><?php echo $versionLib['result']; ?><a class="btn btn-success" id="btn_upgradefirmware">{{Mise à jour du firmware}}</a></span>
+            <span style="top:6px;" class="col-lg-4"><?php echo $versionLib['result']; ?></span>
         </div>
         <div class="form-group">
             <label class="col-lg-4 control-label">
@@ -68,6 +68,12 @@ $versionLib = zigate::callZiGate('get_libversion');
                     }
                     ?>
                 </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">{{Activer la LED}}</label>
+            <div class="col-sm-3">
+                <input type="checkbox" class="configKey form-control" data-l1key="enable_led"/>
             </div>
         </div>
         <div class="form-group">

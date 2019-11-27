@@ -9,8 +9,10 @@ echo "Installation des dépendances"
 sudo apt-get update
 echo 10 > ${PROGRESS_FILE}
 sudo apt-get install -y python3
-echo 30 > ${PROGRESS_FILE}
+echo 20 > ${PROGRESS_FILE}
 sudo apt-get install -y python3-pip
+echo 30 > ${PROGRESS_FILE}
+sudo apt-get install -y python3-serial
 echo 40 > ${PROGRESS_FILE}
 sudo apt-get install -y python3-requests
 echo 50 > ${PROGRESS_FILE}
@@ -25,5 +27,7 @@ zigate_version=$(head -1 $BASEDIR/zigate_version.txt)
 sudo python3 -m pip install zigate==$zigate_version
 echo 100 > ${PROGRESS_FILE}
 sudo usermod -aG gpio www-data
-echo "Installation des dépendances terminé !"
+echo "Installation des dépendances terminée !"
 rm ${PROGRESS_FILE}
+echo "Vérification de la version installée"
+python3 -c 'import zigate;print(zigate.__version__)'

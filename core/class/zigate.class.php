@@ -166,7 +166,7 @@ class zigate extends eqLogic
             $eqLogic->setEqType_name('zigate');
             $eqLogic->setIsEnable(1);
             $eqLogic->setLogicalId($ieee);
-            $eqLogic->setName('Device ' . $ieee . '(' . $addr . ')');
+            $eqLogic->setName('Device ' . $ieee . ' (' . $addr . ')');
             $eqLogic->setIsVisible(1);
             $eqLogic->save();
             $eqLogic = self::byId($eqLogic->getId());
@@ -308,6 +308,26 @@ class zigate extends eqLogic
                         $key = $this->_create_action($endpoint_id, $action, 'stop', 'other', 2);
                         array_push($created_commands, $key);
                         break;
+                    case 'ias':
+                        $key = $this->_create_action($endpoint_id, 'ias_off', 'off', 'other', 0);
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, 'ias_warning', 'buzzer_2sec', 'other', 2);
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, 'ias_warning', 'buzzer_5sec', 'other', 5);
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, 'ias_warning', 'buzzer_10sec', 'other', 10);
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, 'ias_squawk', 'strobe_ON', 'other', 139);
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, 'ias_squawk', 'strobe_ON_Buzzer_ON', 'other', 11);
+                        array_push($created_commands, $key);
+                        
+                        break;
                 }
             }
         }
@@ -379,8 +399,14 @@ class zigate extends eqLogic
 
         $cmd_info = $this->getCmd(null, $key);
         if (!is_object($cmd_info)) {
+            log::add('zigate', 'debug', 'Command doesn\'t exist, create it');
             $cmd_info = new zigateCmd();
             $cmd_info->setLogicalId($key);
+            $cmd_info->setConfiguration('addr', $this->getConfiguration('addr'));
+            $cmd_info->setConfiguration('ieee', $this->getLogicalId());
+            $cmd_info->setConfiguration('endpoint', $endpoint_id);
+            $cmd_info->setConfiguration('cluster', $cluster_id);
+            $cmd_info->setConfiguration('attribute', $attribute_id);
             $cmd_info->setType('info');
             $cmd_info->setEqLogic_id($this->getId());
             $cmd_info->setIsHistorized(0);
@@ -399,70 +425,74 @@ class zigate extends eqLogic
             if (isset($attribute['unit'])) {
                 $cmd_info->setUnite($attribute['unit']);
             }
-        }
 
-        if (isset($attribute['name'])) {
-            $cmd_info->setConfiguration('property', $name);
-            if ($cluster_id < 5) {
-                $this->setConfiguration($name, $attribute['value']);
-                // rename device to add type in name if not renamed
-                if ($name == 'type' && $attribute['value'] && $this->getName() == 'Device ' . $this->getLogicalId()) {
-                    $this->setName('Device ' . $this->getLogicalId(). ' '.$attribute['value']);
+            if (isset($attribute['name'])) {
+                $cmd_info->setConfiguration('property', $name);
+                if ($cluster_id < 5) {
+                    $this->setConfiguration($name, $attribute['value']);
                 }
-                $this->save();
             }
+
+            switch (gettype($value)) {
+                case 'boolean':
+                    $cmd_info->setSubType('binary');
+                    break;
+                case 'integer':
+                    $cmd_info->setSubType('numeric');
+                    if ($name == 'current_level') {
+                        $cmd_info->setConfiguration('minValue', 0);
+                        $cmd_info->setConfiguration('maxValue', 100);
+                    }
+                    if ($name == 'current_hue') {
+                        $cmd_info->setConfiguration('minValue', 0);
+                        $cmd_info->setConfiguration('maxValue', 360);
+                    }
+                    if ($name == 'current_saturation') {
+                        $cmd_info->setConfiguration('minValue', 0);
+                        $cmd_info->setConfiguration('maxValue', 100);
+                    }
+                    if ($name == 'colour_temperature') {
+                        $cmd_info->setConfiguration('minValue', 153);
+                        $cmd_info->setConfiguration('maxValue', 500);
+                    }
+                    break;
+                case 'double':
+                    $cmd_info->setSubType('numeric');
+                    break;
+                default:
+                    $cmd_info->setSubType('string');
+                    break;
+            }
+            $cmd_info->save();
         }
-
-        $cmd_info->setConfiguration('addr', $this->getConfiguration('addr'));
-        $cmd_info->setConfiguration('ieee', $this->getLogicalId());
-        $cmd_info->setConfiguration('endpoint', $endpoint_id);
-        $cmd_info->setConfiguration('cluster', $cluster_id);
-        $cmd_info->setConfiguration('attribute', $attribute_id);
-
+        
+        // rename device to add type in name if not renamed
+        if ($name == 'type' && $attribute['value'] && $this->getName() == 'Device ' . $this->ieee() . ' (' . $this->addr() . ')') {
+            $this->setName($this->getConfiguration('manufacturer').' '.$attribute['value'].' ('.$this->addr().') '.$this->ieee());
+        }
+        $this->save();
+        
         if ($name == 'battery' or $name == 'battery_voltage') {
             $this->evaluateBattery($value);
         } elseif ($name == 'battery_percent') {
             $this->batteryStatus($value);
         }
         
-
-        switch (gettype($value)) {
-            case 'boolean':
-                $cmd_info->setSubType('binary');
-                break;
-            case 'integer':
-                $cmd_info->setSubType('numeric');
-                if ($name == 'current_level') {
-                    $cmd_info->setConfiguration('minValue', 0);
-                    $cmd_info->setConfiguration('maxValue', 100);
-                }
-                if ($name == 'current_hue') {
-                    $cmd_info->setConfiguration('minValue', 0);
-                    $cmd_info->setConfiguration('maxValue', 360);
-                }
-                if ($name == 'current_saturation') {
-                    $cmd_info->setConfiguration('minValue', 0);
-                    $cmd_info->setConfiguration('maxValue', 100);
-                }
-                if ($name == 'colour_temperature') {
-                    $cmd_info->setConfiguration('minValue', 153);
-                    $cmd_info->setConfiguration('maxValue', 500);
-                }
-                break;
-            case 'double':
-                $cmd_info->setSubType('numeric');
-                break;
-            default:
-                $cmd_info->setSubType('string');
-                break;
-        }
-
-        $cmd_info->save();
         if ($value != $cmd_info->getCache('value', '')) {
             $cmd_info->event($value);
         }
 
         return $key;
+    }
+    
+    public function ieee()
+    {
+        return $this->getConfiguration('ieee');
+    }
+    
+    public function addr()
+    {
+        return $this->getConfiguration('addr');
     }
 
     /**
@@ -628,6 +658,7 @@ class zigate extends eqLogic
         $port = config::byKey('port', 'zigate');
         $host = config::byKey('host', 'zigate');
         $gpio = config::byKey('gpio', 'zigate');
+        $enable_led = config::byKey('enable_led', 'zigate');
         $channel = config::byKey('channel', 'zigate');
         $sharedata = config::byKey('sharedata', 'zigate');
         $zigate_path = dirname(__FILE__) . '/../../resources';
@@ -646,6 +677,7 @@ class zigate extends eqLogic
         $cmd .= ' --socket ' . jeedom::getTmpFolder('zigate') . '/daemon.sock';
         $cmd .= ' --callback ' . $callback;
         $cmd .= ' --sharedata ' . $sharedata;
+        $cmd .= ' --enable_led ' . $enable_led;
         if ($channel) {
             $cmd .= ' --channel ' . $channel;
         }
@@ -933,6 +965,16 @@ class zigateCmd extends cmd
 
             case 'refresh':
                 zigate::callZiGate('refresh_device', [$addr]);
+                break;
+
+            case 'ias_warning':
+                    zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0x18, $value, 1, 1 ]);
+                break;
+            case 'ias_off':
+                    zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0, 0, 0, 0 ]);
+                break;
+            case 'ias_squawk':
+                    zigate::CallZiGate('action_ias_squawk', [$addr, $endpoint, $value ]);
                 break;
         }
     }

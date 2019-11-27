@@ -70,6 +70,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
                     <br/>
                 <span>{{Santé}}</span>
             </div>
+            <div class="cursor" id="bt_networkzigate">
+                    <i class="fas fa-network-wired"></i>
+                    <br/>
+                <span>{{Réseau}}</span>
+            </div>
             <div class="cursor" id="bt_terminalzigate">
                     <i class="fas fa-terminal"></i>
                     <br/>
@@ -183,7 +188,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">{{Qualité du lien (1-255)}}</label>
+                            <label class="col-sm-3 control-label">{{Qualité du lien LQI (1-255)}}</label>
                             <div class="col-sm-3">
                                 <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="lqi" placeholder="0" readonly=true/>
                             </div>

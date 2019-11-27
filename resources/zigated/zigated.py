@@ -246,6 +246,7 @@ parser.add_argument('--device', help='ZiGate port', default='auto')
 parser.add_argument('--callback', help='Jeedom callback', default='http://localhost')
 parser.add_argument('--sharedata', type=int, default=1)
 parser.add_argument('--gpio', type=int, default=0)
+parser.add_argument('--enable_led', type=int, default=1)
 parser.add_argument('--channel', type=int, default=None)
 args = parser.parse_args()
 
@@ -328,6 +329,7 @@ zigate.dispatcher.connect(store_response, zigate.ZIGATE_RESPONSE_RECEIVED, weak=
 
 z.autoStart(args.channel)
 z.start_auto_save()
+z.set_led(args.enable_led == 1)
 
 version = z.get_version_text()
 logging.info('Firmware ZiGate : {}'.format(version))
