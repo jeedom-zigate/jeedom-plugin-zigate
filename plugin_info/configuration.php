@@ -71,6 +71,12 @@ $versionLib = zigate::callZiGate('get_libversion');
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-3 control-label">{{Activer la LED}}</label>
+            <div class="col-sm-3">
+                <input type="checkbox" class="configKey form-control" data-l1key="enable_led"/>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-3 control-label">{{PiZiGate (GPIO)}}</label>
             <div class="col-sm-3">
                 <input type="checkbox" class="configKey form-control" data-l1key="gpio"/>

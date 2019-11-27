@@ -658,6 +658,7 @@ class zigate extends eqLogic
         $port = config::byKey('port', 'zigate');
         $host = config::byKey('host', 'zigate');
         $gpio = config::byKey('gpio', 'zigate');
+        $enable_led = config::byKey('enable_led', 'zigate');
         $channel = config::byKey('channel', 'zigate');
         $sharedata = config::byKey('sharedata', 'zigate');
         $zigate_path = dirname(__FILE__) . '/../../resources';
@@ -676,6 +677,7 @@ class zigate extends eqLogic
         $cmd .= ' --socket ' . jeedom::getTmpFolder('zigate') . '/daemon.sock';
         $cmd .= ' --callback ' . $callback;
         $cmd .= ' --sharedata ' . $sharedata;
+        $cmd .= ' --enable_led ' . $enable_led;
         if ($channel) {
             $cmd .= ' --channel ' . $channel;
         }
