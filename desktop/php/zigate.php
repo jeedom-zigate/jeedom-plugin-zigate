@@ -70,6 +70,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
                     <br/>
                 <span>{{Santé}}</span>
             </div>
+            <div class="cursor" id="bt_networkzigate">
+                    <i class="fas fa-network-wired"></i>
+                    <br/>
+                <span>{{Réseau}}</span>
+            </div>
             <div class="cursor" id="bt_terminalzigate">
                     <i class="fas fa-terminal"></i>
                     <br/>
