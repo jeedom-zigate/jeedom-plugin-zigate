@@ -16,5 +16,5 @@
 	"documentation": "https://jeedom-zigate.github.io/jeedom-plugin-zigate",
 	"language": ["fr_FR", "en_US"],
 	"compatibility": ["miniplus", "smart", "rpi", "docker", "diy"],
-	"pluginVersion": "1.4.1beta"
+	"pluginVersion": "1.5.0beta"
 }
