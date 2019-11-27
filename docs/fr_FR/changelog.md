@@ -8,6 +8,7 @@
 * Meilleur support Profalux
 * Support Sirène
 * Diverses corrections
+* Controle de la LED
 * Support Jeedom v4 minimum
 
 ## v1.2.0 (2019-02-11)
