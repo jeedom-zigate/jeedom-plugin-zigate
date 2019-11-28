@@ -83,8 +83,6 @@ class zigate extends eqLogic
         $eqLogic = self::byLogicalId('zigate', 'zigate');
         if (!is_object($eqLogic)) {
             log::add('zigate', 'debug', 'eqLogic ZiGate absent, création');
-            $addr = zigate::callZiGate('addr');
-            $ieee = zigate::callZiGate('ieee');
             $eqLogic = new eqLogic();
             $eqLogic->setEqType_name('zigate');
             $eqLogic->setIsEnable(1);
@@ -94,6 +92,8 @@ class zigate extends eqLogic
             $eqLogic->save();
             $eqLogic = self::byId($eqLogic->getId());
         }
+        $addr = zigate::callZiGate('addr');
+        $ieee = zigate::callZiGate('ieee');
         $eqLogic->setConfiguration('addr', $addr);
         $eqLogic->setConfiguration('ieee', $ieee);
         $eqLogic->save();
