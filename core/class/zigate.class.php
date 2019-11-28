@@ -91,6 +91,8 @@ class zigate extends eqLogic
             $eqLogic->setIsVisible(1);
             $eqLogic->save();
             $eqLogic = self::byId($eqLogic->getId());
+            $eqLogic->setConfiguration('type', 'ZiGate');
+            $eqLogic->setConfiguration('manufacturer', 'zigate.fr');
         }
         $addr = zigate::callZiGate('addr')['result'];
         $ieee = zigate::callZiGate('ieee')['result'];
