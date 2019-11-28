@@ -76,13 +76,35 @@ class zigate extends eqLogic
 
 
     /**
+     * Create/Update ZiGate object
+     */
+    public static function createZiGate()
+    {
+        $eqLogic = self::byLogicalId('zigate', 'zigate');
+        if (!is_object($eqLogic)) {
+            log::add('zigate', 'debug', 'eqLogic ZiGate absent, création');
+            $eqLogic = new eqLogic();
+            $eqLogic->setEqType_name('zigate');
+            $eqLogic->setIsEnable(1);
+            $eqLogic->setLogicalId('zigate');
+            $eqLogic->setName('ZiGate');
+            $eqLogic->setIsVisible(1);
+            $eqLogic->save();
+        }
+    }
+
+
+    /**
      * Sync all eqLogic.
      */
     public static function syncEqLogicWithZiGate()
     {
+        log::add('zigate', 'debug', 'Création de l\'objet ZiGate');
+        zigate::createZiGate();
+        
         log::add('zigate', 'debug', 'Synchronisation des équipements entre le démon et jeedom');
         $results = zigate::callZiGate('devices');
-        $findDevice = [];
+        $findDevice = ['zigate'];
         foreach ($results['result'] as $result) {
             $ieee = zigate::syncDevice($result);
             array_push($findDevice, $ieee);
