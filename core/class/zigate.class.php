@@ -269,6 +269,12 @@ class zigate extends eqLogic
         }
 
         $this->batteryStatus($percent);
+        $fake_attribute = array('name' => 'battery_level',
+            'value' => $percent,
+            'attribute' => 'battery_level',
+            'unit' => '%'
+        );
+        $this->_create_command(0, 0, $fake_attribute);
     }
 
 
@@ -506,6 +512,12 @@ class zigate extends eqLogic
             $this->evaluateBattery($value);
         } elseif ($name == 'battery_percent') {
             $this->batteryStatus($value);
+            $fake_attribute = array('name' => 'battery_level',
+                'value' => $value,
+                'attribute' => 'battery_level',
+                'unit' => '%'
+            );
+            $this->_create_command(0, 0, $fake_attribute);
         }
         
         if ($value != $cmd_info->getCache('value', '')) {
