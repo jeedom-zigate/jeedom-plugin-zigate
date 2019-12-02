@@ -345,16 +345,16 @@ class zigate extends eqLogic
                         $key = $this->_create_action($endpoint_id, 'ias_warning', 'buzzer_2sec', 'other', 2);
                         array_push($created_commands, $key);
                         
-                        $key = $this->_create_action($endpoint_id, 'ias_warning', 'buzzer_5sec', 'other', 5);
-                        array_push($created_commands, $key);
-                        
                         $key = $this->_create_action($endpoint_id, 'ias_warning', 'buzzer_10sec', 'other', 10);
                         array_push($created_commands, $key);
                         
-                        $key = $this->_create_action($endpoint_id, 'ias_squawk', 'strobe_ON', 'other', 139);
+                        $key = $this->_create_action($endpoint_id, 'ias_warning', 'buzzer_60sec', 'other', 60);
                         array_push($created_commands, $key);
                         
-                        $key = $this->_create_action($endpoint_id, 'ias_squawk', 'strobe_ON_Buzzer_ON', 'other', 11);
+                        $key = $this->_create_action($endpoint_id, 'ias_squawk', 'Disarmed', 'other', 'disarmed');
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, 'ias_squawk', 'Armed', 'other', 'armed');
                         array_push($created_commands, $key);
                         
                         break;
@@ -998,13 +998,13 @@ class zigateCmd extends cmd
                 break;
 
             case 'ias_warning':
-                    zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0x18, $value, 1, 1 ]);
+                    zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 'burglar', true, 'low', $value]);
                 break;
             case 'ias_off':
-                    zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0, 0, 0, 0 ]);
+                    zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 'stop']);
                 break;
             case 'ias_squawk':
-                    zigate::CallZiGate('action_ias_squawk', [$addr, $endpoint, $value ]);
+                    zigate::CallZiGate('action_ias_squawk', [$addr, $endpoint, $value, true]);
                 break;
         }
     }
