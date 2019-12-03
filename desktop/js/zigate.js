@@ -107,29 +107,29 @@ $('#bt_erasepdm').on('click', function () {
 });
 
 $('.eqLogicAction[data-action=refresh_device]').on('click', function () {
-    if ($('.li_eqLogic.active').attr('data-eqLogic_id') != undefined) {
-        id = $('.li_eqLogic.active').attr('data-eqLogic_id');
+    if ($('.eqLogicDisplayCard.active').attr('data-eqLogic_id') != undefined) {
+        id = $('.eqLogicDisplayCard.active').attr('data-eqLogic_id');
         refresh_eqlogic(id);
     } else {
-        $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner un}} ' + eqType, level: 'danger'});
+        $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner objet}} ' + eqType, level: 'danger'});
     }
 });
 
 $('.eqLogicAction[data-action=discover_device]').on('click', function () {
-    if ($('.li_eqLogic.active').attr('data-eqLogic_id') != undefined) {
-        id = $('.li_eqLogic.active').attr('data-eqLogic_id');
+    if ($('.eqLogicDisplayCard.active').attr('data-eqLogic_id') != undefined) {
+        id = $('.eqLogicDisplayCard.active').attr('data-eqLogic_id');
         discover_eqlogic(id);
     } else {
-        $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner un}} ' + eqType, level: 'danger'});
+        $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner un objet}} ' + eqType, level: 'danger'});
     }
 });
 
 $('.eqLogicAction[data-action=identify_device]').on('click', function () {
-    if ($('.li_eqLogic.active').attr('data-eqLogic_id') != undefined) {
-        id = $('.li_eqLogic.active').attr('data-eqLogic_id');
+    if ($('.eqLogicDisplayCard.active').attr('data-eqLogic_id') != undefined) {
+        id = $('.eqLogicDisplayCard.active').attr('data-eqLogic_id');
         identify_device(id);
     } else {
-        $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner un}} ' + eqType, level: 'danger'});
+        $('#div_alert').showAlert({message: '{{Veuillez d\'abord sélectionner un objet}} ' + eqType, level: 'danger'});
     }
 });
 
