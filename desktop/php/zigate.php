@@ -81,7 +81,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 <span>{{Terminal}}</span>
             </div>
             <div class="cursor" id="bt_zigateadmin">
-                    <i class="fas fa-terminal"></i>
+                    <i class="fas fa-tools"></i>
                     <br/>
                 <span>{{ZiGate Admin}}</span>
             </div>

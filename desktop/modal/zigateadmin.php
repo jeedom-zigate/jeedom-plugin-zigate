@@ -25,6 +25,4 @@ if (!isConnect('admin')) {
     throw new Exception('401 - Accès non autorisé');
 }
 ?>
-<div class="tab-content">
-	<iframe src="plugins/zigate/core/php/zigateproxy.php"></iframe>
-</div>
+<iframe src="plugins/zigate/core/php/zigateproxy.php" style="width:100%;height:100%;border:0"></iframe>
