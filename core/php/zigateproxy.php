@@ -25,11 +25,11 @@
 
 
   #if ($_GET && $_GET['url']) {
-  if ($_GET && $_GET['url']) {
+  if ($_GET) {
     $headers = getallheaders();
     $headers_str = [];
     #$url = $_GET['url'];
-    $url = 'http://localhost:9998';
+    $url = 'http://localhost:9998/';
     
     foreach ( $headers as $key => $value){
       if($key == 'Host')
