@@ -80,6 +80,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
                     <br/>
                 <span>{{Terminal}}</span>
             </div>
+            <div class="cursor" id="bt_zigateadmin">
+                    <i class="fas fa-terminal"></i>
+                    <br/>
+                <span>{{ZiGate Admin}}</span>
+            </div>
         </div>
 
         <legend><i class="fas fa-table"></i> {{Mes équipements ZiGate}}</legend>

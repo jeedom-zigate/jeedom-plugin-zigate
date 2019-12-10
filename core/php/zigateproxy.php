@@ -24,10 +24,12 @@
   $method = $_SERVER['REQUEST_METHOD'];
 
 
+  #if ($_GET && $_GET['url']) {
   if ($_GET && $_GET['url']) {
     $headers = getallheaders();
     $headers_str = [];
-    $url = $_GET['url'];
+    #$url = $_GET['url'];
+    $url = 'http://localhost:9998';
     
     foreach ( $headers as $key => $value){
       if($key == 'Host')

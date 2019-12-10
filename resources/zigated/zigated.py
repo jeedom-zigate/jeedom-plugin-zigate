@@ -346,6 +346,8 @@ if args.sharedata:
     t.setDaemon(True)
     t.start()
 
+z.start_adminpanel()
+
 t = threading.Thread(target=server.serve_forever)
 t.start()
 
