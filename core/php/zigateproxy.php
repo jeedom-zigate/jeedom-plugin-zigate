@@ -28,7 +28,7 @@
     $headers = getallheaders();
     $headers_str = [];
     #$url = $_GET['url'];
-    $url = 'http://localhost:9998/plugins/zigate/core/php/zigateproxy.php?url='.$_GET['url'];
+    $url = 'http://localhost/plugins/zigate/core/php/zigateproxy.php?url='.$_GET['url'];
     
     foreach ( $headers as $key => $value){
       if($key == 'Host')
@@ -36,7 +36,8 @@
       $headers_str[]=$key.":".$value;
     }
 
-    $ch = curl_init($url);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_PORT, 9998);
 
     curl_setopt($ch,CURLOPT_URL, $url);
     if( $method !== 'GET') {
