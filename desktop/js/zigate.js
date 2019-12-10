@@ -44,9 +44,6 @@ $('#bt_networkzigate').on('click', function() {
 $('#bt_zigateadmin').on('click', function() {
 	$('#md_modal').dialog({
 				title : "{{ZiGate Admin}}",
-				close : function() {
-					startstopTimer();
-				}
 			});
 	$('#md_modal').load('index.php?v=d&plugin=zigate&modal=zigateadmin')
 			.dialog('open');
