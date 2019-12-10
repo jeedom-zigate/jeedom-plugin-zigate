@@ -28,7 +28,7 @@
     $headers = getallheaders();
     $headers_str = [];
     #$url = $_GET['url'];
-    $url = 'http://localhost:9998' & $_GET['url'];
+    $url = 'http://localhost:9998'.$_GET['url'];
     
     foreach ( $headers as $key => $value){
       if($key == 'Host')
