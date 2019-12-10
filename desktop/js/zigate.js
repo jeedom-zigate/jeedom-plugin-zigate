@@ -43,7 +43,7 @@ $('#bt_networkzigate').on('click', function() {
 
 $('#bt_zigateadmin').on('click', function() {
 	$('#md_modal').dialog({
-				title : "{{ZiGate Admin}}",
+				title : "{{ZiGate Admin}}"
 			});
 	$('#md_modal').load('index.php?v=d&plugin=zigate&modal=zigateadmin')
 			.dialog('open');
