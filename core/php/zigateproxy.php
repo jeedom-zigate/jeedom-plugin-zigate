@@ -28,7 +28,7 @@
     $headers = getallheaders();
     $headers_str = [];
     #$url = $_GET['url'];
-    $url = 'http://localhost/plugins/zigate/core/php/zigateproxy.php?url='.$_GET['url'];
+    $url = 'http://localhost/'.$_GET['url'];
     
     foreach ( $headers as $key => $value){
       if($key == 'Host')
