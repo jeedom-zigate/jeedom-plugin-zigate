@@ -69,10 +69,10 @@
     $info = curl_getinfo($ch);
     curl_close($ch);
     
-    header('Content-Type: application/json');
+    header('Content-Type: '.$info[CURLINFO_CONTENT_TYPE]);
+    http_response_code($info[CURLINFO_RESPONSE_CODE]);
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT');
-    http_response_code($info['http_code']);
     echo $result;
   }
   else {
