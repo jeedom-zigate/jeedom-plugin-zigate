@@ -13,6 +13,8 @@ echo 20 > ${PROGRESS_FILE}
 sudo apt-get install -y python3-pip
 echo 30 > ${PROGRESS_FILE}
 sudo apt-get install -y python3-serial
+echo 35 > ${PROGRESS_FILE}
+sudo apt-get install -y python3-usb
 echo 40 > ${PROGRESS_FILE}
 sudo apt-get install -y python3-requests
 echo 50 > ${PROGRESS_FILE}
