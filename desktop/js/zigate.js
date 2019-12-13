@@ -1,20 +1,20 @@
 /*
  * This file is part of Jeedom.
- * 
+ *
  * Jeedom is free software: you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * Jeedom is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
-$('#bt_healthzigate').on('click', function() {
+$('#bt_healthzigate').on('click', function () {
     $('#md_modal').dialog({
                 title : "{{Santé Zigate}}"
             });
@@ -22,10 +22,10 @@ $('#bt_healthzigate').on('click', function() {
             .dialog('open');
 });
 
-$('#bt_terminalzigate').on('click', function() {
+$('#bt_terminalzigate').on('click', function () {
     $('#md_modal').dialog({
                 title : "{{Terminal Zigate}}",
-                close : function() {
+                close : function () {
                     startstopTimer();
                 }
             });
@@ -33,7 +33,7 @@ $('#bt_terminalzigate').on('click', function() {
             .dialog('open');
 });
 
-$('#bt_networkzigate').on('click', function() {
+$('#bt_networkzigate').on('click', function () {
     $('#md_modal').dialog({
                 title : "{{Réseau Zigate}}"
             });
@@ -41,9 +41,9 @@ $('#bt_networkzigate').on('click', function() {
             .dialog('open');
 });
 
-$('#bt_zigateadmin').on('click', function() {
+$('#bt_zigateadmin').on('click', function () {
     $('#md_modal').dialog({
-                title : "{{ZiGate Admin}}"
+        title : "{{ZiGate Admin}}"
             });
     $('#md_modal').load('index.php?v=d&plugin=zigate&modal=zigateadmin')
             .dialog('open');
@@ -107,19 +107,19 @@ function addCmdToTable(_cmd) {
     jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
 }
 
-$('#bt_syncEqLogic').on('click', function() {
+$('#bt_syncEqLogic').on('click', function () {
             syncEqLogicWithZiGate();
         });
 
-$('#bt_permitJoin').on('click', function() {
+$('#bt_permitJoin').on('click', function () {
             permitJoin();
         });
 
-$('#bt_reset').on('click', function() {
+$('#bt_reset').on('click', function () {
             reset();
         });
 
-$('#bt_cleanup_devices').on('click', function() {
+$('#bt_cleanup_devices').on('click', function () {
     bootbox.confirm(
             '{{Etes-vous sûr de vouloir effacer les équipements manquants ?}}',
             function(result) {
@@ -129,7 +129,7 @@ $('#bt_cleanup_devices').on('click', function() {
             });
 });
 
-$('#bt_erasepdm').on('click', function() {
+$('#bt_erasepdm').on('click', function () {
     bootbox.confirm(
             '{{Etes-vous sûr de vouloir effacer les données de la zigate ?}}',
             function(result) {
@@ -139,7 +139,7 @@ $('#bt_erasepdm').on('click', function() {
             });
 });
 
-$('.eqLogicAction[data-action=refresh_device]').on('click', function() {
+$('.eqLogicAction[data-action=refresh_device]').on('click', function () {
     if ($('.eqLogicDisplayCard.active').attr('data-eqLogic_id') != undefined) {
         id = $('.eqLogicDisplayCard.active').attr('data-eqLogic_id');
         refresh_eqlogic(id);
@@ -152,7 +152,7 @@ $('.eqLogicAction[data-action=refresh_device]').on('click', function() {
     }
 });
 
-$('.eqLogicAction[data-action=discover_device]').on('click', function() {
+$('.eqLogicAction[data-action=discover_device]').on('click', function () {
     if ($('.eqLogicDisplayCard.active').attr('data-eqLogic_id') != undefined) {
         id = $('.eqLogicDisplayCard.active').attr('data-eqLogic_id');
         discover_eqlogic(id);
@@ -165,7 +165,7 @@ $('.eqLogicAction[data-action=discover_device]').on('click', function() {
     }
 });
 
-$('.eqLogicAction[data-action=identify_device]').on('click', function() {
+$('.eqLogicAction[data-action=identify_device]').on('click', function () {
     if ($('.eqLogicDisplayCard.active').attr('data-eqLogic_id') != undefined) {
         id = $('.eqLogicDisplayCard.active').attr('data-eqLogic_id');
         identify_device(id);
