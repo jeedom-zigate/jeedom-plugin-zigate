@@ -13,8 +13,8 @@
 
 ## v1.4.*
 
- * Les versions v1.4.* seront les dernières compatibles Jeedom V3, il n'y aura plus d'évolution du plugin mais
- 	uniquement des corrections mineures
+* Les versions v1.4.* seront les dernières compatibles Jeedom V3, il n'y aura plus d'évolution du plugin mais
+ uniquement des corrections mineures
 
 ## v1.2.0 (2019-02-11)
 
