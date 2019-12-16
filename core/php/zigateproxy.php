@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Copyright (c) 2018 Jeedom-ZiGate contributors
  *
@@ -30,16 +30,16 @@ if ($_GET && $_GET['url']) {
     #$url = $_GET['url'];
     $url = 'http://localhost'.$_GET['url'];
     
-    foreach ($headers as $key => $value){
-        if($key == 'Host')
+    foreach ($headers as $key => $value) {
+        if ($key == 'Host') {
             continue;
+        }
         $headers_str[]=$key.":".$value;
     }
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_PORT, 9998);
-
-    curl_setopt($ch,CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_URL, $url);
     if ($method !== 'GET') {
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
     }
