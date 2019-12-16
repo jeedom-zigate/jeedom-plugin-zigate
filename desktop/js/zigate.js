@@ -16,7 +16,7 @@
 
 $('#bt_healthzigate').on('click', function () {
     $('#md_modal').dialog({
-                title : "{{Santé Zigate}}"
+        title : "{{Santé Zigate}}"
             });
     $('#md_modal').load('index.php?v=d&plugin=zigate&modal=health')
             .dialog('open');
@@ -24,10 +24,10 @@ $('#bt_healthzigate').on('click', function () {
 
 $('#bt_terminalzigate').on('click', function () {
     $('#md_modal').dialog({
-                title : "{{Terminal Zigate}}",
-                close : function () {
-                    startstopTimer();
-                }
+        title : "{{Terminal Zigate}}",
+        close : function () {
+            startstopTimer();
+        }
             });
     $('#md_modal').load('index.php?v=d&plugin=zigate&modal=terminal')
             .dialog('open');
@@ -35,7 +35,7 @@ $('#bt_terminalzigate').on('click', function () {
 
 $('#bt_networkzigate').on('click', function () {
     $('#md_modal').dialog({
-                title : "{{Réseau Zigate}}"
+        title : "{{Réseau Zigate}}"
             });
     $('#md_modal').load('index.php?v=d&plugin=zigate&modal=network')
             .dialog('open');
@@ -101,8 +101,7 @@ function addCmdToTable(_cmd) {
     $('#table_cmd tbody').append(tr);
     $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
     if (isset(_cmd.type)) {
-        $('#table_cmd tbody tr:last .cmdAttr[data-l1key=type]')
-                .value(init(_cmd.type));
+        $('#table_cmd tbody tr:last .cmdAttr[data-l1key=type]').value(init(_cmd.type));
     }
     jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
 }
@@ -122,7 +121,7 @@ $('#bt_reset').on('click', function () {
 $('#bt_cleanup_devices').on('click', function () {
     bootbox.confirm(
             '{{Etes-vous sûr de vouloir effacer les équipements manquants ?}}',
-            function(result) {
+            function (result) {
                 if (result) {
                     callZiGate('cleanup_devices');
                 }
@@ -132,7 +131,7 @@ $('#bt_cleanup_devices').on('click', function () {
 $('#bt_erasepdm').on('click', function () {
     bootbox.confirm(
             '{{Etes-vous sûr de vouloir effacer les données de la zigate ?}}',
-            function(result) {
+            function (result) {
                 if (result) {
                     callZiGate('erase_persistent');
                 }
@@ -187,14 +186,14 @@ function callZiGate(action) {
                     ,
                 },
                 dataType : 'json',
-                error : function(request, status, error) {
+                error : function (request, status, error) {
                     handleAjaxError(request, status, error);
                 },
-                success : function(data) {
+                success : function (data) {
                     if (data.state != 'ok') {
                         $('#div_alert').showAlert({
-                                    message : data.result,
-                                    level : 'danger'
+                    message : data.result,
+                    level : 'danger'
                                 });
                         return;
                     }
@@ -215,14 +214,14 @@ function syncEqLogicWithZiGate() {
                     ,
                 },
                 dataType : 'json',
-                error : function(request, status, error) {
+                error : function (request, status, error) {
                     handleAjaxError(request, status, error);
                 },
-                success : function(data) {
+                success : function (data) {
                     if (data.state != 'ok') {
                         $('#div_alert').showAlert({
-                                    message : data.result,
-                                    level : 'danger'
+                    message : data.result,
+                    level : 'danger'
                                 });
                         return;
                     }
@@ -240,20 +239,20 @@ function permitJoin() {
                     ,
                 },
                 dataType : 'json',
-                error : function(request, status, error) {
+                error : function (request, status, error) {
                     handleAjaxError(request, status, error);
                 },
-                success : function(data) {
+                success : function (data) {
                     if (data.state != 'ok') {
                         $('#div_alert').showAlert({
-                                    message : data.result,
-                                    level : 'danger'
+                    message : data.result,
+                    level : 'danger'
                                 });
                         return;
                     } else {
                         $('#div_alert').showAlert({
-                                    message : '{{Mode inclusion lancé pour 30sec.}}',
-                                    level : 'warning'
+                    message : '{{Mode inclusion lancé pour 30sec.}}',
+                    level : 'warning'
                                 });
                     }
                 }
@@ -269,20 +268,20 @@ function reset() {
                     ,
                 },
                 dataType : 'json',
-                error : function(request, status, error) {
+                error : function (request, status, error) {
                     handleAjaxError(request, status, error);
                 },
-                success : function(data) {
+                success : function (data) {
                     if (data.state != 'ok') {
                         $('#div_alert').showAlert({
-                                    message : data.result,
-                                    level : 'danger'
+                    message : data.result,
+                    level : 'danger'
                                 });
                         return;
                     } else {
                         $('#div_alert').showAlert({
-                                    message : '{{Reset de la clé ZiGate.}}',
-                                    level : 'warning'
+                    message : '{{Reset de la clé ZiGate.}}',
+                    level : 'warning'
                                 });
                     }
                 }
@@ -298,10 +297,10 @@ function refresh_eqlogic(id) {
             args : [id]
         },
         dataType : 'json',
-        error : function(request, status, error) {
+        error : function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success : function(data) {
+        success : function (data) {
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({
                             message : data.result,
@@ -329,10 +328,10 @@ function discover_eqlogic(id) {
             args : [id]
         },
         dataType : 'json',
-        error : function(request, status, error) {
+        error : function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success : function(data) {
+        success : function (data) {
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({
                             message : data.result,
@@ -360,10 +359,10 @@ function identify_device(id) {
             args : [id]
         },
         dataType : 'json',
-        error : function(request, status, error) {
+        error : function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success : function(data) {
+        success : function (data) {
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({
                             message : data.result,
@@ -381,7 +380,7 @@ function identify_device(id) {
 }
 
 $('body').off('zigate::device_changed').on('zigate::device_changed',
-        function(_event, _options) {
+        function (_event, _options) {
             if (_options == '') {
                 window.location.reload();
             } else {
