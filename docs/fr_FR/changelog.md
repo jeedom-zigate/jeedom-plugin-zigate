@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.5.1 (2019-12-16)
+
+* Correction installation des dépendances
+
 ## v1.5.0 (2019-11-27)
 
 * Support Firmware 3.1a et 3.1b
