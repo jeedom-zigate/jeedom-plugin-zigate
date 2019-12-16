@@ -48,12 +48,11 @@ if ($_GET && $_GET['url']) {
         $data_str = file_get_contents('php://input');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_str);
         //error_log($method.': '.$data_str.serialize($_POST).'\n',3, 'err.log');
-    }
-    elseif ($method == "POST") {
+    } elseif ($method == "POST") {
         $data_str = array();
         if (!empty($_FILES)) {
             foreach ($_FILES as $key => $value) {
-                $full_path = realpath( $_FILES[$key]['tmp_name']);
+                $full_path = realpath($_FILES[$key]['tmp_name']);
                 $data_str[$key] = '@'.$full_path;
             }
         }
@@ -63,7 +62,7 @@ if ($_GET && $_GET['url']) {
     }
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt( $ch, CURLOPT_HTTPHEADER, $headers_str );
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers_str);
 
     $result = curl_exec($ch);
     $info = curl_getinfo($ch);
@@ -74,8 +73,7 @@ if ($_GET && $_GET['url']) {
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT');
     echo $result;
-}
-else {
+} else {
     echo $method;
     var_dump($_POST);
     var_dump($_GET);
