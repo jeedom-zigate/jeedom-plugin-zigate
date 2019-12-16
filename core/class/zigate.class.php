@@ -76,13 +76,43 @@ class zigate extends eqLogic
 
 
     /**
+     * Create/Update ZiGate object
+     */
+    public static function createZiGate()
+    {
+        $eqLogic = self::byLogicalId('zigate', 'zigate');
+        if (!is_object($eqLogic)) {
+            log::add('zigate', 'debug', 'eqLogic ZiGate absent, création');
+            $eqLogic = new eqLogic();
+            $eqLogic->setEqType_name('zigate');
+            $eqLogic->setIsEnable(1);
+            $eqLogic->setLogicalId('zigate');
+            $eqLogic->setName('ZiGate');
+            $eqLogic->setIsVisible(1);
+            $eqLogic->save();
+            $eqLogic = self::byId($eqLogic->getId());
+            $eqLogic->setConfiguration('type', 'ZiGate');
+            $eqLogic->setConfiguration('manufacturer', 'zigate.fr');
+        }
+        $addr = zigate::callZiGate('addr')['result'];
+        $ieee = zigate::callZiGate('ieee')['result'];
+        $eqLogic->setConfiguration('addr', $addr);
+        $eqLogic->setConfiguration('ieee', $ieee);
+        $eqLogic->save();
+    }
+
+
+    /**
      * Sync all eqLogic.
      */
     public static function syncEqLogicWithZiGate()
     {
+        log::add('zigate', 'debug', 'Création de l\'objet ZiGate');
+        zigate::createZiGate();
+        
         log::add('zigate', 'debug', 'Synchronisation des équipements entre le démon et jeedom');
         $results = zigate::callZiGate('devices');
-        $findDevice = [];
+        $findDevice = ['zigate'];
         foreach ($results['result'] as $result) {
             $ieee = zigate::syncDevice($result);
             array_push($findDevice, $ieee);
@@ -239,6 +269,12 @@ class zigate extends eqLogic
         }
 
         $this->batteryStatus($percent);
+        $fake_attribute = array('name' => 'battery_level',
+            'value' => $percent,
+            'attribute' => 'battery_level',
+            'unit' => '%'
+        );
+        $this->_create_command(0, 0, $fake_attribute);
     }
 
 
@@ -315,16 +351,16 @@ class zigate extends eqLogic
                         $key = $this->_create_action($endpoint_id, 'ias_warning', 'buzzer_2sec', 'other', 2);
                         array_push($created_commands, $key);
                         
-                        $key = $this->_create_action($endpoint_id, 'ias_warning', 'buzzer_5sec', 'other', 5);
-                        array_push($created_commands, $key);
-                        
                         $key = $this->_create_action($endpoint_id, 'ias_warning', 'buzzer_10sec', 'other', 10);
                         array_push($created_commands, $key);
                         
-                        $key = $this->_create_action($endpoint_id, 'ias_squawk', 'strobe_ON', 'other', 139);
+                        $key = $this->_create_action($endpoint_id, 'ias_warning', 'buzzer_60sec', 'other', 60);
                         array_push($created_commands, $key);
                         
-                        $key = $this->_create_action($endpoint_id, 'ias_squawk', 'strobe_ON_Buzzer_ON', 'other', 11);
+                        $key = $this->_create_action($endpoint_id, 'ias_squawk', 'Disarmed', 'other', 'disarmed');
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, 'ias_squawk', 'Armed', 'other', 'armed');
                         array_push($created_commands, $key);
                         
                         break;
@@ -476,6 +512,12 @@ class zigate extends eqLogic
             $this->evaluateBattery($value);
         } elseif ($name == 'battery_percent') {
             $this->batteryStatus($value);
+            $fake_attribute = array('name' => 'battery_level',
+                'value' => $value,
+                'attribute' => 'battery_level',
+                'unit' => '%'
+            );
+            $this->_create_command(0, 0, $fake_attribute);
         }
         
         if ($value != $cmd_info->getCache('value', '')) {
@@ -968,13 +1010,13 @@ class zigateCmd extends cmd
                 break;
 
             case 'ias_warning':
-                    zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0x18, $value, 1, 1 ]);
+                    zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 'burglar', true, 'low', $value]);
                 break;
             case 'ias_off':
-                    zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 0, 0, 0, 0 ]);
+                    zigate::CallZiGate('action_ias_warning', [$addr, $endpoint, 'stop']);
                 break;
             case 'ias_squawk':
-                    zigate::CallZiGate('action_ias_squawk', [$addr, $endpoint, $value ]);
+                    zigate::CallZiGate('action_ias_squawk', [$addr, $endpoint, $value, true]);
                 break;
         }
     }

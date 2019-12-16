@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Jeedom-Zigate">
-    <description>The coding standard for Jeedom-Zigate</description>
+<ruleset name="jeedom-zigate">
+    <description>The coding standard for jeedom-zigate</description>
 
     <file>./core</file>
     <file>./desktop</file>

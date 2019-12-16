@@ -5,6 +5,26 @@ git:
 matrix:
   include:
 
+  - php: 7.4
+    install:
+    - composer install
+    addons:
+      sonarcloud:
+        organization: "jeedom-zigate"
+    script:
+    - cd ${TRAVIS_BUILD_DIR}
+    - composer run-script test
+    - sonar-scanner
+  - php: 7.3
+    install:
+    - composer install
+    addons:
+      sonarcloud:
+        organization: "jeedom-zigate"
+    script:
+    - cd ${TRAVIS_BUILD_DIR}
+    - composer run-script test
+    - sonar-scanner
   - php: 7.2
     install:
     - composer install
@@ -34,6 +54,24 @@ matrix:
     - cd ${TRAVIS_BUILD_DIR}
     - composer run-script test
 
+  - language: python
+    python:
+    - 3.8
+    env: TOXENV=py38
+    install:
+    - pip install flake8
+    script:
+    - cd ${TRAVIS_BUILD_DIR}
+    - flake8 .
+  - language: python
+    python:
+    - 3.7
+    env: TOXENV=py37
+    install:
+    - pip install flake8
+    script:
+    - cd ${TRAVIS_BUILD_DIR}
+    - flake8 .
   - language: python
     python:
     - 3.6

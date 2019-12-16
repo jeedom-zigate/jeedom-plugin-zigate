@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.5.1 (2019-12-16)
+
+* Correction installation des dépendances
+
 ## v1.5.0 (2019-11-27)
 
 * Support Firmware 3.1a et 3.1b
@@ -13,8 +17,8 @@
 
 ## v1.4.*
 
- * Les versions v1.4.* seront les dernières compatibles Jeedom V3, il n'y aura plus d'évolution du plugin mais
- 	uniquement des corrections mineures
+* Les versions v1.4.* seront les dernières compatibles Jeedom V3, il n'y aura plus d'évolution du plugin mais
+ uniquement des corrections mineures
 
 ## v1.2.0 (2019-02-11)
 
@@ -51,7 +55,6 @@
 
 * Now requires Python lib in v0.22.0
 
->>>>>>> release/v1.1.5
 ## v1.1.3 (2018-11-17)
 
 * Enhancement #47: Calcul du % de batterie.

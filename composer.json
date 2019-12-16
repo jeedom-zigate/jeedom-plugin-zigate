@@ -1,21 +1,25 @@
 {
-	"name": "Jeedom-Zigate/jeedom-plugin-zigate",
-	"description": "Plugin Jeedom for ZiGate key.",
-	"keywords": ["jeedom", "home-automation", "jeedom-plugin"],
-	"type": "library",
-	"license": "MIT",
-	"authors": [{
-		"name": "Jeedom-Zigate"
-	}],
-	"require-dev": {
-    "squizlabs/php_codesniffer": "3.*"
+	"name" : "jeedom-zigate/jeedom-plugin-zigate",
+	"description" : "Plugin Jeedom for ZiGate key.",
+	"keywords" : [
+		"jeedom",
+		"home-automation",
+		"jeedom-plugin",
+		"zigate"
+	],
+	"type" : "library",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "jeedom-zigate"
+		}, {
+			"name" : "doudz"
+		}
+	],
+	"require-dev" : {
+		"squizlabs/php_codesniffer" : "3.*"
 	},
-  "scripts": {
-    "test:phpcs": "vendor/bin/phpcs",
-    "test": [
-      "@test:phpcs"
-    ]
-  },
-	"autoload": {
+	"scripts" : {
+		"test:phpcs" : "vendor/bin/phpcs",
+		"test" : "@test:phpcs"
 	}
 }
