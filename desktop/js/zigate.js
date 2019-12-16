@@ -14,49 +14,58 @@
  * Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
-$('#bt_healthzigate').on('click', function () {
-    $('#md_modal').dialog({
-        title : "{{Santé Zigate}}"
+$('#bt_healthzigate').on(
+        'click',
+        function () {
+            $('#md_modal').dialog({
+                title : "{{Santé Zigate}}"
             });
-    $('#md_modal').load('index.php?v=d&plugin=zigate&modal=health')
-            .dialog('open');
-});
+            $('#md_modal').load('index.php?v=d&plugin=zigate&modal=health')
+                    .dialog('open');
+        });
 
-$('#bt_terminalzigate').on('click', function () {
-    $('#md_modal').dialog({
-        title : "{{Terminal Zigate}}",
-        close : function () {
-            startstopTimer();
-        }
+$('#bt_terminalzigate').on(
+        'click',
+        function () {
+            $('#md_modal').dialog({
+                title : "{{Terminal Zigate}}",
+                close : function () {
+                    startstopTimer();
+                }
             });
-    $('#md_modal').load('index.php?v=d&plugin=zigate&modal=terminal')
-            .dialog('open');
-});
+            $('#md_modal').load('index.php?v=d&plugin=zigate&modal=terminal')
+                    .dialog('open');
+        });
 
-$('#bt_networkzigate').on('click', function () {
-    $('#md_modal').dialog({
-        title : "{{Réseau Zigate}}"
+$('#bt_networkzigate').on(
+        'click',
+        function () {
+            $('#md_modal').dialog({
+                title : "{{Réseau Zigate}}"
             });
-    $('#md_modal').load('index.php?v=d&plugin=zigate&modal=network')
-            .dialog('open');
-});
+            $('#md_modal').load('index.php?v=d&plugin=zigate&modal=network')
+                    .dialog('open');
+        });
 
-$('#bt_zigateadmin').on('click', function () {
-    $('#md_modal').dialog({
-        title : "{{ZiGate Admin}}"
+$('#bt_zigateadmin').on(
+        'click',
+        function () {
+            $('#md_modal').dialog({
+                title : "{{ZiGate Admin}}"
             });
-    $('#md_modal').load('index.php?v=d&plugin=zigate&modal=zigateadmin')
-            .dialog('open');
-});
+            $('#md_modal')
+                    .load('index.php?v=d&plugin=zigate&modal=zigateadmin')
+                    .dialog('open');
+        });
 
 $("#table_cmd").sortable({
-            axis : "y",
-            cursor : "move",
-            items : ".cmd",
-            placeholder : "ui-state-highlight",
-            tolerance : "intersect",
-            forcePlaceholderSize : true
-        });
+    axis : "y",
+    cursor : "move",
+    items : ".cmd",
+    placeholder : "ui-state-highlight",
+    tolerance : "intersect",
+    forcePlaceholderSize : true
+});
 /*
  * Fonction pour l'ajout de commande, appellé automatiquement par plugin.zigate
  */
@@ -101,42 +110,51 @@ function addCmdToTable(_cmd) {
     $('#table_cmd tbody').append(tr);
     $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
     if (isset(_cmd.type)) {
-        $('#table_cmd tbody tr:last .cmdAttr[data-l1key=type]').value(init(_cmd.type));
+        $('#table_cmd tbody tr:last .cmdAttr[data-l1key=type]').value(
+                init(_cmd.type));
     }
     jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
 }
 
 $('#bt_syncEqLogic').on('click', function () {
-            syncEqLogicWithZiGate();
-        });
+    syncEqLogicWithZiGate();
+});
 
 $('#bt_permitJoin').on('click', function () {
-            permitJoin();
-        });
+    permitJoin();
+});
 
 $('#bt_reset').on('click', function () {
-            reset();
-        });
-
-$('#bt_cleanup_devices').on('click', function () {
-    bootbox.confirm(
-            '{{Etes-vous sûr de vouloir effacer les équipements manquants ?}}',
-            function (result) {
-                if (result) {
-                    callZiGate('cleanup_devices');
-                }
-            });
+    reset();
 });
 
-$('#bt_erasepdm').on('click', function () {
-    bootbox.confirm(
-            '{{Etes-vous sûr de vouloir effacer les données de la zigate ?}}',
-            function (result) {
-                if (result) {
-                    callZiGate('erase_persistent');
-                }
-            });
-});
+$('#bt_cleanup_devices')
+        .on(
+                'click',
+                function () {
+                    bootbox
+                            .confirm(
+                                    '{{Etes-vous sûr de vouloir effacer les équipements manquants ?}}',
+                                    function (result) {
+                                        if (result) {
+                                            callZiGate('cleanup_devices');
+                                        }
+                                    });
+                });
+
+$('#bt_erasepdm')
+        .on(
+                'click',
+                function () {
+                    bootbox
+                            .confirm(
+                                    '{{Etes-vous sûr de vouloir effacer les données de la zigate ?}}',
+                                    function (result) {
+                                        if (result) {
+                                            callZiGate('erase_persistent');
+                                        }
+                                    });
+                });
 
 $('.eqLogicAction[data-action=refresh_device]').on('click', function () {
     if ($('.eqLogicDisplayCard.active').attr('data-eqLogic_id') != undefined) {
@@ -144,10 +162,9 @@ $('.eqLogicAction[data-action=refresh_device]').on('click', function () {
         refresh_eqlogic(id);
     } else {
         $('#div_alert').showAlert({
-                    message : '{{Veuillez d\'abord sélectionner objet}} '
-                            + eqType,
-                    level : 'danger'
-                });
+            message : '{{Veuillez d\'abord sélectionner objet}} ' + eqType,
+            level : 'danger'
+        });
     }
 });
 
@@ -157,10 +174,9 @@ $('.eqLogicAction[data-action=discover_device]').on('click', function () {
         discover_eqlogic(id);
     } else {
         $('#div_alert').showAlert({
-                    message : '{{Veuillez d\'abord sélectionner un objet}} '
-                            + eqType,
-                    level : 'danger'
-                });
+            message : '{{Veuillez d\'abord sélectionner un objet}} ' + eqType,
+            level : 'danger'
+        });
     }
 });
 
@@ -170,102 +186,127 @@ $('.eqLogicAction[data-action=identify_device]').on('click', function () {
         identify_device(id);
     } else {
         $('#div_alert').showAlert({
-                    message : '{{Veuillez d\'abord sélectionner un objet}} '
-                            + eqType,
-                    level : 'danger'
-                });
+            message : '{{Veuillez d\'abord sélectionner un objet}} ' + eqType,
+            level : 'danger'
+        });
     }
 });
 
 function callZiGate(action) {
     $.ajax({
-                type : "POST",
-                url : "plugins/zigate/core/ajax/zigate.ajax.php",
-                data : {
-                    action : action
-                    ,
-                },
-                dataType : 'json',
-                error : function (request, status, error) {
-                    handleAjaxError(request, status, error);
-                },
-                success : function (data) {
-                    if (data.state != 'ok') {
-                        $('#div_alert').showAlert({
+        type : "POST",
+        url : "plugins/zigate/core/ajax/zigate.ajax.php",
+        data : {
+            action : action,
+        },
+        dataType : 'json',
+        error : function (request, status, error) {
+            handleAjaxError(request, status, error);
+        },
+        success : function (data) {
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({
                     message : data.result,
                     level : 'danger'
-                                });
-                        return;
-                    }
-                    $('#div_alert').showAlert({
-                                message : '{{Commande envoyée}}',
-                                level : 'info'
-                            });
-                }
+                });
+                return;
+            }
+            $('#div_alert').showAlert({
+                message : '{{Commande envoyée}}',
+                level : 'info'
             });
+        }
+    });
 }
 
 function syncEqLogicWithZiGate() {
     $.ajax({
-                type : "POST",
-                url : "plugins/zigate/core/ajax/zigate.ajax.php",
-                data : {
-                    action : "syncEqLogicWithZiGate"
-                    ,
-                },
-                dataType : 'json',
-                error : function (request, status, error) {
-                    handleAjaxError(request, status, error);
-                },
-                success : function (data) {
-                    if (data.state != 'ok') {
-                        $('#div_alert').showAlert({
+        type : "POST",
+        url : "plugins/zigate/core/ajax/zigate.ajax.php",
+        data : {
+            action : "syncEqLogicWithZiGate",
+        },
+        dataType : 'json',
+        error : function (request, status, error) {
+            handleAjaxError(request, status, error);
+        },
+        success : function (data) {
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({
                     message : data.result,
                     level : 'danger'
-                                });
-                        return;
-                    }
-                    window.location.reload();
-                }
-            });
+                });
+                return;
+            }
+            window.location.reload();
+        }
+    });
 }
 
 function permitJoin() {
     $.ajax({
-                type : "POST",
-                url : "plugins/zigate/core/ajax/zigate.ajax.php",
-                data : {
-                    action : "permit_join"
-                    ,
-                },
-                dataType : 'json',
-                error : function (request, status, error) {
-                    handleAjaxError(request, status, error);
-                },
-                success : function (data) {
-                    if (data.state != 'ok') {
-                        $('#div_alert').showAlert({
+        type : "POST",
+        url : "plugins/zigate/core/ajax/zigate.ajax.php",
+        data : {
+            action : "permit_join",
+        },
+        dataType : 'json',
+        error : function (request, status, error) {
+            handleAjaxError(request, status, error);
+        },
+        success : function (data) {
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({
                     message : data.result,
                     level : 'danger'
-                                });
-                        return;
-                    } else {
-                        $('#div_alert').showAlert({
+                });
+                return;
+            } else {
+                $('#div_alert').showAlert({
                     message : '{{Mode inclusion lancé pour 30sec.}}',
                     level : 'warning'
-                                });
-                    }
-                }
-            });
+                });
+            }
+        }
+    });
 }
 
 function reset() {
     $.ajax({
+        type : "POST",
+        url : "plugins/zigate/core/ajax/zigate.ajax.php",
+        data : {
+            action : "reset",
+        },
+        dataType : 'json',
+        error : function (request, status, error) {
+            handleAjaxError(request, status, error);
+        },
+        success : function (data) {
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({
+                    message : data.result,
+                    level : 'danger'
+                });
+                return;
+            } else {
+                $('#div_alert').showAlert({
+                    message : '{{Reset de la clé ZiGate.}}',
+                    level : 'warning'
+                });
+            }
+        }
+    });
+}
+
+function refresh_eqlogic(id) {
+    $
+            .ajax({
                 type : "POST",
                 url : "plugins/zigate/core/ajax/zigate.ajax.php",
                 data : {
-                    action : "reset"
-                    ,
+                    action : "refresh_eqlogic",
+                    args : [ id ]
                 },
                 dataType : 'json',
                 error : function (request, status, error) {
@@ -274,112 +315,92 @@ function reset() {
                 success : function (data) {
                     if (data.state != 'ok') {
                         $('#div_alert').showAlert({
-                    message : data.result,
-                    level : 'danger'
-                                });
+                            message : data.result,
+                            level : 'danger'
+                        });
                         return;
                     } else {
-                        $('#div_alert').showAlert({
-                    message : '{{Reset de la clé ZiGate.}}',
-                    level : 'warning'
-                                });
+                        $('#div_alert')
+                                .showAlert(
+                                        {
+                                            message : '{{Rafraichissement de l\'équipement lancé.}}<br>'
+                                                    + '{{Les équipements sur pile doivent être activés manuellement pour transmettre les infos}}'
+                                                    + ' ({{Appui sur le bouton de synchro, manipulation, etc}})',
+                                            level : 'warning'
+                                        });
                     }
                 }
             });
 }
 
-function refresh_eqlogic(id) {
-    $.ajax({
-        type : "POST",
-        url : "plugins/zigate/core/ajax/zigate.ajax.php",
-        data : {
-            action : "refresh_eqlogic",
-            args : [id]
-        },
-        dataType : 'json',
-        error : function (request, status, error) {
-            handleAjaxError(request, status, error);
-        },
-        success : function (data) {
-            if (data.state != 'ok') {
-                $('#div_alert').showAlert({
-                            message : data.result,
-                            level : 'danger'
-                        });
-                return;
-            } else {
-                $('#div_alert').showAlert({
-                    message : '{{Rafraichissement de l\'équipement lancé.}}<br>'
-                            + '{{Les équipements sur pile doivent être activés manuellement pour transmettre les infos}}'
-                            + ' ({{Appui sur le bouton de synchro, manipulation, etc}})',
-                    level : 'warning'
-                });
-            }
-        }
-    });
-}
-
 function discover_eqlogic(id) {
-    $.ajax({
-        type : "POST",
-        url : "plugins/zigate/core/ajax/zigate.ajax.php",
-        data : {
-            action : "discover_eqlogic",
-            args : [id]
-        },
-        dataType : 'json',
-        error : function (request, status, error) {
-            handleAjaxError(request, status, error);
-        },
-        success : function (data) {
-            if (data.state != 'ok') {
-                $('#div_alert').showAlert({
+    $
+            .ajax({
+                type : "POST",
+                url : "plugins/zigate/core/ajax/zigate.ajax.php",
+                data : {
+                    action : "discover_eqlogic",
+                    args : [ id ]
+                },
+                dataType : 'json',
+                error : function (request, status, error) {
+                    handleAjaxError(request, status, error);
+                },
+                success : function (data) {
+                    if (data.state != 'ok') {
+                        $('#div_alert').showAlert({
                             message : data.result,
                             level : 'danger'
                         });
-                return;
-            } else {
-                $('#div_alert').showAlert({
-                    message : '{{Découverte de l\'équipement lancé.}}<br>'
-                            + '{{Les équipements sur pile doivent être activés manuellement pour transmettre les infos}}'
-                            + ' ({{Appui sur le bouton de synchro, manipulation, etc}})',
-                    level : 'warning'
-                });
-            }
-        }
-    });
+                        return;
+                    } else {
+                        $('#div_alert')
+                                .showAlert(
+                                        {
+                                            message : '{{Découverte de l\'équipement lancé.}}<br>'
+                                                    + '{{Les équipements sur pile doivent être activés manuellement pour transmettre les infos}}'
+                                                    + ' ({{Appui sur le bouton de synchro, manipulation, etc}})',
+                                            level : 'warning'
+                                        });
+                    }
+                }
+            });
 }
 
 function identify_device(id) {
-    $.ajax({
-        type : "POST",
-        url : "plugins/zigate/core/ajax/zigate.ajax.php",
-        data : {
-            action : "identify_device",
-            args : [id]
-        },
-        dataType : 'json',
-        error : function (request, status, error) {
-            handleAjaxError(request, status, error);
-        },
-        success : function (data) {
-            if (data.state != 'ok') {
-                $('#div_alert').showAlert({
+    $
+            .ajax({
+                type : "POST",
+                url : "plugins/zigate/core/ajax/zigate.ajax.php",
+                data : {
+                    action : "identify_device",
+                    args : [ id ]
+                },
+                dataType : 'json',
+                error : function (request, status, error) {
+                    handleAjaxError(request, status, error);
+                },
+                success : function (data) {
+                    if (data.state != 'ok') {
+                        $('#div_alert').showAlert({
                             message : data.result,
                             level : 'danger'
                         });
-                return;
-            } else {
-                $('#div_alert').showAlert({
-                    message : 'Identification de l\'équipement lancé. (Cette commande peut être sans effet sur certain équipement)',
-                    level : 'warning'
-                });
-            }
-        }
-    });
+                        return;
+                    } else {
+                        $('#div_alert')
+                                .showAlert(
+                                        {
+                                            message : 'Identification de l\'équipement lancé. (Cette commande peut être sans effet sur certain équipement)',
+                                            level : 'warning'
+                                        });
+                    }
+                }
+            });
 }
 
-$('body').off('zigate::device_changed').on('zigate::device_changed',
+$('body').off('zigate::device_changed').on(
+        'zigate::device_changed',
         function (_event, _options) {
             if (_options == '') {
                 window.location.reload();
