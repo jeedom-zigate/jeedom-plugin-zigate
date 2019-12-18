@@ -27,8 +27,18 @@ $method = $_SERVER['REQUEST_METHOD'];
 if ($_GET && $_GET['url']) {
     $headers = getallheaders();
     $headers_str = [];
-    #$url = $_GET['url'];
     $url = 'http://localhost'.$_GET['url'];
+    $params = '';
+    foreach ($_GET as $key => $value) {
+        if ($key == 'url') {
+            continue;
+        }
+        $params .= $key.'='.$value.'&';
+    }
+    $params = trim($params, '&');
+    if ($params) {
+        $url = $url.'?'.$params;
+    }
     
     foreach ($headers as $key => $value) {
         if ($key == 'Host') {
@@ -68,8 +78,16 @@ if ($_GET && $_GET['url']) {
     $info = curl_getinfo($ch);
     curl_close($ch);
     
-    header('Content-Type: '.$info[CURLINFO_CONTENT_TYPE]);
-    http_response_code($info[CURLINFO_RESPONSE_CODE]);
+    if (isset($info[CURLINFO_CONTENT_TYPE])) {
+        header('Content-Type: '.$info[CURLINFO_CONTENT_TYPE]);
+    } else {
+        header('Content-Type: text/html');
+    }
+    if (isset($info[CURLINFO_RESPONSE_CODE])) {
+        http_response_code($info[CURLINFO_RESPONSE_CODE]);
+    } else {
+        http_response_code(200);
+    }
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT');
     echo $result;
