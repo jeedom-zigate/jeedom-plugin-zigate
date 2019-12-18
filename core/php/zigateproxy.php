@@ -29,14 +29,14 @@ if ($_GET && $_GET['url']) {
     $headers_str = [];
     $url = 'http://localhost'.$_GET['url'];
     $params = '';
-    foreach ($_GET as $key => $value){
+    foreach ($_GET as $key => $value) {
         if ($key == 'url') {
             continue;
         }
         $params .= $key.'='.$value.'&';
     }
     $params = trim($params, '&');
-    if ($params){
+    if ($params) {
         $url = $url.'?'.$params;
     }
     
@@ -80,14 +80,12 @@ if ($_GET && $_GET['url']) {
     
     if (isset($info[CURLINFO_CONTENT_TYPE])) {
         header('Content-Type: '.$info[CURLINFO_CONTENT_TYPE]);
-    }
-    else {
+    } else {
         header('Content-Type: text/html');
     }
     if (isset($info[CURLINFO_RESPONSE_CODE])) {
         http_response_code($info[CURLINFO_RESPONSE_CODE]);
-    }
-    else {
+    } else {
         http_response_code(200);
     }
     header('Access-Control-Allow-Origin: *');
