@@ -27,8 +27,18 @@ $method = $_SERVER['REQUEST_METHOD'];
 if ($_GET && $_GET['url']) {
     $headers = getallheaders();
     $headers_str = [];
-    #$url = $_GET['url'];
     $url = 'http://localhost'.$_GET['url'];
+    $params = '';
+    foreach ($_GET as $key => $value){
+        if ($key == 'url') {
+            continue;
+        }
+        $params .= $key.'='.$value.'&';
+    }
+    $params = trim($params, '&');
+    if ($params){
+        $url = $url.'?'.$params;
+    }
     
     foreach ($headers as $key => $value) {
         if ($key == 'Host') {
