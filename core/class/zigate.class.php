@@ -132,10 +132,11 @@ class zigate extends eqLogic
             $ieee = $device['info']['ieee'];
             $eqLogic = self::byLogicalId($ieee, 'zigate');
             if (is_object($eqLogic)) {
-                $eqLogic->setIsEnable(0);
-                $eqLogic->save();
+//                 $eqLogic->setIsEnable(0);
+//                 $eqLogic->save();
                 $humanName = $eqLogic->getHumanName();
-                message::add('zigate', 'L\'équipement '.$humanName.' semble manquant, il a été désactivé.');
+//                 message::add('zigate', 'L\'équipement '.$humanName.' semble manquant, il a été désactivé.');
+                log::add('zigate', 'info', 'L\'équipement '.$humanName.' semble manquant.');
             }
         }
     }
@@ -428,7 +429,10 @@ class zigate extends eqLogic
             $name = $attribute['name'];
         }
 
-        $value = $attribute['data'];
+        $value = '';
+        if (isset($attribute['data'])) {
+            $value = $attribute['data'];
+        }
         if (isset($attribute['value'])) {
             $value = $attribute['value'];
         }
