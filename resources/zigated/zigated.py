@@ -341,6 +341,15 @@ if version < '3.1a':
     jc.send({'action': 'message',
              'message': 'Le firmware de votre ZiGate est ancien, vous devriez le mettre à jour.'})
 
+if sys.version_info < (3, 5):
+    logging.warning('Votre système utilise une version obsolète de Python (<3.5), '
+                    'à partir de la version 1.6 du plugin '
+                    'la version minimale sera Python 3.5.')
+    jc.send({'action': 'message',
+             'message': ('Votre système utilise une version obsolète de Python (<3.5), '
+                         'à partir de la version 1.6 du plugin '
+                         'la version minimale sera Python 3.5.')})
+
 if args.sharedata:
     t = threading.Thread(target=sharedata)
     t.setDaemon(True)
