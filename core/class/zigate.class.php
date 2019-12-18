@@ -385,7 +385,10 @@ class zigate extends eqLogic
     public function update_command($endpoint_id, $cluster_id, $attribute)
     {
         $created_commands = [];
-        $value = $attribute['data'];
+        $value = '';
+        if (isset($attribute['data'])) {
+            $value = $attribute['data'];
+        }
         if (isset($attribute['value'])) {
             $value = $attribute['value'];
         }
