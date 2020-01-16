@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.6.0 (2020-01-17)
+
+* Diverses corrections
+* Améliorations du panneau d'administration
+* Fin du support de Python 3.4 (3.5 minimum)
+
 ## v1.5.2 (2019-12-18)
 
 * Attention à partir de la version 1.6, plus de support pour Python 3.4 (3.5 minimum)
