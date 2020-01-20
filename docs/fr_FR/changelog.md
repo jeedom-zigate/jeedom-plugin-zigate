@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.6.1 (2020-01-20)
+
+* Diverses corrections
+
 ## v1.6.0 (2020-01-17)
 
 * Diverses corrections
