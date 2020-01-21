@@ -1,6 +1,6 @@
 # Changelog
 
-# v1.6.2 (2020-01-21)
+## v1.6.2 (2020-01-21)
 
 * Corrige erreur 404 sur panneau d'administration
 
