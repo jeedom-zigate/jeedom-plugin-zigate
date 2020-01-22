@@ -24,21 +24,10 @@
 $method = $_SERVER['REQUEST_METHOD'];
 
 
-if ($_GET && $_GET['url']) {
+if ($_GET && $_GET['q']) {
     $headers = getallheaders();
     $headers_str = [];
-    $url = 'http://localhost'.$_GET['url'];
-    $params = '';
-    foreach ($_GET as $key => $value) {
-        if ($key == 'url') {
-            continue;
-        }
-        $params .= $key.'='.$value.'&';
-    }
-    $params = trim($params, '&');
-    if ($params) {
-        $url = $url.'?'.$params;
-    }
+    $url = 'http://localhost'.$_GET['q'];
     
     foreach ($headers as $key => $value) {
         if ($key == 'Host') {

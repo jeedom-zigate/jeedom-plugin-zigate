@@ -355,7 +355,7 @@ if args.sharedata:
     t.setDaemon(True)
     t.start()
 
-z.start_adminpanel(prefix='/plugins/zigate/core/php/zigateproxy.php?url=')
+z.start_adminpanel(prefix='/plugins/zigate/core/php/zigateproxy.php')
 
 t = threading.Thread(target=server.serve_forever)
 t.start()
