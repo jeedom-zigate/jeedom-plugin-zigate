@@ -25,4 +25,4 @@ if (!isConnect('admin')) {
     throw new Exception('401 - Accès non autorisé');
 }
 ?>
-<iframe src="/plugins/zigate/core/php/zigateproxy.php?url=/" style="width:100%;height:100%;border:0;background; white;"></iframe>
+<iframe src="/plugins/zigate/core/php/zigateproxy.php?q=%2F" style="width:100%;height:100%;border:0;background; white;"></iframe>

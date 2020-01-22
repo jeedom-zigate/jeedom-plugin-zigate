@@ -24,21 +24,10 @@
 $method = $_SERVER['REQUEST_METHOD'];
 
 
-if ($_GET && $_GET['url']) {
+if ($_GET && $_GET['q']) {
     $headers = getallheaders();
     $headers_str = [];
-    $url = 'http://localhost'.$_GET['url'];
-    $params = '';
-    foreach ($_GET as $key => $value) {
-        if ($key == 'url') {
-            continue;
-        }
-        $params .= $key.'='.$value.'&';
-    }
-    $params = trim($params, '&');
-    if ($params) {
-        $url = $url.'?'.$params;
-    }
+    $url = 'http://localhost'.$_GET['q'];
     
     foreach ($headers as $key => $value) {
         if ($key == 'Host') {
@@ -72,6 +61,7 @@ if ($_GET && $_GET['url']) {
     }
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers_str);
 
     $result = curl_exec($ch);
