@@ -339,10 +339,13 @@ if version < '3.1a':
     jc.send({'action': 'message',
              'message': 'Le firmware de votre ZiGate est ancien, vous devriez le mettre à jour.'})
 
-if args.sharedata:
-    t = threading.Thread(target=sharedata)
-    t.setDaemon(True)
-    t.start()
+jc.send({'action': 'message',
+         'message': 'Le plugin ZiGate n\'est plus supporté par Jeedom V3, vous devriez migrer vers Jeedom V4.'})
+
+# if args.sharedata:
+#     t = threading.Thread(target=sharedata)
+#     t.setDaemon(True)
+#     t.start()
 
 t = threading.Thread(target=server.serve_forever)
 t.start()
