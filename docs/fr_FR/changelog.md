@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.6.4 (2020-01-27)
+
+* Diverses corrections
+
 ## v1.6.3 (2020-01-22)
 
 * Corrige un bug du panneau d'administration
