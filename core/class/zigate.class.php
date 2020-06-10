@@ -345,6 +345,7 @@ class zigate extends eqLogic
 
                         $key = $this->_create_action($endpoint_id, $action, 'unlock', 'other', 1);
                         array_push($created_commands, $key);
+                        break;
                 }
             }
         }
