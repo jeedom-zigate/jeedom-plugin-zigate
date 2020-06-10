@@ -994,8 +994,10 @@ class zigateCmd extends cmd
                 break;
             case 'Occupied_temperature_setpoint':
                     zigate::CallZiGate('action_thermostat_occupied_heating_setpoint', [$addr, $endpoint, $value]);
+                break;
             case 'System_mode':
                     zigate::CallZiGate('action_thermostat_system_mode', [$addr, $endpoint, $value]);
+                break;
         }
     }
 }
