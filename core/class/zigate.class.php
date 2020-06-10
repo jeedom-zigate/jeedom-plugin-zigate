@@ -337,7 +337,7 @@ class zigate extends eqLogic
                         
                         $key = $this->_create_action($endpoint_id, 'ias_squawk', 'strobe_ON_Buzzer_ON', 'other', 11);
                         array_push($created_commands, $key);
-                       
+
                         break;
                     case 'lock':
                         $key = $this->_create_action($endpoint_id, $action, 'lock', 'other', 0);
@@ -345,8 +345,6 @@ class zigate extends eqLogic
 
                         $key = $this->_create_action($endpoint_id, $action, 'unlock', 'other', 1);
                         array_push($created_commands, $key);
-
-                        break;
                 }
             }
         }
@@ -993,10 +991,10 @@ class zigateCmd extends cmd
             case 'ias_squawk':
                     zigate::CallZiGate('action_ias_squawk', [$addr, $endpoint, $value ]);
                 break;
-            case 'Occupied_temperature_setpoint' :
+            case 'Occupied_temperature_setpoint':
                     zigate::CallZiGate('action_thermostat_occupied_heating_setpoint', [$addr, $endpoint, $value]);
-            case 'System_mode' :
-                   zigate::CallZiGate('action_thermostat_system_mode', [$addr, $endpoint, $value]);			   
+            case 'System_mode':
+                    zigate::CallZiGate('action_thermostat_system_mode', [$addr, $endpoint, $value]);
         }
     }
 }
