@@ -1,0 +1,9 @@
+{
+  "line-length": false,
+  "MD014": false,
+  "MD033": {
+    "allowed_elements": [
+      "br"
+    ]
+  }
+}
