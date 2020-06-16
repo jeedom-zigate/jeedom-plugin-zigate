@@ -7,7 +7,6 @@
 [![Gitter chat](https://badges.gitter.im/Jeedom-Zigate.png)](https://gitter.im/Jeedom-Zigate)
 
 [![Build Status](https://travis-ci.org/Jeedom-Zigate/jeedom-plugin-zigate.svg?branch=master)](https://travis-ci.org/Jeedom-Zigate/jeedom-plugin-zigate)
-[![GuardRails badge](https://badges.production.guardrails.io/Jeedom-Zigate/jeedom-plugin-zigate.svg)](https://www.guardrails.io)
 [![SonarCloud: Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=jeedom-zigate:jeedom-plugin-zigate&metric=alert_status)](https://sonarcloud.io/dashboard?id=jeedom-zigate%3Ajeedom-plugin-zigate)
 [![SonarCloud: Bugs](https://sonarcloud.io/api/project_badges/measure?project=jeedom-zigate:jeedom-plugin-zigate&metric=bugs)](https://sonarcloud.io/dashboard?id=jeedom-zigate%3Ajeedom-plugin-zigate)
 [![SonarCloud: Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jeedom-zigate:jeedom-plugin-zigate&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=jeedom-zigate%3Ajeedom-plugin-zigate)
