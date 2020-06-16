@@ -8,7 +8,7 @@ We release patches for security vulnerabilities. Which versions are eligible rec
 | ------- | ------------------ |
 | 1.6.x   | :white_check_mark: |
 | 1.5.x   | :x:                |
-| 1.4.x   | :x:                |
+| 1.4.x   | :white_check_mark: |
 | 1.3.x   | :x:                |
 | 1.2.x   | :x:                |
 | 1.1.x   | :x:                |
