@@ -6,7 +6,7 @@
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/Jeedom-Zigate/jeedom-plugin-zigate.svg)](http://isitmaintained.com/project/Jeedom-Zigate/jeedom-plugin-zigate "Percentage of issues still open")
 [![Gitter chat](https://badges.gitter.im/Jeedom-Zigate.png)](https://gitter.im/Jeedom-Zigate)
 
-[![Build & tests](https://github.com/jeedom-zigate/jeedom-plugin-zigate/workflows/Build%20&%20tests/badge.svg?branch=feature%2Fgithubactions)](https://github.com/jeedom-zigate/jeedom-plugin-zigate/actions?query=workflow%3A%22Build+%26+tests%22)
+[![Build & tests](https://github.com/jeedom-zigate/jeedom-plugin-zigate/workflows/Build%20&%20tests/badge.svg?branch=master)](https://github.com/jeedom-zigate/jeedom-plugin-zigate/actions)
 [![SonarCloud: Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=jeedom-zigate:jeedom-plugin-zigate&metric=alert_status)](https://sonarcloud.io/dashboard?id=jeedom-zigate%3Ajeedom-plugin-zigate)
 [![SonarCloud: Bugs](https://sonarcloud.io/api/project_badges/measure?project=jeedom-zigate:jeedom-plugin-zigate&metric=bugs)](https://sonarcloud.io/dashboard?id=jeedom-zigate%3Ajeedom-plugin-zigate)
 [![SonarCloud: Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jeedom-zigate:jeedom-plugin-zigate&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=jeedom-zigate%3Ajeedom-plugin-zigate)
