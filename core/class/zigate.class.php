@@ -345,6 +345,17 @@ class zigate extends eqLogic
                         $key = $this->_create_action($endpoint_id, $action, 'stop', 'other', 2);
                         array_push($created_commands, $key);
                         break;
+                    case 'thermostat':
+                        $key = $this->_create_action($endpoint_id, 'Occupied_temperature_setpoint', 'Occupied temperature setpoint', 'slider', [6, 28]);
+                        array_push($created_commands, $key);
+                        
+                        $key = $this->_create_action($endpoint_id, 'System_mode', 'off', 'other', 0);
+                        array_push($created_commands, $key);
+                        $key = $this->_create_action($endpoint_id, 'System_mode', 'cooling', 'other', 3);
+                        array_push($created_commands, $key);
+                        $key = $this->_create_action($endpoint_id, 'System_mode', 'heating', 'other', 4);
+                        array_push($created_commands, $key);
+                        break;
                     case 'ias':
                         $key = $this->_create_action($endpoint_id, 'ias_off', 'off', 'other', 0);
                         array_push($created_commands, $key);
@@ -363,7 +374,14 @@ class zigate extends eqLogic
                         
                         $key = $this->_create_action($endpoint_id, 'ias_squawk', 'Armed', 'other', 'armed');
                         array_push($created_commands, $key);
-                        
+
+                        break;
+                    case 'lock':
+                        $key = $this->_create_action($endpoint_id, $action, 'lock', 'other', 0);
+                        array_push($created_commands, $key);
+
+                        $key = $this->_create_action($endpoint_id, $action, 'unlock', 'other', 1);
+                        array_push($created_commands, $key);
                         break;
                 }
             }
@@ -1024,6 +1042,12 @@ class zigateCmd extends cmd
                 break;
             case 'ias_squawk':
                     zigate::CallZiGate('action_ias_squawk', [$addr, $endpoint, $value, true]);
+                break;
+            case 'Occupied_temperature_setpoint':
+                    zigate::CallZiGate('action_thermostat_occupied_heating_setpoint', [$addr, $endpoint, $value]);
+                break;
+            case 'System_mode':
+                    zigate::CallZiGate('action_thermostat_system_mode', [$addr, $endpoint, $value]);
                 break;
         }
     }

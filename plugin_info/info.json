@@ -15,6 +15,6 @@
 	"changelog": "https://jeedom-zigate.github.io/jeedom-plugin-zigate/fr_FR/changelog",
 	"documentation": "https://jeedom-zigate.github.io/jeedom-plugin-zigate",
 	"language": ["fr_FR", "en_US"],
-	"compatibility": ["miniplus", "smart", "rpi", "docker", "diy"],
-	"pluginVersion": "1.6.4"
+	"compatibility": ["miniplus", "smart", "rpi", "docker", "diy", "v4"],
+	"pluginVersion": "1.7.0"
 }

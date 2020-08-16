@@ -6,8 +6,7 @@
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/jeedom-zigate/jeedom-plugin-zigate.svg)](http://isitmaintained.com/project/jeedom-zigate/jeedom-plugin-zigate "Percentage of issues still open")
 [![Gitter chat](https://badges.gitter.im/jeedom-zigate.png)](https://gitter.im/jeedom-zigate)
 
-[![Build Status](https://travis-ci.org/jeedom-zigate/jeedom-plugin-zigate.svg?branch=master)](https://travis-ci.org/jeedom-zigate/jeedom-plugin-zigate)
-[![GuardRails badge](https://badges.production.guardrails.io/jeedom-zigate/jeedom-plugin-zigate.svg)](https://www.guardrails.io)
+[![Build & tests](https://github.com/jeedom-zigate/jeedom-plugin-zigate/workflows/Build%20&%20tests/badge.svg?branch=master)](https://github.com/jeedom-zigate/jeedom-plugin-zigate/actions)
 [![SonarCloud: Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=jeedom-zigate:jeedom-plugin-zigate&metric=alert_status)](https://sonarcloud.io/dashboard?id=jeedom-zigate%3Ajeedom-plugin-zigate)
 [![SonarCloud: Bugs](https://sonarcloud.io/api/project_badges/measure?project=jeedom-zigate:jeedom-plugin-zigate&metric=bugs)](https://sonarcloud.io/dashboard?id=jeedom-zigate%3Ajeedom-plugin-zigate)
 [![SonarCloud: Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jeedom-zigate:jeedom-plugin-zigate&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=jeedom-zigate%3Ajeedom-plugin-zigate)
@@ -45,4 +44,3 @@ Si vous souhaitez apporter une contribution à ce projet, nous vous suggérons d
 - <https://github.com/firstcontributions/first-contributions/blob/master/github-desktop-tutorial.md>
 
 Certains développeurs pourraient également être intéressés par des dons sous forme de matériel, tels que des modules ou des dispositifs Zigbee, et même si ces dons sont le plus souvent donnés sans aucune condition, cela pourrait dans de nombreux cas motiver les développeurs et indirectement améliorer le développement de ce projet.
-
