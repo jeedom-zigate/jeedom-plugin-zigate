@@ -121,6 +121,8 @@ class zigate extends eqLogic
         foreach (self::byType('zigate') as $eqLogic) {
             if (!in_array($eqLogic->getLogicalId(), $findDevice)) {
 //                 $eqLogic->remove();
+                $humanName = $eqLogic->getHumanName();
+                log::add('zigate', 'info', 'L\'équipement '.$humanName.' n\'a pas été trouvé, il a été désactivé.');
                 $eqLogic->setIsEnable(0);
                 $eqLogic->save();
             }
