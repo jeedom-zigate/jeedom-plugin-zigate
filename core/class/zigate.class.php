@@ -117,9 +117,10 @@ class zigate extends eqLogic
             $ieee = zigate::syncDevice($result);
             array_push($findDevice, $ieee);
         }
-
+        log::add('zigate', 'debug', 'Equipements trouvés : '.implode(', ', $findDevice));
         foreach (self::byType('zigate') as $eqLogic) {
             if (!in_array($eqLogic->getLogicalId(), $findDevice)) {
+                log::add('zigate', 'debug', $eqLogic->getLogicalId().' absent de la liste.');
 //                 $eqLogic->remove();
                 $humanName = $eqLogic->getHumanName();
                 log::add('zigate', 'info', 'L\'équipement '.$humanName.' n\'a pas été trouvé, il a été désactivé.');
@@ -205,6 +206,7 @@ class zigate extends eqLogic
             $eqLogic = self::byId($eqLogic->getId());
         }
 
+        log::add('zigate', 'debug', 'Mis à jour eqLogic '.$eqLogic->getId());
         foreach ($device['info'] as $info => $value) {
             $eqLogic->setConfiguration($info, $value);
         }
