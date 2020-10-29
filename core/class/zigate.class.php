@@ -1035,7 +1035,7 @@ class zigateCmd extends cmd
                 break;
 
             case 'refresh':
-                zigate::callZiGate('refresh_device', [$addr]);
+                zigate::callZiGate('refresh_device', [$addr, false, true]);
                 break;
 
             case 'ias_warning':
