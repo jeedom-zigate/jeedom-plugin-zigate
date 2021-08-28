@@ -89,6 +89,9 @@ function addCmdToTable(_cmd)
     tr += '</td>';
     tr += '<td>';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 140px;" placeholder="{{Nom}}">';
+    tr += '<select class="cmdAttr form-control input-sm" data-l1key="value" style="display : none;margin-top : 5px;" title="La valeur de la commande vaut par défaut la commande">';
+    tr += '<option value="">Aucune</option>';
+    tr += '</select>';
     tr += '</td>';
     tr += '<td>';
     tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="info" disabled style="margin-bottom : 5px;" />';
@@ -120,6 +123,21 @@ function addCmdToTable(_cmd)
         );
     }
     jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
+    //build Select Command (data-l1key="value")
+    var tr = $('#table_cmd tbody tr:last');
+    jeedom.eqLogic.builSelectCmd({
+      id:  $('.eqLogicAttr[data-l1key=id]').value(),
+      filter: {type: 'info'},
+      error: function (error) {
+        $('#div_alert').showAlert({message: error.message, level: 'danger'});
+      },
+      success: function (result) {
+        tr.find('.cmdAttr[data-l1key=value]').append(result);
+        tr.setValues(_cmd, '.cmdAttr');
+        jeedom.cmd.changeType(tr, init(_cmd.subType));
+        initTooltips();
+      }
+    });
 }
 
 $('#bt_syncEqLogic').on('click', function () {
